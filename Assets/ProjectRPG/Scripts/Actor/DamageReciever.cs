@@ -12,6 +12,6 @@ public class DamageReciever : MonoBehaviour
 
     public void TakeDamage(float damage, GameObject attacker)
     {
-        OnTakeDamage(damage, attacker);
+        OnTakeDamage?.Invoke(damage, attacker);
     }
 }

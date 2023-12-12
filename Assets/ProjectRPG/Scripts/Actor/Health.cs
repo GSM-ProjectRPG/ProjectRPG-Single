@@ -37,7 +37,7 @@ public class Health : MonoBehaviour
 
             CurruntHealth = Mathf.Max(CurruntHealth - damage, 0);
 
-            OnDamaged(origin - CurruntHealth, attacker);
+            OnDamaged?.Invoke(origin - CurruntHealth, attacker);
 
             if (CurruntHealth == 0)
             {
@@ -55,7 +55,7 @@ public class Health : MonoBehaviour
 
             CurruntHealth = Mathf.Min(CurruntHealth + heal, MaxHealth);
 
-            OnHealed(CurruntHealth - origin, healer);
+            OnHealed?.Invoke(CurruntHealth - origin, healer);
         }
     }
 
@@ -64,7 +64,7 @@ public class Health : MonoBehaviour
         float origin = CurruntHealth;
         CurruntHealth = 0;
 
-        OnDamaged(origin, killer);
+        OnDamaged?.Invoke(origin, killer);
 
         HandleDie(killer);
     }
@@ -79,14 +79,14 @@ public class Health : MonoBehaviour
         float delta = CurruntHealth - origin;
         if (delta > 0)
         {
-            OnHealed(delta, caller);
+            OnHealed?.Invoke(delta, caller);
         }
         else
         {
-            OnDamaged(delta, caller);
+            OnDamaged?.Invoke(delta, caller);
         }
 
-        if(CurruntHealth == 0)
+        if (CurruntHealth == 0)
         {
             HandleDie(caller);
         }
@@ -96,6 +96,6 @@ public class Health : MonoBehaviour
     {
         if (_isDead) return;
         _isDead = true;
-        OnDead(killer);
+        OnDead?.Invoke(killer);
     }
 }

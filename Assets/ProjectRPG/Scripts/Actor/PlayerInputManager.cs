@@ -2,11 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerInput : MonoBehaviour
+public class PlayerInputManager : MonoBehaviour
 {
+    public static PlayerInputManager Instance { get; private set; }
+
     public KeyCode[] skillKeys = new KeyCode[] { KeyCode.Alpha1, KeyCode.Alpha2, KeyCode.Alpha3 };
 
     public bool inputEnable = true;
+
+    private void Start()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Debug.LogError("PlayerInputManager가 2개 이상 존재합니다.\nGameObject : " + gameObject.name);
+            Destroy(Instance);
+        }
+    }
 
     public float GetHorizontal()
     {
@@ -34,7 +49,7 @@ public class PlayerInput : MonoBehaviour
 
     public bool GetJump()
     {
-        if(!inputEnable) return false;
+        if (!inputEnable) return false;
         return Input.GetKeyDown(KeyCode.Space);
     }
 

@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
     public float attackStat => 0;
 
     private Rigidbody rigid;
-    private PlayerInput input;
+    private PlayerInputManager input;
     private Health health;
     private DamageReciever damageReciever;
     [SerializeField] private Animator animator;
@@ -34,9 +34,9 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         rigid = GetComponent<Rigidbody>();
-        input = GetComponent<PlayerInput>();
         health = GetComponent<Health>();
         damageReciever = GetComponent<DamageReciever>();
+        input = PlayerInputManager.Instance;
         //animator = GetComponent<Animator>();
 
         damageReciever.OnTakeDamage += (damage, attacker) => health.TakeDamage(damage, attacker);

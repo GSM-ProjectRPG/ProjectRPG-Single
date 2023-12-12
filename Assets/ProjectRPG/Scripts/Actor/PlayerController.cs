@@ -71,7 +71,15 @@ public class PlayerController : MonoBehaviour
 
     private void SetCameraPos()
     {
-        _camera.transform.position = transform.position + Vector3.up * _cameraHeight + Quaternion.Euler(0, _cameraRotation + 180, 0) * new Vector3(0, _cameraInclination, 1) * _cameraDistance;
+        Vector3 rayDirection = Quaternion.Euler(0, _cameraRotation + 180, 0) * new Vector3(0, _cameraInclination, 1);
+        if (Physics.Raycast(transform.position + Vector3.up * _cameraHeight, rayDirection, out RaycastHit hit, _cameraDistance))
+        {
+            _camera.transform.position = hit.point;
+        }
+        else
+        {
+            _camera.transform.position = transform.position + Vector3.up * _cameraHeight + rayDirection * _cameraDistance;
+        }
         _camera.transform.LookAt(transform.position + Vector3.up * _cameraLookHegit);
     }
 

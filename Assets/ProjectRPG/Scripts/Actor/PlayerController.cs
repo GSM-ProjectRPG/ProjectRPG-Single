@@ -27,7 +27,9 @@ public class PlayerController : MonoBehaviour
     private float _cameraDistance;
     private float _cameraRotation = 0;
     private float _motionStopTime;
+    private bool _isDead = false;
     private bool isActing => _motionStopTime >= Time.time;
+    private bool canAct => !isActing && !_isDead;
 
     void Start()
     {
@@ -38,6 +40,7 @@ public class PlayerController : MonoBehaviour
         //animator = GetComponent<Animator>();
 
         damageReciever.OnTakeDamage += (damage, attacker) => health.TakeDamage(damage, attacker);
+        health.OnDead += (_) => { animator.SetTrigger("Die"); _isDead = true; };
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -55,12 +58,12 @@ public class PlayerController : MonoBehaviour
 
         SetCameraPos();
 
-        if (input.GetAttack() && !isActing)
+        if (input.GetAttack() && canAct)
         {
             animator.SetTrigger("Attack");
             StartCoroutine(SetMotionStun());
         }
-        if (input.GetJump() && !isActing)
+        if (input.GetJump() && canAct)
         {
             _jumpInputBuffer = true;
         }
@@ -89,7 +92,7 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (!isActing)
+        if (canAct)
         {
             MoveHandler();
         }

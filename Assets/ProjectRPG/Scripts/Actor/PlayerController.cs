@@ -20,9 +20,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Camera _camera;
     [SerializeField] private float _cameraMaxDistance = 3f;
     [SerializeField] private float _cameraMinDistance = 2f;
-    [SerializeField] private float _cameraHeight = 0.5f;
+    [SerializeField] private float _cameraHeight = 1f;
     [SerializeField] private float _cameraInclination = 0.5f;
-    [SerializeField] private float _cameraLookHegit;
+    [SerializeField] private float _cameraLookHegit = 1f;
 
     private float _cameraDistance;
     private float _cameraRotation = 0;
@@ -60,17 +60,24 @@ public class PlayerController : MonoBehaviour
             animator.SetTrigger("Attack");
             StartCoroutine(SetMotionStun());
         }
-        if(input.GetJump() && !isActing)
+        if (input.GetJump() && !isActing)
         {
             _jumpInputBuffer = true;
         }
     }
 
-    [ContextMenu("카메라 위치 확인")]
     private void SetCameraPos()
     {
         _camera.transform.position = transform.position + Vector3.up * _cameraHeight + Quaternion.Euler(0, _cameraRotation + 180, 0) * new Vector3(0, _cameraInclination, 1) * _cameraDistance;
         _camera.transform.LookAt(transform.position + Vector3.up * _cameraLookHegit);
+    }
+
+
+    [ContextMenu("카메라 위치 확인")]
+    private void TestCameraPos()
+    {
+        _cameraDistance = _cameraMaxDistance;
+        SetCameraPos();
     }
 
     private IEnumerator SetMotionStun()
@@ -105,31 +112,33 @@ public class PlayerController : MonoBehaviour
 
         Vector2 inputVector = input.GetMoveVector();
 
-        Vector3 moveDelta = Vector3.zero;
+        Vector3 moveVelocity = Vector3.zero;
         if (inputVector != Vector2.zero)
         {
             if (input.GetRunning())
             {
-                moveDelta = Quaternion.Euler(0, _cameraRotation, 0) * new Vector3(inputVector.x, 0, inputVector.y) * runSpeed * Time.fixedDeltaTime;
+                moveVelocity = Quaternion.Euler(0, _cameraRotation, 0) * new Vector3(inputVector.x, 0, inputVector.y) * runSpeed;
                 animator.SetInteger("MoveMode", 2);
             }
             else
             {
-                moveDelta = Quaternion.Euler(0, _cameraRotation, 0) * new Vector3(inputVector.x, 0, inputVector.y) * moveSpeed * Time.fixedDeltaTime;
+                moveVelocity = Quaternion.Euler(0, _cameraRotation, 0) * new Vector3(inputVector.x, 0, inputVector.y) * moveSpeed;
                 animator.SetInteger("MoveMode", 1);
             }
         }
 
-        if (moveDelta != Vector3.zero)
+        if (moveVelocity != Vector3.zero)
         {
-            rigid.MovePosition(rigid.position + moveDelta);
+            //rigid.MovePosition(rigid.position + moveDelta);
 
-            float moveDegree = -Mathf.Atan2(moveDelta.z, moveDelta.x) * Mathf.Rad2Deg + 90;
+            float moveDegree = -Mathf.Atan2(moveVelocity.z, moveVelocity.x) * Mathf.Rad2Deg + 90;
             transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0, moveDegree, 0), Time.fixedDeltaTime * 10f);
         }
         else
         {
             animator.SetInteger("MoveMode", 0);
         }
+
+        rigid.velocity = new Vector3(moveVelocity.x, rigid.velocity.y, moveVelocity.z);
     }
 }

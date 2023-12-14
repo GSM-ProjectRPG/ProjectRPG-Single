@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -14,9 +14,9 @@ public class PlayerController : MonoBehaviour
     private DamageReciever damageReciever;
     [SerializeField] private Animator animator;
 
-    [Header("Ä³¸¯ÅÍ ¼³Á¤")]
+    [Header("ìºë¦­í„° ì„¤ì •")]
     [SerializeField] private float _jumpPower = 3f;
-    [Header("Ä«¸Ş¶ó ¼³Á¤")]
+    [Header("ì¹´ë©”ë¼ ì„¤ì •")]
     [SerializeField] private Camera _camera;
     [SerializeField] private float _cameraMaxDistance = 3f;
     [SerializeField] private float _cameraMinDistance = 2f;
@@ -84,7 +84,7 @@ public class PlayerController : MonoBehaviour
     }
 
 
-    [ContextMenu("Ä«¸Ş¶ó À§Ä¡ È®ÀÎ")]
+    [ContextMenu("ì¹´ë©”ë¼ ìœ„ì¹˜ í™•ì¸")]
     private void TestCameraPos()
     {
         _cameraDistance = _cameraMaxDistance;

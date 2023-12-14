@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -50,9 +50,11 @@ public class BuffManager : MonoBehaviour
     public void RemoveBuff<T>() where T : Buff
     {
         Type type = typeof(T);
-        _buffs.TryGetValue(type, out Buff buff);
-        _buffs.Remove(type);
-        buff.OnDeleted(this);
+        if (_buffs.TryGetValue(type, out Buff buff))
+        {
+            _buffs.Remove(type);
+            buff.OnDeleted(this);
+        }
     }
 
     private void Update()

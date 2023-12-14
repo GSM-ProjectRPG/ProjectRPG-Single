@@ -8,6 +8,11 @@ public class BuffManager : MonoBehaviour
 {
     private Dictionary<Type, Buff> _buffs = new();
 
+    public bool ContainsBuff<T>()
+    {
+        return _buffs.ContainsKey(typeof(T));
+    }
+
     public T GetBuff<T>() where T : Buff
     {
         if (_buffs.TryGetValue(typeof(T), out Buff buff))

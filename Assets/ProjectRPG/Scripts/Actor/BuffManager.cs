@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,11 +8,17 @@ public class BuffManager : MonoBehaviour
 {
     private Dictionary<Type, Buff> _buffs = new();
 
+    /// <summary>
+    /// 특정 타입의 버프가 존재하는지 확인
+    /// </summary>
     public bool ContainsBuff<T>()
     {
         return _buffs.ContainsKey(typeof(T));
     }
 
+    /// <summary>
+    /// 특정 타입의 버프가 존재하면 가져오기
+    /// </summary>
     public T GetBuff<T>() where T : Buff
     {
         if (_buffs.TryGetValue(typeof(T), out Buff buff))
@@ -22,6 +28,9 @@ public class BuffManager : MonoBehaviour
         return null;
     }
 
+    /// <summary>
+    /// 버프 추가
+    /// </summary>
     public void AddBuff(Buff addedBuff)
     {
         if (_buffs.ContainsKey(addedBuff.GetType()))
@@ -35,6 +44,9 @@ public class BuffManager : MonoBehaviour
         addedBuff.OnAdded(this);
     }
 
+    /// <summary>
+    /// 특정 타입의 버프 제거
+    /// </summary>
     public void RemoveBuff<T>() where T : Buff
     {
         Type type = typeof(T);

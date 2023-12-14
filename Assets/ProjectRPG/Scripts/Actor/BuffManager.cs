@@ -33,6 +33,8 @@ public class BuffManager : MonoBehaviour
     /// </summary>
     public void AddBuff(Buff addedBuff)
     {
+        if (addedBuff == null) return;
+
         if (_buffs.ContainsKey(addedBuff.GetType()))
         {
             _buffs[addedBuff.GetType()].MergeBuff(addedBuff);

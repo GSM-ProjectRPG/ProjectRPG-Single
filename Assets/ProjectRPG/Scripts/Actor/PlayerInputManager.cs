@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,7 +10,7 @@ public class PlayerInputManager : MonoBehaviour
 
     public bool inputEnable = true;
 
-    private void Start()
+    private void Awake()
     {
         if (Instance == null)
         {

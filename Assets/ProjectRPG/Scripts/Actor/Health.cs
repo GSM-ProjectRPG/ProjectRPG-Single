@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,15 +6,15 @@ using UnityEngine;
 public class Health : MonoBehaviour
 {
     /// <summary>
-    /// float : ¹ŞÀºµ¥¹ÌÁö, GameObject : °ø°İÀÚ
+    /// float : ë°›ì€ë°ë¯¸ì§€, GameObject : ê³µê²©ì
     /// </summary>
     public Action<float, GameObject> OnDamaged;
     /// <summary>
-    /// float : ¹ŞÀºÈú·®, GameObject : Ä¡À¯ÀÚ
+    /// float : ë°›ì€íëŸ‰, GameObject : ì¹˜ìœ ì
     /// </summary>
     public Action<float, GameObject> OnHealed;
     /// <summary>
-    /// GameObject : Ã³Ä¡ÀÚ
+    /// GameObject : ì²˜ì¹˜ì
     /// </summary>
     public Action<GameObject> OnDead;
 

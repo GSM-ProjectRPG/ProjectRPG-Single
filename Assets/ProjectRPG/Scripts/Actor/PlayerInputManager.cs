@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -18,7 +18,7 @@ public class PlayerInputManager : MonoBehaviour
         }
         else
         {
-            Debug.LogError("PlayerInputManager°¡ 2°³ ÀÌ»ó Á¸ÀçÇÕ´Ï´Ù.\nGameObject : " + gameObject.name);
+            Debug.LogError("PlayerInputManagerê°€ 2ê°œ ì´ìƒ ì¡´ì¬í•©ë‹ˆë‹¤.\nGameObject : " + gameObject.name);
             Destroy(Instance);
         }
     }

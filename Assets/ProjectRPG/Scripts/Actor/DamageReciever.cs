@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,7 +6,7 @@ using UnityEngine;
 public class DamageReciever : MonoBehaviour
 {
     /// <summary>
-    /// float : ¹ŞÀº µ¥¹ÌÁö, GameObject : °ø°İÀÚ
+    /// float : ë°›ì€ ë°ë¯¸ì§€, GameObject : ê³µê²©ì
     /// </summary>
     public Action<float, GameObject> OnTakeDamage;
 

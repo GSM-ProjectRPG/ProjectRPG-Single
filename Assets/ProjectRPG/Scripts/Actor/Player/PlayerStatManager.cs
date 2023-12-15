@@ -13,8 +13,8 @@ public class PlayerStatManager : StatManager
     public Action<float> OnAddedExp;
 
     //플레이어 데이터 저장 기능 만들면 수정필요
-    public int Level { get; set; } = 1;
-    public float Exp { get; set; } = 0;
+    public int Level { get; protected set; } = 1;
+    public float Exp { get; protected set; } = 0;
 
     [SerializeField] protected PlayerLevelData levelData;
 

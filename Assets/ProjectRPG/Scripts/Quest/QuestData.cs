@@ -7,7 +7,7 @@ public enum QuestType { Hunt, Item }
 [CreateAssetMenu(fileName = "QuestData", menuName = "Scriptable Object/QuestData", order = int.MaxValue)]
 public class QuestData : ScriptableObject
 {
-    public int QuestID;
+    public int questId;
 
     public List<string> story;
     public string questContents;

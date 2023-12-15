@@ -39,6 +39,15 @@ public abstract class Quest : MonoBehaviour
     public QuestData QuestData;
 
     public abstract void OnRegistedQuest();
-    public abstract void QuestClearCheck();
+
+    private void Update()
+    {
+        if (QuestClearCheck())
+        {
+            OnQuestClear();
+        }
+    }
+
+    public abstract bool QuestClearCheck();
     public abstract void OnQuestClear();
 }

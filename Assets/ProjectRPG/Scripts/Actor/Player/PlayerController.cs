@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public float moveSpeed => 3;
-    public float runSpeed => moveSpeed * 1.5f;
-    public float attackStat => 0;
+    public float MoveSpeed => 3;
+    public float RunSpeed => MoveSpeed * 1.5f;
+    public float AttackStat => 0;
 
-    private Rigidbody rigid;
-    private PlayerInputManager input;
-    private Health health;
-    private DamageReciever damageReciever;
-    private PlayerStatManager statManager;
-    [SerializeField] private Animator animator;
+    private Rigidbody _rigid;
+    private PlayerInputManager _input;
+    private Health _health;
+    private DamageReciever _damageReciever;
+    private PlayerStatManager _statManager;
+    [SerializeField] private Animator _animator;
 
     [Header("캐릭터 설정")]
     [SerializeField] private float _jumpPower = 3f;
@@ -29,25 +29,25 @@ public class PlayerController : MonoBehaviour
     private float _cameraRotation = 0;
     private float _motionStopTime;
     private bool _isDead = false;
-    private bool isActing => _motionStopTime >= Time.time;
-    private bool canAct => !isActing && !_isDead;
+    private bool _isActing => _motionStopTime >= Time.time;
+    private bool _canAct => !_isActing && !_isDead;
 
-    void Start()
+    private void Start()
     {
-        rigid = GetComponent<Rigidbody>();
-        health = GetComponent<Health>();
-        damageReciever = GetComponent<DamageReciever>();
-        statManager = GetComponent<PlayerStatManager>();
-        input = PlayerInputManager.Instance;
+        _rigid = GetComponent<Rigidbody>();
+        _health = GetComponent<Health>();
+        _damageReciever = GetComponent<DamageReciever>();
+        _statManager = GetComponent<PlayerStatManager>();
+        _input = PlayerInputManager.Instance;
         //animator = GetComponent<Animator>();
 
-        damageReciever.OnTakeDamage += (damage, attacker) => health.TakeDamage(damage, attacker);
-        health.OnDead += (_) => { animator.SetTrigger("Die"); _isDead = true; };
-        statManager.OnLevelUp += () =>
+        _damageReciever.OnTakeDamage += (damage, attacker) => _health.TakeDamage(damage, attacker);
+        _health.OnDead += (_) => { _animator.SetTrigger("Die"); _isDead = true; };
+        _statManager.OnLevelUp += () =>
         {
-            float maxHealth = statManager.GetCurruntStat().Health;
-            health.SetMaxHealth(maxHealth);
-            health.SetHealth(maxHealth, gameObject);
+            float maxHealth = _statManager.GetCurruntStat().Health;
+            _health.SetMaxHealth(maxHealth);
+            _health.SetHealth(maxHealth, gameObject);
         };
 
         Cursor.lockState = CursorLockMode.Locked;
@@ -56,22 +56,22 @@ public class PlayerController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        if (input.GetLookScrolling())
+        if (_input.GetLookScrolling())
         {
-            _cameraRotation += input.GetLookDelta().x;
+            _cameraRotation += _input.GetLookDelta().x;
         }
-        _cameraDistance = Mathf.Clamp(_cameraDistance + input.GetCameraDistanceDelta(), _cameraMinDistance, _cameraMaxDistance);
+        _cameraDistance = Mathf.Clamp(_cameraDistance + _input.GetCameraDistanceDelta(), _cameraMinDistance, _cameraMaxDistance);
 
         SetCameraPos();
 
-        if (input.GetAttack() && canAct)
+        if (_input.GetAttack() && _canAct)
         {
-            animator.SetTrigger("Attack");
+            _animator.SetTrigger("Attack");
             StartCoroutine(SetMotionStun());
         }
-        if (input.GetJump() && canAct)
+        if (_input.GetJump() && _canAct)
         {
             _jumpInputBuffer = true;
         }
@@ -103,12 +103,12 @@ public class PlayerController : MonoBehaviour
     {
         _motionStopTime = Time.time + 1;
         yield return null;
-        _motionStopTime = Time.time + animator.GetNextAnimatorClipInfo(0).Length;
+        _motionStopTime = Time.time + _animator.GetNextAnimatorClipInfo(0).Length;
     }
 
     private void FixedUpdate()
     {
-        if (canAct)
+        if (_canAct)
         {
             MoveHandler();
         }
@@ -121,28 +121,28 @@ public class PlayerController : MonoBehaviour
         if (_jumpInputBuffer)
         {
             _jumpInputBuffer = false;
-            animator.SetTrigger("Jump");
+            _animator.SetTrigger("Jump");
             StartCoroutine(SetMotionStun());
-            Vector3 jumpVector = rigid.velocity;
+            Vector3 jumpVector = _rigid.velocity;
             jumpVector.y = _jumpPower;
-            rigid.velocity = jumpVector;
+            _rigid.velocity = jumpVector;
             return;
         }
 
-        Vector2 inputVector = input.GetMoveVector();
+        Vector2 inputVector = _input.GetMoveVector();
 
         Vector3 moveVelocity = Vector3.zero;
         if (inputVector != Vector2.zero)
         {
-            if (input.GetRunning())
+            if (_input.GetRunning())
             {
-                moveVelocity = Quaternion.Euler(0, _cameraRotation, 0) * new Vector3(inputVector.x, 0, inputVector.y) * runSpeed;
-                animator.SetInteger("MoveMode", 2);
+                moveVelocity = Quaternion.Euler(0, _cameraRotation, 0) * new Vector3(inputVector.x, 0, inputVector.y) * RunSpeed;
+                _animator.SetInteger("MoveMode", 2);
             }
             else
             {
-                moveVelocity = Quaternion.Euler(0, _cameraRotation, 0) * new Vector3(inputVector.x, 0, inputVector.y) * moveSpeed;
-                animator.SetInteger("MoveMode", 1);
+                moveVelocity = Quaternion.Euler(0, _cameraRotation, 0) * new Vector3(inputVector.x, 0, inputVector.y) * MoveSpeed;
+                _animator.SetInteger("MoveMode", 1);
             }
         }
 
@@ -155,9 +155,9 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            animator.SetInteger("MoveMode", 0);
+            _animator.SetInteger("MoveMode", 0);
         }
 
-        rigid.velocity = new Vector3(moveVelocity.x, rigid.velocity.y, moveVelocity.z);
+        _rigid.velocity = new Vector3(moveVelocity.x, _rigid.velocity.y, moveVelocity.z);
     }
 }

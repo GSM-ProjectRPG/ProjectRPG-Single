@@ -11,7 +11,7 @@ public class QuestManager : MonoBehaviour
     private void Awake()
     {
         if (instance == null) instance = this;
-        else Destroy(instance);
+        else if (instance != this) Destroy(instance);
     }
 
     public void RegistQuest(Quest data)
@@ -40,14 +40,14 @@ public abstract class Quest : MonoBehaviour
 
     public abstract void OnRegistedQuest();
 
-    private void Update()
+    public void QuestClearCheck()
     {
-        if (QuestClearCheck())
+        if (IsQuestClear())
         {
             OnQuestClear();
         }
     }
 
-    public abstract bool QuestClearCheck();
+    public abstract bool IsQuestClear();
     public abstract void OnQuestClear();
 }

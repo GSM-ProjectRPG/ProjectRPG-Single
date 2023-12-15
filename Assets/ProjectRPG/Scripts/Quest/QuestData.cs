@@ -18,6 +18,7 @@ public class QuestData : ScriptableObject
     public int targetCount;
 
     public int rewardGold;
+    public int rewardExp;
     public GameObject rewardItem;
-    public int rewardItemCound;
+    public int rewardItemCount;
 }

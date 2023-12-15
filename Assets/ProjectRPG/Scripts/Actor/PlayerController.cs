@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     private PlayerInputManager input;
     private Health health;
     private DamageReciever damageReciever;
+    private PlayerStatManager statManager;
     [SerializeField] private Animator animator;
 
     [Header("캐릭터 설정")]
@@ -36,11 +37,18 @@ public class PlayerController : MonoBehaviour
         rigid = GetComponent<Rigidbody>();
         health = GetComponent<Health>();
         damageReciever = GetComponent<DamageReciever>();
+        statManager = GetComponent<PlayerStatManager>();
         input = PlayerInputManager.Instance;
         //animator = GetComponent<Animator>();
 
         damageReciever.OnTakeDamage += (damage, attacker) => health.TakeDamage(damage, attacker);
         health.OnDead += (_) => { animator.SetTrigger("Die"); _isDead = true; };
+        statManager.OnLevelUp += () =>
+        {
+            float maxHealth = statManager.GetCurruntStat().Health;
+            health.SetMaxHealth(maxHealth);
+            health.SetHealth(maxHealth, gameObject);
+        };
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;

@@ -1,10 +1,12 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(StatManager))]
 public class Health : MonoBehaviour
 {
+    public Action OnHealthChanged;
     /// <summary>
     /// float : 받은데미지, GameObject : 공격자
     /// </summary>
@@ -18,13 +20,19 @@ public class Health : MonoBehaviour
     /// </summary>
     public Action<GameObject> OnDead;
 
-    public float MaxHealth;
+    public float MaxHealth { get; protected set; }
     public float CurruntHealth { get; protected set; }
 
     private bool _isDead = false;
 
     public void Start()
     {
+        StatManager statManager = GetComponent<StatManager>();
+        if (statManager != null)
+        {
+            MaxHealth = statManager.GetCurruntStat().Health;
+        }
+
         CurruntHealth = MaxHealth;
     }
 
@@ -38,6 +46,7 @@ public class Health : MonoBehaviour
             CurruntHealth = Mathf.Max(CurruntHealth - damage, 0);
 
             OnDamaged?.Invoke(origin - CurruntHealth, attacker);
+            OnHealthChanged?.Invoke();
 
             if (CurruntHealth == 0)
             {
@@ -56,6 +65,7 @@ public class Health : MonoBehaviour
             CurruntHealth = Mathf.Min(CurruntHealth + heal, MaxHealth);
 
             OnHealed?.Invoke(CurruntHealth - origin, healer);
+            OnHealthChanged?.Invoke();
         }
     }
 
@@ -85,11 +95,19 @@ public class Health : MonoBehaviour
         {
             OnDamaged?.Invoke(delta, caller);
         }
+        OnHealthChanged?.Invoke();
 
         if (CurruntHealth == 0)
         {
             HandleDie(caller);
         }
+    }
+
+    public void SetMaxHealth(float maxHealth)
+    {
+        MaxHealth = maxHealth;
+        CurruntHealth = Mathf.Min(CurruntHealth, MaxHealth);
+        OnHealthChanged?.Invoke();
     }
 
     private void HandleDie(GameObject killer)

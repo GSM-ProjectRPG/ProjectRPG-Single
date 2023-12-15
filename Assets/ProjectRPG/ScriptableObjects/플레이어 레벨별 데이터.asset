@@ -1,0 +1,165 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 983c80e0e3896d3418456b548df94c0a, type: 3}
+  m_Name: "\uD50C\uB808\uC774\uC5B4 \uB808\uBCA8\uBCC4 \uB370\uC774\uD130"
+  m_EditorClassIdentifier: 
+  levelDatas:
+  - maxHp: 100
+    attack: 10
+    totalExp: 10
+  - maxHp: 110
+    attack: 11
+    totalExp: 21
+  - maxHp: 120
+    attack: 12
+    totalExp: 33
+  - maxHp: 130
+    attack: 13
+    totalExp: 46
+  - maxHp: 150
+    attack: 15
+    totalExp: 61
+  - maxHp: 160
+    attack: 16
+    totalExp: 77
+  - maxHp: 180
+    attack: 18
+    totalExp: 95
+  - maxHp: 190
+    attack: 19
+    totalExp: 114
+  - maxHp: 210
+    attack: 21
+    totalExp: 135
+  - maxHp: 240
+    attack: 24
+    totalExp: 159
+  - maxHp: 260
+    attack: 26
+    totalExp: 185
+  - maxHp: 290
+    attack: 29
+    totalExp: 214
+  - maxHp: 310
+    attack: 31
+    totalExp: 245
+  - maxHp: 350
+    attack: 19
+    totalExp: 280
+  - maxHp: 380
+    attack: 19
+    totalExp: 318
+  - maxHp: 420
+    attack: 19
+    totalExp: 360
+  - maxHp: 460
+    attack: 0
+    totalExp: 406
+  - maxHp: 510
+    attack: 0
+    totalExp: 457
+  - maxHp: 560
+    attack: 0
+    totalExp: 513
+  - maxHp: 610
+    attack: 0
+    totalExp: 513
+  - maxHp: 670
+    attack: 0
+    totalExp: 641
+  - maxHp: 740
+    attack: 0
+    totalExp: 715
+  - maxHp: 810
+    attack: 0
+    totalExp: 796
+  - maxHp: 900
+    attack: 0
+    totalExp: 886
+  - maxHp: 980
+    attack: 0
+    totalExp: 984
+  - maxHp: 1080
+    attack: 0
+    totalExp: 1092
+  - maxHp: 1190
+    attack: 0
+    totalExp: 1211
+  - maxHp: 1310
+    attack: 0
+    totalExp: 1342
+  - maxHp: 1440
+    attack: 0
+    totalExp: 1486
+  - maxHp: 1590
+    attack: 0
+    totalExp: 1645
+  - maxHp: 1740
+    attack: 0
+    totalExp: 1819
+  - maxHp: 1920
+    attack: 0
+    totalExp: 2011
+  - maxHp: 2110
+    attack: 0
+    totalExp: 2222
+  - maxHp: 2320
+    attack: 0
+    totalExp: 2454
+  - maxHp: 2550
+    attack: 0
+    totalExp: 2709
+  - maxHp: 2810
+    attack: 0
+    totalExp: 2990
+  - maxHp: 3090
+    attack: 0
+    totalExp: 3299
+  - maxHp: 3400
+    attack: 0
+    totalExp: 3639
+  - maxHp: 3740
+    attack: 0
+    totalExp: 4013
+  - maxHp: 4110
+    attack: 0
+    totalExp: 4424
+  - maxHp: 4530
+    attack: 0
+    totalExp: 4877
+  - maxHp: 4980
+    attack: 0
+    totalExp: 5480
+  - maxHp: 5480
+    attack: 0
+    totalExp: 5923
+  - maxHp: 6020
+    attack: 0
+    totalExp: 6525
+  - maxHp: 6630
+    attack: 0
+    totalExp: 7188
+  - maxHp: 7290
+    attack: 0
+    totalExp: 7917
+  - maxHp: 8020
+    attack: 0
+    totalExp: 8719
+  - maxHp: 8820
+    attack: 0
+    totalExp: 9601
+  - maxHp: 9700
+    attack: 0
+    totalExp: 10571
+  - maxHp: 10670
+    attack: 0
+    totalExp: 11638

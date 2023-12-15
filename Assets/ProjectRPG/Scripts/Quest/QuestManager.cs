@@ -6,27 +6,39 @@ public class QuestManager : MonoBehaviour
 {
     public static QuestManager instance { get; private set; }
 
+    public List<Quest> currentQuests = new();
+
     private void Awake()
     {
         if (instance == null) instance = this;
         else Destroy(instance);
     }
 
-    public List<QuestData> currentQuests = new();
-
-    public void RegistQuest(QuestData data)
+    public void RegistQuest(Quest data)
     {
-        currentQuests.Add(data);
-        Debug.Log(currentQuests.Count);
+        if (data == null) return;
+        if (!currentQuests.Contains(data))
+        {
+            currentQuests.Add(data);
+            data.OnRegistedQuest();
+        }
     }
 
-    public void RemoveQuest(QuestData data)
+    public void RemoveQuest(Quest data)
     {
+        if (data == null) return;
         if (currentQuests.Contains(data))
         {
             currentQuests.Remove(data);
-
         }
-        Debug.Log(currentQuests.Count);
     }
+}
+
+public abstract class Quest : MonoBehaviour
+{
+    public QuestData QuestData;
+
+    public abstract void OnRegistedQuest();
+    public abstract void QuestClearCheck();
+    public abstract void OnQuestClear();
 }

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class BuffManager : MonoBehaviour
+public class BuffSystem : MonoBehaviour
 {
     private Dictionary<Type, Buff> _buffs = new();
 
@@ -93,7 +93,7 @@ public abstract class Buff
     public abstract Sprite Sprite { get; }
 
     public abstract void MergeBuff(Buff other);
-    public abstract void OnAdded(BuffManager manager);
-    public abstract void OnUpdate(BuffManager manager);
-    public abstract void OnDeleted(BuffManager manager);
+    public abstract void OnAdded(BuffSystem manager);
+    public abstract void OnUpdate(BuffSystem manager);
+    public abstract void OnDeleted(BuffSystem manager);
 }

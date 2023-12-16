@@ -12,7 +12,7 @@ public class PlayerController : MonoBehaviour
     private PlayerInputManager _input;
     private Health _health;
     private DamageReciever _damageReciever;
-    private PlayerStatManager _statManager;
+    private PlayerStatSystem _statManager;
     [SerializeField] private Animator _animator;
 
     [Header("캐릭터 설정")]
@@ -37,7 +37,7 @@ public class PlayerController : MonoBehaviour
         _rigid = GetComponent<Rigidbody>();
         _health = GetComponent<Health>();
         _damageReciever = GetComponent<DamageReciever>();
-        _statManager = GetComponent<PlayerStatManager>();
+        _statManager = GetComponent<PlayerStatSystem>();
         _input = PlayerInputManager.Instance;
         //animator = GetComponent<Animator>();
 

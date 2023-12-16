@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StatManager : MonoBehaviour
+public class StatSystem : MonoBehaviour
 {
     public string Name;
     public float Attack;

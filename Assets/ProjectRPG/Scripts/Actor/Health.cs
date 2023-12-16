@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(StatManager))]
+[RequireComponent(typeof(StatSystem))]
 public class Health : MonoBehaviour
 {
     public Action OnHealthChanged;
@@ -27,7 +27,7 @@ public class Health : MonoBehaviour
 
     public void Start()
     {
-        StatManager statManager = GetComponent<StatManager>();
+        StatSystem statManager = GetComponent<StatSystem>();
         if (statManager != null)
         {
             MaxHealth = statManager.GetCurruntStat().Health;

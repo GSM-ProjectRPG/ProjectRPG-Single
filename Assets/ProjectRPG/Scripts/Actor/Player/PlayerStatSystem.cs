@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class PlayerStatManager : StatManager
+public class PlayerStatSystem : StatSystem
 {
     public Action OnLevelUp;
     /// <summary>

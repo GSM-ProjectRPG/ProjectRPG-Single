@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -35,6 +36,8 @@ public class PlayerController : MonoBehaviour
     private bool _isActing => _motionStopTime >= Time.time;
     private bool _canAct => !_isActing && !_isDead;
 
+    private Action punchHandler;
+
     private void Start()
     {
         _rigid = GetComponent<Rigidbody>();
@@ -54,7 +57,7 @@ public class PlayerController : MonoBehaviour
             _health.SetMaxHealth(maxHealth);
             _health.SetHealth(maxHealth, gameObject);
         };
-        _attackSystem.AttackActions[0] += () => Punch();
+        punchHandler += () => _attackSystem.Attack(_attackSystem.AddAttack(Punch));
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -74,7 +77,7 @@ public class PlayerController : MonoBehaviour
 
         if (_input.GetAttack() && _canAct)
         {
-            _attackSystem.TryAttack(0);
+            punchHandler?.Invoke();
         }
         if (_input.GetJump() && _canAct)
         {

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 /// <summary>
@@ -16,7 +17,8 @@ public class AttackSystem : MonoBehaviour
 
     private StatSystem statSystem;
 
-    private List<Action> attackActions = new();
+    public AttackActionList AttackActions = new();
+
 
     private void Start()
     {
@@ -24,24 +26,11 @@ public class AttackSystem : MonoBehaviour
     }
 
     /// <summary>
-    /// 원하는 인덱스의 공격을 정의하는 함수입니다, TryAttack 메서드를 통해 정의된 공격을 사용할 수 있습니다.
-    /// </summary>
-    public Action GetAttackData(int attackIndex)
-    {
-        while (attackActions.Count <= attackIndex)
-        {
-            attackActions.Add(null);
-        }
-        return attackActions[attackIndex];
-    }
-
-    /// <summary>
     /// AddAttackData 메서드를 통해 정의된 공격을 시도합니다.
     /// </summary>
     public void TryAttack(int index)
     {
-        if (index >= attackActions.Count) return;
-        attackActions[index]?.Invoke();
+        AttackActions[index]?.Invoke();
     }
 
     /// <summary>
@@ -59,5 +48,30 @@ public class AttackSystem : MonoBehaviour
         }
 
         return instance;
+    }
+
+    public class AttackActionList
+    {
+        private List<Action> actions = new();
+
+        public Action this[int index]
+        {
+            get
+            {
+                while (actions.Count <= index)
+                {
+                    actions.Add(() => { });
+                }
+                return actions[index];
+            }
+            set
+            {
+                while (actions.Count <= index)
+                {
+                    actions.Add(() => { });
+                }
+                actions[index] = value;
+            }
+        }
     }
 }

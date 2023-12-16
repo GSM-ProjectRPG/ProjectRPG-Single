@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
     private Health _health;
     private DamageReciever _damageReciever;
     private PlayerStatManager _statManager;
+    private PlayerInteractor _interactor;
     [SerializeField] private Animator _animator;
 
     [Header("캐릭터 설정")]
@@ -38,6 +39,7 @@ public class PlayerController : MonoBehaviour
         _health = GetComponent<Health>();
         _damageReciever = GetComponent<DamageReciever>();
         _statManager = GetComponent<PlayerStatManager>();
+        _interactor = GetComponent<PlayerInteractor>();
         _input = PlayerInputManager.Instance;
         //animator = GetComponent<Animator>();
 
@@ -74,6 +76,10 @@ public class PlayerController : MonoBehaviour
         if (_input.GetJump() && _canAct)
         {
             _jumpInputBuffer = true;
+        }
+        if (_input.GetInteraction())
+        {
+            _interactor.TryInteract();
         }
     }
 

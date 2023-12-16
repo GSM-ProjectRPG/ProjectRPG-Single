@@ -22,12 +22,9 @@ public class PlayerInteractor : MonoBehaviour
         for (int i = 0; i < cols.Count; i++)
         {
             InteractableObject interactable = cols[i].GetComponent<InteractableObject>();
-            Vector3 interactablePos = cols[i].transform.position;
             if (interactable != null)
             {
-                Debug.Log("찾음");
                 curruntNearInteractableObject = interactable;
-                interactable.CallInteract(this);
                 findSuccess = true;
                 break;
             }

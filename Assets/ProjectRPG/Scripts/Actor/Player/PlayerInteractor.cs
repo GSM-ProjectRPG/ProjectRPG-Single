@@ -17,12 +17,15 @@ public class PlayerInteractor : MonoBehaviour
         bool findSuccess = false;
 
         List<Collider> cols = Physics.OverlapSphere(transform.position, interactionRange).ToList();
+        cols.Sort((a, b) => { return (int)Mathf.Sign(Vector3.Distance(transform.position, a.transform.position) - Vector3.Distance(transform.position, b.transform.position)); });
+
         for (int i = 0; i < cols.Count; i++)
         {
             InteractableObject interactable = cols[i].GetComponent<InteractableObject>();
             Vector3 interactablePos = cols[i].transform.position;
-            if (interactable != null && Vector3.Distance(transform.position, interactablePos) < interactionRange)
+            if (interactable != null)
             {
+                Debug.Log("찾음");
                 curruntNearInteractableObject = interactable;
                 interactable.CallInteract(this);
                 findSuccess = true;

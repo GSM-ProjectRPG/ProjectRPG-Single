@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 983c80e0e3896d3418456b548df94c0a, type: 3}
   m_Name: "\uD50C\uB808\uC774\uC5B4 \uB808\uBCA8\uBCC4 \uB370\uC774\uD130"
   m_EditorClassIdentifier: 
-  levelDatas:
+  LevelDatas:
   - maxHp: 100
     attack: 10
     totalExp: 10

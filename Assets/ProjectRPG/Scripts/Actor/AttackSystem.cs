@@ -34,17 +34,9 @@ public class AttackSystem : MonoBehaviour
         _actSystem = GetComponent<ActSystem>();
     }
 
-    public int AddAttack(Action action)
+    public Action Attack(Action action)
     {
-        return AttackActions.Add(() => _actSystem.Act(_actSystem.AddAct(action)));
-    }
-
-    /// <summary>
-    /// AttackActions에 정의된 공격을 시도합니다.
-    /// </summary>
-    public void Attack(int index)
-    {
-        AttackActions[index]?.Invoke();
+        return _actSystem.Act(action);
     }
 
     /// <summary>

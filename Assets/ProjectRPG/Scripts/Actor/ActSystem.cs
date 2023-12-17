@@ -5,19 +5,48 @@ using UnityEngine;
 
 public class ActSystem : MonoBehaviour
 {
-    /// <summary>
-    /// 공격을 정의하는 람다식을 저장합니다, TryAttack 메서드를 통해 공격할 수 있습니다.
-    /// </summary>
-    private ActionList ActActions = new();
+    BuffSystem _buffSystem;
 
-    public int AddAct(Action action)
+    private void Start()
     {
-        return ActActions.Add(action);
+        _buffSystem = GetComponent<BuffSystem>();
     }
 
-    public void Act(int actIndex)
+    public Action Act(Action action)
     {
-        ActActions[actIndex]?.Invoke();
+        return () =>
+        {
+            if (!_buffSystem.ContainsBuff<Stun>())
+            {
+                action?.Invoke();
+            }
+        };
+    }
+}
+
+public class Stun : Buff
+{
+    public override string Name => "기절";
+    public override string Description => "기절";
+    public override Sprite Sprite => null;
+
+    public float endTime;
+
+    public override void MergeBuff(Buff other)
+    {
+        endTime = MathF.Max(endTime, ((Stun)other).endTime);
+    }
+
+    public override void OnAdded(BuffSystem manager)
+    {
+    }
+
+    public override void OnUpdate(BuffSystem manager)
+    {
+    }
+
+    public override void OnDeleted(BuffSystem manager)
+    {
     }
 }
 

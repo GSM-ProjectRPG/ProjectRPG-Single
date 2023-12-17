@@ -57,7 +57,7 @@ public class PlayerController : MonoBehaviour
             _health.SetMaxHealth(maxHealth);
             _health.SetHealth(maxHealth, gameObject);
         };
-        punchHandler += () => _attackSystem.Attack(_attackSystem.AddAttack(Punch));
+        punchHandler = _attackSystem.Attack(Punch);
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -16,6 +17,7 @@ public class PlayerController : MonoBehaviour
     private PlayerStatSystem _statManager;
     private PlayerInteractor _interactor;
     private AttackSystem _attackSystem;
+    private ActSystem _actSystem;
 
     [SerializeField] private Animator _animator;
 
@@ -37,6 +39,8 @@ public class PlayerController : MonoBehaviour
     private bool _canAct => !_isActing && !_isDead;
 
     private Action punchHandler;
+    private Action interactionHandler;
+    private Action jumpHandler;
 
     private void Start()
     {
@@ -46,6 +50,7 @@ public class PlayerController : MonoBehaviour
         _statManager = GetComponent<PlayerStatSystem>();
         _interactor = GetComponent<PlayerInteractor>();
         _attackSystem = GetComponent<AttackSystem>();
+        _actSystem = GetComponent<ActSystem>();
         _input = PlayerInputManager.Instance;
         //animator = GetComponent<Animator>();
 
@@ -57,13 +62,16 @@ public class PlayerController : MonoBehaviour
             _health.SetMaxHealth(maxHealth);
             _health.SetHealth(maxHealth, gameObject);
         };
+
         punchHandler = _attackSystem.Attack(Punch);
+        interactionHandler = _actSystem.Act(() => _interactor.TryInteract());
+        jumpHandler = _actSystem.Act(() => _jumpInputBuffer = true);
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         _cameraDistance = _cameraMaxDistance;
     }
-
+ 
     // Update is called once per frame
     private void Update()
     {
@@ -81,11 +89,11 @@ public class PlayerController : MonoBehaviour
         }
         if (_input.GetJump() && _canAct)
         {
-            _jumpInputBuffer = true;
+            jumpHandler?.Invoke();
         }
         if (_input.GetInteraction())
         {
-            _interactor.TryInteract();
+            interactionHandler?.Invoke();
         }
     }
 

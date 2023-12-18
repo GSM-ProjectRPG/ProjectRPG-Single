@@ -38,7 +38,7 @@ public class QuestManager : MonoBehaviour
 public abstract class AQuest : MonoBehaviour
 {
     public QuestData QuestData;
-
+    public int CurrentTargetCount;
     public bool IsQuestProceeding;
 
     public abstract void OnRegistedQuest();

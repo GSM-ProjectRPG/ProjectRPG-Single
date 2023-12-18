@@ -12,6 +12,13 @@ public class SkillSystem : MonoBehaviour
     public List<Skill> HaveSkills { get; protected set; } = new();
     public Skill CurruntSkill { get; protected set; }
 
+    [SerializeField] private SkillData basicSkillData;
+
+    private void Awake()
+    {
+        SelectSkill(new Skill(basicSkillData, null));
+    }
+
     public void RegistSkill(Skill skill)
     {
         HaveSkills.Add(skill);
@@ -26,17 +33,12 @@ public class SkillSystem : MonoBehaviour
 
     public void UseSkill()
     {
-        CurruntSkill?.Invoke(this);
-        OnUseSkill?.Invoke(CurruntSkill);
+        if (CurruntSkill != null)
+        {
+            CurruntSkill.Invoke();
+            OnUseSkill?.Invoke(CurruntSkill);
+        }
     }
-}
-
-[CreateAssetMenu(fileName = "스킬 데이터", menuName = "Scriptable Object/스킬 데이터", order = int.MinValue)]
-public class SkillData : ScriptableObject
-{
-    public string Name;
-    public string Description;
-    public Sprite Sprite;
 }
 
 public class Skill
@@ -46,16 +48,16 @@ public class Skill
     public virtual Sprite Sprite => _skillData.Sprite;
 
     protected SkillData _skillData;
-    protected Action<SkillSystem> _onUseSkill;
+    protected Action _onUseSkill;
 
-    public Skill(SkillData skill, Action<SkillSystem> onUseSkill)
+    public Skill(SkillData skillData, Action onUseSkill)
     {
-        _skillData = skill;
+        _skillData = skillData;
         _onUseSkill = onUseSkill;
     }
 
-    public void Invoke(SkillSystem skillSystem)
+    public void Invoke()
     {
-        _onUseSkill?.Invoke(skillSystem);
+        _onUseSkill?.Invoke();
     }
 }

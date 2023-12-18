@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class QuestNPC : MonoBehaviour
 {
-    public Quest quest;
+    public AQuest Quest;
 
     private void Start()
     {
-        GetComponent<InteractableObject>().OnInteracted += (regist) => { QuestManager.instance.RegistQuest(quest); };
+        GetComponent<InteractableObject>().OnInteracted += (regist) => { QuestManager.Instance.RegistQuest(Quest); };
     }
 }

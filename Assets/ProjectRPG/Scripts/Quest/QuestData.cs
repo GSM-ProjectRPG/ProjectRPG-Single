@@ -2,23 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum QuestType { Hunt, Item }
+public enum EQuestType { Hunt, Item }
 
 [CreateAssetMenu(fileName = "QuestData", menuName = "Scriptable Object/QuestData", order = int.MaxValue)]
 public class QuestData : ScriptableObject
 {
-    public int questId;
+    public int QuestId;
 
-    public List<string> story;
-    public string questContents;
+    public List<string> Story;
+    public string QuestContents;
 
-    public QuestType questType;
+    public EQuestType QuestType;
 
-    public GameObject targetObject;
-    public int targetCount;
+    public GameObject TargetObject;
+    public int TargetCount;
 
-    public int rewardGold;
-    public int rewardExp;
-    public GameObject rewardItem;
-    public int rewardItemCount;
+    public int RewardGold;
+    public int RewardExp;
+    public GameObject RewardItem;
+    public int RewardItemCount;
 }

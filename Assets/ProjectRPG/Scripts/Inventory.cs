@@ -2,92 +2,81 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Inventory : MonoBehaviour
 {
+    public List<Item> itemList = new List<Item>();
+
+    public ItemData itemData;
+    public Sprite testImg;
+
     public Action equipAction;
     public Action useAction;
 
-    public List<Item> itemList = new();
+    public Image[] inventoryImage;
+    public Text[] inventoryText;
+    public Text descriptionText;
 
-    public void AddItemData(Item itemData)
+
+    private void Update()
+    {
+        for (int i = 0; i < itemList.Count; i++)
+        {
+            inventoryImage[i].sprite = itemList[i].itemData.itemImg;
+            inventoryText[i].text = itemList[i].itemData.itemName;
+        }
+    }
+
+    public void AddItemData(Item item)
     {
         foreach (Item data in itemList)
         {
-            if (data.itemData.itemID == itemData.itemData.itemID)
+            if(itemList.Count > 16)
             {
-                Countable countableResource = data as Countable;
-                Countable countableAdd = itemData as Countable;
+                
+            }    
 
-                if (countableResource is not null && countableAdd is not null)
+            if (data.itemData.itemID == item.itemData.itemID)
+            {
+                data.count += item.count;
+                return;
+            }
+        }
+        itemList.Add(item);
+    }
+
+    public void RemoveItemData(Item item)
+    {
+        foreach (Item data in itemList)
+        {
+            if (data.itemData.itemID == item.itemData.itemID)
+            {
+                if(data.count - item.count > 0)
                 {
-                    countableResource.count += countableAdd.count;
-                    return;
+                    data.count -= item.count;
+                }
+                else if(data.count - item.count == 0)
+                {
+                    itemList.Remove(item);
+                }
+                else
+                {
+
                 }
             }
         }
-        itemList.Add(itemData);
-    }
-
-    public void RemoveItemData(int index)
-    {
-        itemList.RemoveAt(index);
     }
 
     public void Use(int index)
     {
-        if (itemList[index] is Equipment)
+        if (itemList[index].itemData is Equipment)
         {
-            EquipItem(index);
-
-            equipAction += () =>
-            {
-
-            };
-
             equipAction?.Invoke();
         }
-        else if (itemList[index] is Use)
+        else if (itemList[index].itemData is Use)
         {
             useAction?.Invoke();
         }
-    }
-
-    void EquipItem(int index)
-    {
-        if (itemList[index] is Weapon)
-        {
-            AddItemData(itemList[0]);
-            itemList[0] = itemList[index];
-        }
-        else if(itemList[index] is Accesory)
-        {
-            AddItemData(itemList[1]);
-            itemList[1] = itemList[index];
-
-        }
-    }
-
-    void UseItem()
-    {
-
-    }
-
-    int[] GetStat()
-    {
-        int[] stat = new int[3];
-
-        Weapon weapon = itemList[0] as Weapon;
-        Accesory accesory = itemList[1] as Accesory;
-
-        int damage = weapon.damage + accesory.damage;
-        int health = accesory.health;
-        int speed = accesory.speed;
-
-        stat[0] = damage;
-        stat[1] = health;
-        stat[2] = speed;
-
-        return stat;
     }
 }

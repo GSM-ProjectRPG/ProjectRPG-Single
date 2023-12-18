@@ -12,7 +12,7 @@ public class ActorManager : MonoBehaviour
     public Action OnRegistedPlayer;
     public Action OnDeletedPlayer;
 
-    public GameObject Player;
+    public GameObject Player { get; set; }
 
     public List<GameObject> Actors { get; private set; } = new();
 

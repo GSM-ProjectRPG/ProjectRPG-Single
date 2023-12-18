@@ -54,21 +54,21 @@ public class Inventory : MonoBehaviour
 
     public void RemoveItemData(Item item)
     {
-        foreach (Item data in itemList)
+        foreach (Item item in itemList)
         {
-            if (data.itemData.itemID == item.itemData.itemID)
+            if (item.itemData.itemID == item.itemData.itemID)
             {
-                if(data.count - item.count > 0)
+                if(item.count > item.count)
                 {
-                    data.count -= item.count;
+                    item.count -= item.count;
                     return;
                 }
-                else if(data.count - item.count == 0)
+                else if(item.count == item.count)
                 {
                     itemList.Remove(item);
                     return;
                 }
-                else
+                else if(item.count < item.count)
                 {
                     return;
                 }

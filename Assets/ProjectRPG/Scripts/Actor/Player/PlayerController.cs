@@ -6,9 +6,9 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public float MoveSpeed => 3;
+    public float MoveSpeed => _statManager.GetCurruntStat().MoveSpeed;
     public float RunSpeed => MoveSpeed * 1.5f;
-    public float AttackStat => 0;
+    public float AttackStat => _statManager.GetCurruntStat().Attack;
 
     private Rigidbody _rigid;
     private PlayerInputManager _input;

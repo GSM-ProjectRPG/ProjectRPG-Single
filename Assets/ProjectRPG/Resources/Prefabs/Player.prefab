@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 4182017467630518810}
   - component: {fileID: 6424370322115242300}
   - component: {fileID: 3288502224778911381}
+  - component: {fileID: 1737948761529796464}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -139,10 +140,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48aacad8bc9531542ab53e6ffac7b1d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: 
-  Attack: 0
-  Health: 0
-  MoveSpeed: 0
+  _name: 
+  _attack: 0
+  _health: 0
+  _moveSpeed: 3
   levelData: {fileID: 11400000, guid: 623ea17b6f898b64c9a2bf394036b688, type: 2}
 --- !u!114 &6424370322115242300
 MonoBehaviour:
@@ -167,6 +168,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0add22a39cee31743a0f86ce00c537dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1737948761529796464
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6799289787203058824}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57ba3465e988e2d49880352f480fd91e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &6799289787372926813

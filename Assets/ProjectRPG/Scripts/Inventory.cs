@@ -9,74 +9,85 @@ public class Inventory : MonoBehaviour
     public List<Item> itemList = new List<Item>();
 
     public ItemData itemData;
-    public Sprite testImg;
 
-    public Action equipAction;
-    public Action useAction;
+    public Action<Item> OnEquip;
+    public Action<Item> OnUse;
 
-    public Image[] inventoryImage;
-    public Text[] inventoryText;
-    public Text descriptionText;
-
+    public Image[] inventoryImg;
+    public Text[] inventoryTxt;
 
     private void Update()
     {
-        for (int i = 0; i < itemList.Count; i++)
+        for (int i = 0; i < 16; i++)
         {
-            inventoryImage[i].sprite = itemList[i].itemData.itemImg;
-            inventoryText[i].text = itemList[i].itemData.itemName;
+            if (i < itemList.Count)
+            {
+                inventoryImg[i].sprite = itemList[i].itemData.itemImg;
+                inventoryTxt[i].text = itemList[i].itemData.itemName;
+            }
+            else
+            {
+                inventoryImg[i].sprite = null;
+                inventoryTxt[i].text = null;
+            }
         }
     }
 
-    public void AddItemData(Item item)
+    public void AddItemData(Item compareItem)
     {
-        foreach (Item data in itemList)
+        foreach (Item sourceItem in itemList)
         {
-            if(itemList.Count > 16)
+            if (sourceItem.itemData.itemID == compareItem.itemData.itemID)
             {
-                
-            }    
-
-            if (data.itemData.itemID == item.itemData.itemID)
-            {
-                data.count += item.count;
+                sourceItem.count += compareItem.count;
                 return;
             }
         }
-        itemList.Add(item);
+
+        if (itemList.Count >= 16)
+        {
+            return;
+        }
+
+        itemList.Add(compareItem);
     }
 
     public void RemoveItemData(Item item)
     {
-        foreach (Item data in itemList)
+        foreach (Item item in itemList)
         {
-            if (data.itemData.itemID == item.itemData.itemID)
+            if (item.itemData.itemID == item.itemData.itemID)
             {
-                if(data.count - item.count > 0)
+                if(item.count > item.count)
                 {
-                    data.count -= item.count;
+                    item.count -= item.count;
+                    return;
                 }
-                else if(data.count - item.count == 0)
+                else if(item.count == item.count)
                 {
                     itemList.Remove(item);
+                    return;
                 }
-                else
+                else if(item.count < item.count)
                 {
-
+                    return;
                 }
             }
         }
     }
-
+    
     public void Use(int index)
     {
+        if (itemList[index] is null) return;
+        if (index > itemList.Count) return;
+
         if (itemList[index].itemData is Equipment)
         {
-            equipAction?.Invoke();
+            OnEquip?.Invoke(itemList[index]);
         }
         else if (itemList[index].itemData is Use)
         {
-            useAction?.Invoke();
+            OnUse?.Invoke(itemList[index]);
         }
     }
 }

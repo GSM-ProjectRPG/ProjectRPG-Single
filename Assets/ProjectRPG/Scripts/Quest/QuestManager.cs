@@ -39,7 +39,6 @@ public abstract class Quest : MonoBehaviour
 {
     public QuestData questData;
 
-    public bool isRegistInteraction;
     public bool isQuestProceeding;
 
     public abstract void OnRegistedQuest();

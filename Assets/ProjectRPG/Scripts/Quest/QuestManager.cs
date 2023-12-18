@@ -21,6 +21,7 @@ public class QuestManager : MonoBehaviour
         {
             currentQuests.Add(data);
             data.OnRegistedQuest();
+            data.isQuestProceeding = true;
         }
     }
 
@@ -39,6 +40,7 @@ public abstract class Quest : MonoBehaviour
     public QuestData questData;
 
     public bool isRegistInteraction;
+    public bool isQuestProceeding;
 
     public abstract void OnRegistedQuest();
 

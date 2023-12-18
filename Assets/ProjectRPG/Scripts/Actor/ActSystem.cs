@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class ActSystem : MonoBehaviour
 {
-    BuffSystem _buffSystem;
+    private BuffSystem _buffSystem;
 
     private void Start()
     {
@@ -21,32 +21,6 @@ public class ActSystem : MonoBehaviour
                 action?.Invoke();
             }
         };
-    }
-}
-
-public class Stun : Buff
-{
-    public override string Name => "기절";
-    public override string Description => "기절";
-    public override Sprite Sprite => null;
-
-    public float endTime;
-
-    public override void MergeBuff(Buff other)
-    {
-        endTime = MathF.Max(endTime, ((Stun)other).endTime);
-    }
-
-    public override void OnAdded(BuffSystem manager)
-    {
-    }
-
-    public override void OnUpdate(BuffSystem manager)
-    {
-    }
-
-    public override void OnDeleted(BuffSystem manager)
-    {
     }
 }
 

@@ -19,11 +19,6 @@ public class AttackSystem : MonoBehaviour
     /// </summary>
     public Action<GameObject, float> OnAttackHitted;
 
-    /// <summary>
-    /// 공격을 정의하는 람다식을 저장합니다, TryAttack 메서드를 통해 공격할 수 있습니다.
-    /// </summary>
-    private ActionList AttackActions = new();
-
     private StatSystem _statSystem;
     private ActSystem _actSystem;
 

@@ -38,9 +38,10 @@ public class PlayerController : MonoBehaviour
     private bool _isActing => _motionStopTime >= Time.time;
     private bool _canAct => !_isActing && !_isDead;
 
-    private Action punchHandler;
-    private Action interactionHandler;
-    private Action jumpHandler;
+    private Action _punchHandler;
+    private Action _interactionHandler;
+    private Action _jumpInputHandler;
+    private Action _moveHandler;
 
     private void Start()
     {
@@ -63,15 +64,16 @@ public class PlayerController : MonoBehaviour
             _health.SetHealth(maxHealth, gameObject);
         };
 
-        punchHandler = _attackSystem.Attack(Punch);
-        interactionHandler = _actSystem.Act(() => _interactor.TryInteract());
-        jumpHandler = _actSystem.Act(() => _jumpInputBuffer = true);
+        _punchHandler = _attackSystem.Attack(Punch);
+        _interactionHandler = _actSystem.Act(() => _interactor.TryInteract());
+        _jumpInputHandler = _actSystem.Act(() => _jumpInputBuffer = true);
+        _moveHandler = _actSystem.Act(() => Move(_input.GetMoveVector()));
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         _cameraDistance = _cameraMaxDistance;
     }
- 
+
     // Update is called once per frame
     private void Update()
     {
@@ -85,15 +87,15 @@ public class PlayerController : MonoBehaviour
 
         if (_input.GetAttack() && _canAct)
         {
-            punchHandler?.Invoke();
+            _punchHandler?.Invoke();
         }
         if (_input.GetJump() && _canAct)
         {
-            jumpHandler?.Invoke();
+            _jumpInputHandler?.Invoke();
         }
         if (_input.GetInteraction())
         {
-            interactionHandler?.Invoke();
+            _interactionHandler?.Invoke();
         }
     }
 
@@ -134,15 +136,16 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        JumpLogic();
         if (_canAct)
         {
-            MoveHandler();
+            _moveHandler?.Invoke();
         }
     }
 
     private bool _jumpInputBuffer;
 
-    private void MoveHandler()
+    private void JumpLogic()
     {
         if (_jumpInputBuffer)
         {
@@ -154,9 +157,10 @@ public class PlayerController : MonoBehaviour
             _rigid.velocity = jumpVector;
             return;
         }
+    }
 
-        Vector2 inputVector = _input.GetMoveVector();
-
+    private void Move(Vector2 inputVector)
+    {
         Vector3 moveVelocity = Vector3.zero;
         if (inputVector != Vector2.zero)
         {

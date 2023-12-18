@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -15,6 +17,7 @@ public class PlayerController : MonoBehaviour
     private PlayerStatSystem _statManager;
     private PlayerInteractor _interactor;
     private AttackSystem _attackSystem;
+    private ActSystem _actSystem;
 
     [SerializeField] private Animator _animator;
 
@@ -35,6 +38,11 @@ public class PlayerController : MonoBehaviour
     private bool _isActing => _motionStopTime >= Time.time;
     private bool _canAct => !_isActing && !_isDead;
 
+    private Action _punchHandler;
+    private Action _interactionHandler;
+    private Action _jumpHandler;
+    private Action _moveHandler;
+
     private void Start()
     {
         _rigid = GetComponent<Rigidbody>();
@@ -43,6 +51,7 @@ public class PlayerController : MonoBehaviour
         _statManager = GetComponent<PlayerStatSystem>();
         _interactor = GetComponent<PlayerInteractor>();
         _attackSystem = GetComponent<AttackSystem>();
+        _actSystem = GetComponent<ActSystem>();
         _input = PlayerInputManager.Instance;
         //animator = GetComponent<Animator>();
 
@@ -54,7 +63,11 @@ public class PlayerController : MonoBehaviour
             _health.SetMaxHealth(maxHealth);
             _health.SetHealth(maxHealth, gameObject);
         };
-        _attackSystem.AttackActions[0] += () => Punch();
+
+        _punchHandler = _attackSystem.Attack(Punch);
+        _interactionHandler = _actSystem.Act(() => _interactor.TryInteract());
+        _jumpHandler = _actSystem.Act(Jump);
+        _moveHandler = _actSystem.Act(() => Move(_input.GetMoveVector()));
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -74,15 +87,16 @@ public class PlayerController : MonoBehaviour
 
         if (_input.GetAttack() && _canAct)
         {
-            _attackSystem.TryAttack(0);
+            _punchHandler?.Invoke();
         }
         if (_input.GetJump() && _canAct)
         {
             _jumpInputBuffer = true;
+
         }
         if (_input.GetInteraction())
         {
-            _interactor.TryInteract();
+            _interactionHandler?.Invoke();
         }
     }
 
@@ -125,27 +139,30 @@ public class PlayerController : MonoBehaviour
     {
         if (_canAct)
         {
-            MoveHandler();
+            _moveHandler?.Invoke();
+
+            if (_jumpInputBuffer)
+            {
+                _jumpHandler?.Invoke();
+            }
+            _jumpInputBuffer = false;
         }
     }
 
     private bool _jumpInputBuffer;
 
-    private void MoveHandler()
+    private void Jump()
     {
-        if (_jumpInputBuffer)
-        {
-            _jumpInputBuffer = false;
-            _animator.SetTrigger("Jump");
-            StartCoroutine(SetMotionStun());
-            Vector3 jumpVector = _rigid.velocity;
-            jumpVector.y = _jumpPower;
-            _rigid.velocity = jumpVector;
-            return;
-        }
+        _animator.SetTrigger("Jump");
+        StartCoroutine(SetMotionStun());
+        Vector3 jumpVector = _rigid.velocity;
+        jumpVector.y = _jumpPower;
+        _rigid.velocity = jumpVector;
+        return;
+    }
 
-        Vector2 inputVector = _input.GetMoveVector();
-
+    private void Move(Vector2 inputVector)
+    {
         Vector3 moveVelocity = Vector3.zero;
         if (inputVector != Vector2.zero)
         {

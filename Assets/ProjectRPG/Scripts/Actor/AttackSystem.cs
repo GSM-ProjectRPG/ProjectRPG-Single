@@ -11,6 +11,7 @@ using Debug = UnityEngine.Debug;
 /// 공격을 등록하고, 실행 요청받는 공격관리자입니다.
 /// </summary>
 [RequireComponent(typeof(StatSystem))]
+[RequireComponent(typeof(ActSystem))]
 public class AttackSystem : MonoBehaviour
 {
     /// <summary>
@@ -18,25 +19,22 @@ public class AttackSystem : MonoBehaviour
     /// </summary>
     public Action<GameObject, float> OnAttackHitted;
 
-    /// <summary>
-    /// 공격을 정의하는 람다식을 저장합니다, TryAttack 메서드를 통해 공격할 수 있습니다.
-    /// </summary>
-    public AttackActionList AttackActions = new();
-
     private StatSystem _statSystem;
+    private ActSystem _actSystem;
 
 
     private void Start()
     {
         _statSystem = GetComponent<StatSystem>();
+        _actSystem = GetComponent<ActSystem>();
     }
 
     /// <summary>
-    /// AttackActions에 정의된 공격을 시도합니다.
+    /// 공격 로직을 매개변수로 받아 공격 핸들러를 반환합니다.
     /// </summary>
-    public void TryAttack(int index)
+    public Action Attack(Action action)
     {
-        AttackActions[index]?.Invoke();
+        return _actSystem.Act(action);
     }
 
     /// <summary>
@@ -77,33 +75,5 @@ public class AttackSystem : MonoBehaviour
         #endregion
 
         return instance;
-    }
-
-    /// <summary>
-    /// 공격 람다식들을 저장하는 클래스입니다. 인덱서를 통하여 공격을 참조할 수 있으며, 인덱스 범위를 벗어났을 경우 자동으로 확장됩니다.
-    /// </summary>
-    public class AttackActionList
-    {
-        private List<Action> _actions = new();
-
-        public Action this[int index]
-        {
-            get
-            {
-                while (_actions.Count <= index)
-                {
-                    _actions.Add(() => { });
-                }
-                return _actions[index];
-            }
-            set
-            {
-                while (_actions.Count <= index)
-                {
-                    _actions.Add(() => { });
-                }
-                _actions[index] = value;
-            }
-        }
     }
 }

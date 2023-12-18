@@ -13,6 +13,9 @@ public class PlayerController : MonoBehaviour
     private Health _health;
     private DamageReciever _damageReciever;
     private PlayerStatSystem _statManager;
+    private PlayerInteractor _interactor;
+    private AttackSystem _attackSystem;
+
     [SerializeField] private Animator _animator;
 
     [Header("캐릭터 설정")]
@@ -38,6 +41,8 @@ public class PlayerController : MonoBehaviour
         _health = GetComponent<Health>();
         _damageReciever = GetComponent<DamageReciever>();
         _statManager = GetComponent<PlayerStatSystem>();
+        _interactor = GetComponent<PlayerInteractor>();
+        _attackSystem = GetComponent<AttackSystem>();
         _input = PlayerInputManager.Instance;
         //animator = GetComponent<Animator>();
 
@@ -49,6 +54,7 @@ public class PlayerController : MonoBehaviour
             _health.SetMaxHealth(maxHealth);
             _health.SetHealth(maxHealth, gameObject);
         };
+        _attackSystem.AttackActions[0] += () => Punch();
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -68,13 +74,22 @@ public class PlayerController : MonoBehaviour
 
         if (_input.GetAttack() && _canAct)
         {
-            _animator.SetTrigger("Attack");
-            StartCoroutine(SetMotionStun());
+            _attackSystem.TryAttack(0);
         }
         if (_input.GetJump() && _canAct)
         {
             _jumpInputBuffer = true;
         }
+        if (_input.GetInteraction())
+        {
+            _interactor.TryInteract();
+        }
+    }
+
+    private void Punch()
+    {
+        _animator.SetTrigger("Attack");
+        StartCoroutine(SetMotionStun());
     }
 
     private void SetCameraPos()

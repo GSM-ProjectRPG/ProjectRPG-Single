@@ -81,4 +81,10 @@ public class PlayerInputManager : MonoBehaviour
         if (!InputEnable) return 0f;
         return -Input.GetAxis("Mouse ScrollWheel");
     }
+
+    public bool GetInteraction()
+    {
+        if (!InputEnable) return false;
+        return Input.GetKeyDown(KeyCode.F);
+    }
 }

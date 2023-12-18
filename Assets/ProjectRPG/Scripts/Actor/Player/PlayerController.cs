@@ -40,7 +40,7 @@ public class PlayerController : MonoBehaviour
 
     private Action _punchHandler;
     private Action _interactionHandler;
-    private Action _jumpInputHandler;
+    private Action _jumpHandler;
     private Action _moveHandler;
 
     private void Start()
@@ -66,7 +66,7 @@ public class PlayerController : MonoBehaviour
 
         _punchHandler = _attackSystem.Attack(Punch);
         _interactionHandler = _actSystem.Act(() => _interactor.TryInteract());
-        _jumpInputHandler = _actSystem.Act(() => _jumpInputBuffer = true);
+        _jumpHandler = _actSystem.Act(Jump);
         _moveHandler = _actSystem.Act(() => Move(_input.GetMoveVector()));
 
         Cursor.lockState = CursorLockMode.Locked;
@@ -91,7 +91,8 @@ public class PlayerController : MonoBehaviour
         }
         if (_input.GetJump() && _canAct)
         {
-            _jumpInputHandler?.Invoke();
+            _jumpInputBuffer = true;
+
         }
         if (_input.GetInteraction())
         {
@@ -136,27 +137,28 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        JumpLogic();
         if (_canAct)
         {
             _moveHandler?.Invoke();
+
+            if (_jumpInputBuffer)
+            {
+                _jumpHandler?.Invoke();
+            }
+            _jumpInputBuffer = false;
         }
     }
 
     private bool _jumpInputBuffer;
 
-    private void JumpLogic()
+    private void Jump()
     {
-        if (_jumpInputBuffer)
-        {
-            _jumpInputBuffer = false;
-            _animator.SetTrigger("Jump");
-            StartCoroutine(SetMotionStun());
-            Vector3 jumpVector = _rigid.velocity;
-            jumpVector.y = _jumpPower;
-            _rigid.velocity = jumpVector;
-            return;
-        }
+        _animator.SetTrigger("Jump");
+        StartCoroutine(SetMotionStun());
+        Vector3 jumpVector = _rigid.velocity;
+        jumpVector.y = _jumpPower;
+        _rigid.velocity = jumpVector;
+        return;
     }
 
     private void Move(Vector2 inputVector)

@@ -15,6 +15,7 @@ public class PlayerStatSystem : StatSystem
     //플레이어 데이터 저장 기능 만들면 수정필요
     public int Level { get; protected set; } = 1;
     public float Exp { get; protected set; } = 0;
+    public float NeededExp => levelData.GetLevelData(Level).totalExp;
 
     [SerializeField] protected PlayerLevelData levelData;
 
@@ -31,9 +32,9 @@ public class PlayerStatSystem : StatSystem
     {
         Exp += exp;
         OnAddedExp?.Invoke(exp);
-        while (Exp >= levelData.GetLevelData(Level).totalExp)
+        while (Exp >= NeededExp)
         {
-            Exp -= levelData.GetLevelData(Level).totalExp;
+            Exp -= NeededExp;
             Level++;
             OnLevelUp?.Invoke();
         }

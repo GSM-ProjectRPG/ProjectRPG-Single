@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Reflection;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -18,12 +19,13 @@ public class AttackSystem : MonoBehaviour
     /// GameObject : 공격을 맞은오브젝트, float : 가해진 최종 데미지
     /// </summary>
     public Action<GameObject, float> OnAttackHitted;
+    public Action<GameObject> OnKill;
 
     private StatSystem _statSystem;
     private ActSystem _actSystem;
 
 
-    private void Start()
+    private void Awake()
     {
         _statSystem = GetComponent<StatSystem>();
         _actSystem = GetComponent<ActSystem>();
@@ -49,6 +51,21 @@ public class AttackSystem : MonoBehaviour
         {
             attack.SetAttacker(this, _statSystem);
             attack.OnHitted += OnAttackHitted;
+            attack.OnHitted += (victim, damage) =>
+            {
+                Health health = victim.GetComponent<Health>();
+                if (health != null)
+                {
+                    if (health.OnDead == null)
+                    {
+                        health.OnDead = OnKill;
+                    }
+                    else if (!health.OnDead.GetInvocationList().Contains(OnKill))
+                    {
+                        health.OnDead += OnKill;
+                    }
+                }
+            };
         }
         #region 경고 메시지 출력
 #if UNITY_EDITOR

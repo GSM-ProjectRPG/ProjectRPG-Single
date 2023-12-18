@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Reflection;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -11,32 +12,31 @@ using Debug = UnityEngine.Debug;
 /// 공격을 등록하고, 실행 요청받는 공격관리자입니다.
 /// </summary>
 [RequireComponent(typeof(StatSystem))]
+[RequireComponent(typeof(ActSystem))]
 public class AttackSystem : MonoBehaviour
 {
     /// <summary>
     /// GameObject : 공격을 맞은오브젝트, float : 가해진 최종 데미지
     /// </summary>
     public Action<GameObject, float> OnAttackHitted;
-
-    /// <summary>
-    /// 공격을 정의하는 람다식을 저장합니다, TryAttack 메서드를 통해 공격할 수 있습니다.
-    /// </summary>
-    public AttackActionList AttackActions = new();
+    public Action<GameObject> OnKill;
 
     private StatSystem _statSystem;
+    private ActSystem _actSystem;
 
 
-    private void Start()
+    private void Awake()
     {
         _statSystem = GetComponent<StatSystem>();
+        _actSystem = GetComponent<ActSystem>();
     }
 
     /// <summary>
-    /// AttackActions에 정의된 공격을 시도합니다.
+    /// 공격 로직을 매개변수로 받아 공격 핸들러를 반환합니다.
     /// </summary>
-    public void TryAttack(int index)
+    public Action Attack(Action action)
     {
-        AttackActions[index]?.Invoke();
+        return _actSystem.Act(action);
     }
 
     /// <summary>
@@ -51,6 +51,21 @@ public class AttackSystem : MonoBehaviour
         {
             attack.SetAttacker(this, _statSystem);
             attack.OnHitted += OnAttackHitted;
+            attack.OnHitted += (victim, damage) =>
+            {
+                Health health = victim.GetComponent<Health>();
+                if (health != null)
+                {
+                    if (health.OnDead == null)
+                    {
+                        health.OnDead = OnKill;
+                    }
+                    else if (!health.OnDead.GetInvocationList().Contains(OnKill))
+                    {
+                        health.OnDead += OnKill;
+                    }
+                }
+            };
         }
         #region 경고 메시지 출력
 #if UNITY_EDITOR
@@ -77,33 +92,5 @@ public class AttackSystem : MonoBehaviour
         #endregion
 
         return instance;
-    }
-
-    /// <summary>
-    /// 공격 람다식들을 저장하는 클래스입니다. 인덱서를 통하여 공격을 참조할 수 있으며, 인덱스 범위를 벗어났을 경우 자동으로 확장됩니다.
-    /// </summary>
-    public class AttackActionList
-    {
-        private List<Action> _actions = new();
-
-        public Action this[int index]
-        {
-            get
-            {
-                while (_actions.Count <= index)
-                {
-                    _actions.Add(() => { });
-                }
-                return _actions[index];
-            }
-            set
-            {
-                while (_actions.Count <= index)
-                {
-                    _actions.Add(() => { });
-                }
-                _actions[index] = value;
-            }
-        }
     }
 }

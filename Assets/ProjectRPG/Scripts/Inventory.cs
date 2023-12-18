@@ -9,22 +9,27 @@ public class Inventory : MonoBehaviour
     public List<Item> itemList = new List<Item>();
 
     public ItemData itemData;
-    public Sprite testImg;
 
-    public Action equipAction;
-    public Action useAction;
+    public Action<Item> OnEquip;
+    public Action<Item> OnUse;
 
-    public Image[] inventoryImage;
-    public Text[] inventoryText;
-    public Text descriptionText;
-
+    public Image[] inventoryImg;
+    public Text[] inventoryTxt;
 
     private void Update()
     {
-        for (int i = 0; i < itemList.Count; i++)
+        for (int i = 0; i < 16; i++)
         {
-            inventoryImage[i].sprite = itemList[i].itemData.itemImg;
-            inventoryText[i].text = itemList[i].itemData.itemName;
+            if (i < itemList.Count)
+            {
+                inventoryImg[i].sprite = itemList[i].itemData.itemImg;
+                inventoryTxt[i].text = itemList[i].itemData.itemName;
+            }
+            else
+            {
+                inventoryImg[i].sprite = null;
+                inventoryTxt[i].text = null;
+            }
         }
     }
 
@@ -32,17 +37,18 @@ public class Inventory : MonoBehaviour
     {
         foreach (Item data in itemList)
         {
-            if(itemList.Count > 16)
-            {
-                
-            }    
-
             if (data.itemData.itemID == item.itemData.itemID)
             {
                 data.count += item.count;
                 return;
             }
         }
+
+        if (itemList.Count > 16)
+        {
+            return;
+        }
+
         itemList.Add(item);
     }
 
@@ -55,28 +61,32 @@ public class Inventory : MonoBehaviour
                 if(data.count - item.count > 0)
                 {
                     data.count -= item.count;
+                    return;
                 }
                 else if(data.count - item.count == 0)
                 {
                     itemList.Remove(item);
+                    return;
                 }
                 else
                 {
-
+                    return;
                 }
             }
         }
     }
-
+    
     public void Use(int index)
     {
+        if (itemList[index] is null) return;
+
         if (itemList[index].itemData is Equipment)
         {
-            equipAction?.Invoke();
+            OnEquip?.Invoke(itemList[index]);
         }
         else if (itemList[index].itemData is Use)
         {
-            useAction?.Invoke();
+            OnUse?.Invoke(itemList[index]);
         }
     }
 }

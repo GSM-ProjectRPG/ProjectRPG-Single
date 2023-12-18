@@ -9,7 +9,7 @@ public class PlayerInteractor : MonoBehaviour
 {
     [SerializeField] private float interactionRange;
 
-    public InteractableObject curruntNearInteractableObject { get; set; }
+    public InteractableObject curruntNearInteractableObject { get; protected set; }
 
     // Update is called once per frame
     private void Update()

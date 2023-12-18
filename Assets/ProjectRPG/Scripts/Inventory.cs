@@ -33,23 +33,23 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    public void AddItemData(Item item)
+    public void AddItemData(Item compareItem)
     {
-        foreach (Item data in itemList)
+        foreach (Item sourceItem in itemList)
         {
-            if (data.itemData.itemID == item.itemData.itemID)
+            if (sourceItem.itemData.itemID == compareItem.itemData.itemID)
             {
-                data.count += item.count;
+                sourceItem.count += compareItem.count;
                 return;
             }
         }
 
-        if (itemList.Count > 16)
+        if (itemList.Count >= 16)
         {
             return;
         }
 
-        itemList.Add(item);
+        itemList.Add(compareItem);
     }
 
     public void RemoveItemData(Item item)
@@ -79,6 +79,7 @@ public class Inventory : MonoBehaviour
     public void Use(int index)
     {
         if (itemList[index] is null) return;
+        if (index > itemList.Count) return;
 
         if (itemList[index].itemData is Equipment)
         {

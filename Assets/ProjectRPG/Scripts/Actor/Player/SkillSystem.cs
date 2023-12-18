@@ -5,16 +5,29 @@ using UnityEngine;
 
 public class SkillSystem : MonoBehaviour
 {
+    public Action<Skill> OnRegistedSkill;
+    public Action<Skill> OnChangeSkill;
+    public Action<Skill> OnUseSkill;
+
+    public List<Skill> HaveSkills { get; protected set; } = new();
     public Skill CurruntSkill { get; protected set; }
 
     public void RegistSkill(Skill skill)
     {
-        CurruntSkill = skill;
+        HaveSkills.Add(skill);
+        OnRegistedSkill?.Invoke(skill);
     }
 
-    public virtual void UseSkill()
+    public void SelectSkill(Skill skill)
+    {
+        CurruntSkill = skill;
+        OnChangeSkill?.Invoke(skill);
+    }
+
+    public void UseSkill()
     {
         CurruntSkill?.Invoke(this);
+        OnUseSkill?.Invoke(CurruntSkill);
     }
 }
 

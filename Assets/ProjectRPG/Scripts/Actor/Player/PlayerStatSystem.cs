@@ -24,7 +24,7 @@ public class PlayerStatSystem : StatSystem
         Stat stat = new Stat();
         stat.Health = levelData.GetLevelData(Level).maxHp;
         stat.Attack = levelData.GetLevelData(Level).attack;
-        stat.MoveSpeed = MoveSpeed;
+        stat.MoveSpeed = _moveSpeed;
         return stat;
     }
 

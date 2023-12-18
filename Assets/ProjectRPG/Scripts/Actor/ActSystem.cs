@@ -12,6 +12,11 @@ public class ActSystem : MonoBehaviour
         _buffSystem = GetComponent<BuffSystem>();
     }
 
+    /// <summary>
+    /// 행동 로직을 매개변수로 받아 행동 핸들러를 반환합니다.
+    /// </summary>
+    /// <param name="action"></param>
+    /// <returns></returns>
     public Action Act(Action action)
     {
         return () =>

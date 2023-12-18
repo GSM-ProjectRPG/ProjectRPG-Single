@@ -29,6 +29,9 @@ public class AttackSystem : MonoBehaviour
         _actSystem = GetComponent<ActSystem>();
     }
 
+    /// <summary>
+    /// 공격 로직을 매개변수로 받아 공격 핸들러를 반환합니다.
+    /// </summary>
     public Action Attack(Action action)
     {
         return _actSystem.Act(action);

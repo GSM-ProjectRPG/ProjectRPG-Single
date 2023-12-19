@@ -8,6 +8,6 @@ public class QuestNPC : MonoBehaviour
 
     private void Start()
     {
-        GetComponent<InteractableObject>().OnInteracted += (regist) => { QuestManager.Instance.RegistQuest(Quest); };
+        GetComponent<InteractableObject>().OnInteracted += (_) => { QuestManager.Instance.RegistQuest(Quest); };
     }
 }

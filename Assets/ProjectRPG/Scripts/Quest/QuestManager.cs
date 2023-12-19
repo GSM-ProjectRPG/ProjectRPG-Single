@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Reflection;
 using UnityEngine;
 
 public class QuestManager : MonoBehaviour
@@ -12,6 +14,26 @@ public class QuestManager : MonoBehaviour
     {
         if (Instance == null) Instance = this;
         else Destroy(this);
+    }
+
+    private void Start()
+    {
+        GameObject.Find("Player").GetComponent<AttackSystem>().OnKill += (die) =>
+        {
+            Action _onCheckQuest = null;
+            foreach (var quest in Instance.CurrentQuests)
+            {
+                if (quest.QuestData.TargetObject.name == die.name)
+                {
+                    _onCheckQuest += () =>
+                    {
+                        quest.CurrentTargetCount++;
+                        quest.QuestClearCheck();
+                    };
+                }
+            }
+            _onCheckQuest?.Invoke();
+        };
     }
 
     public void RegistQuest(AQuest data)
@@ -47,6 +69,7 @@ public abstract class AQuest : MonoBehaviour
     {
         if (IsQuestClear())
         {
+            Debug.Log("sklfjsdf");
             OnQuestClear();
         }
     }

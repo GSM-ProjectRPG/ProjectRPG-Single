@@ -24,6 +24,7 @@ public class AttackSystem : MonoBehaviour
     private StatSystem _statSystem;
     private ActSystem _actSystem;
 
+    private List<Health> healths = new List<Health>();
 
     private void Awake()
     {
@@ -54,16 +55,14 @@ public class AttackSystem : MonoBehaviour
             attack.OnHitted += (victim, damage) =>
             {
                 Health health = victim.GetComponent<Health>();
-                if (health != null)
+                if (health != null && !healths.Contains(health))
                 {
-                    if (health.OnDead == null)
+                    healths.Add(health);
+                    health.OnDead += (_) =>
                     {
-                        health.OnDead = OnKill;
-                    }
-                    else if (!health.OnDead.GetInvocationList().Contains(OnKill))
-                    {
-                        health.OnDead += OnKill;
-                    }
+                        OnKill?.Invoke(health.gameObject);
+                        healths?.Remove(health);
+                    };
                 }
             };
         }

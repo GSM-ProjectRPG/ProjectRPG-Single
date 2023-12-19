@@ -55,8 +55,9 @@ public class PlayerController : MonoBehaviour
         _input = PlayerInputManager.Instance;
         //animator = GetComponent<Animator>();
 
+        ActorManager.Instance.RegistPlayer(gameObject);
         _damageReciever.OnTakeDamage += (damage, attacker) => _health.TakeDamage(damage, attacker);
-        _health.OnDead += (_) => { _animator.SetTrigger("Die"); _isDead = true; };
+        _health.OnDead += (_) => { _animator.SetTrigger("Die"); _isDead = true; ActorManager.Instance.DeleteActor(gameObject); };
         _statManager.OnLevelUp += () =>
         {
             float maxHealth = _statManager.GetCurruntStat().Health;

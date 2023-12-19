@@ -18,12 +18,31 @@ public class Health : MonoBehaviour
     /// <summary>
     /// GameObject : 처치자
     /// </summary>
-    public Action<GameObject> OnDead;
+    private Action<GameObject> _onDead;
+    public Action<GameObject> OnDead
+    {
+        get
+        {
+            return _onDead;
+        }
+        set
+        {
+            if(_isDead)
+            {
+                value?.Invoke(_killer);
+            }
+            else
+            {
+                _onDead = value;
+            }
+        }
+    }
 
     public float MaxHealth { get; protected set; }
     public float CurruntHealth { get; protected set; }
 
     private bool _isDead = false;
+    private GameObject _killer = null;
 
     public void Start()
     {
@@ -38,6 +57,7 @@ public class Health : MonoBehaviour
 
     public void TakeDamage(float damage, GameObject attacker)
     {
+        if (_isDead) { return; }
         if (damage > 0)
         {
             float origin = CurruntHealth;
@@ -57,6 +77,7 @@ public class Health : MonoBehaviour
 
     public void TakeHeal(float heal, GameObject healer)
     {
+        if (_isDead) { return; }
         if (heal > 0)
         {
             float origin = CurruntHealth;
@@ -71,6 +92,7 @@ public class Health : MonoBehaviour
 
     public void Kill(GameObject killer)
     {
+        if (_isDead) { return; }
         float origin = CurruntHealth;
         CurruntHealth = 0;
 
@@ -81,6 +103,7 @@ public class Health : MonoBehaviour
 
     public void SetHealth(float health, GameObject caller)
     {
+        if (_isDead) { return; }
         health = Mathf.Clamp(health, 0, MaxHealth);
         float origin = CurruntHealth;
 
@@ -105,6 +128,7 @@ public class Health : MonoBehaviour
 
     public void SetMaxHealth(float maxHealth)
     {
+        if (_isDead) { return; }
         MaxHealth = maxHealth;
         CurruntHealth = Mathf.Min(CurruntHealth, MaxHealth);
         OnHealthChanged?.Invoke();
@@ -113,7 +137,12 @@ public class Health : MonoBehaviour
     private void HandleDie(GameObject killer)
     {
         if (_isDead) return;
-        _isDead = true;
+
+        _killer = killer;
+
         OnDead?.Invoke(killer);
+        OnDead = null;
+
+        _isDead = true;
     }
 }

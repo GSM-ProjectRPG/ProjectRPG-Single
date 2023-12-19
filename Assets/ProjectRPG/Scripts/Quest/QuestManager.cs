@@ -69,7 +69,6 @@ public abstract class AQuest : MonoBehaviour
     {
         if (IsQuestClear())
         {
-            Debug.Log("sklfjsdf");
             OnQuestClear();
         }
     }

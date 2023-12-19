@@ -141,7 +141,6 @@ public class Health : MonoBehaviour
         _killer = killer;
 
         OnDead?.Invoke(killer);
-        OnDead = null;
 
         _isDead = true;
     }

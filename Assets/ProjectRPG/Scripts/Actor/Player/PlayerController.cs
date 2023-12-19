@@ -18,11 +18,13 @@ public class PlayerController : MonoBehaviour
     private PlayerInteractor _interactor;
     private AttackSystem _attackSystem;
     private ActSystem _actSystem;
+    private SkillSystem _skillSystem;
 
     [SerializeField] private Animator _animator;
 
     [Header("캐릭터 설정")]
     [SerializeField] private float _jumpPower = 3f;
+    [SerializeField] private SkillData _punchSkillData;
     [Header("카메라 설정")]
     [SerializeField] private Camera _camera;
     [SerializeField] private float _cameraMaxDistance = 3f;
@@ -38,7 +40,6 @@ public class PlayerController : MonoBehaviour
     private bool _isActing => _motionStopTime >= Time.time;
     private bool _canAct => !_isActing && !_isDead;
 
-    private Action _punchHandler;
     private Action _interactionHandler;
     private Action _jumpHandler;
     private Action _moveHandler;
@@ -52,6 +53,7 @@ public class PlayerController : MonoBehaviour
         _interactor = GetComponent<PlayerInteractor>();
         _attackSystem = GetComponent<AttackSystem>();
         _actSystem = GetComponent<ActSystem>();
+        _skillSystem = GetComponent<SkillSystem>();
         _input = PlayerInputManager.Instance;
         //animator = GetComponent<Animator>();
 
@@ -65,7 +67,9 @@ public class PlayerController : MonoBehaviour
             _health.SetHealth(maxHealth, gameObject);
         };
 
-        _punchHandler = _attackSystem.Attack(Punch);
+        Skill punchSkill = new Skill(_punchSkillData, _attackSystem.Attack(Punch));
+        _skillSystem.RegistSkill(punchSkill);
+        _skillSystem.SelectSkill(punchSkill);
         _interactionHandler = _actSystem.Act(() => _interactor.TryInteract());
         _jumpHandler = _actSystem.Act(Jump);
         _moveHandler = _actSystem.Act(() => Move(_input.GetMoveVector()));
@@ -88,12 +92,11 @@ public class PlayerController : MonoBehaviour
 
         if (_input.GetAttack() && _canAct)
         {
-            _punchHandler?.Invoke();
+            _skillSystem.UseSkill();
         }
         if (_input.GetJump() && _canAct)
         {
             _jumpInputBuffer = true;
-
         }
         if (_input.GetInteraction())
         {

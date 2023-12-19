@@ -44,7 +44,7 @@ public class PlayerController : MonoBehaviour
     private Action _jumpHandler;
     private Action _moveHandler;
 
-    private void Start()
+    private void Awake()
     {
         _rigid = GetComponent<Rigidbody>();
         _health = GetComponent<Health>();
@@ -56,7 +56,10 @@ public class PlayerController : MonoBehaviour
         _skillSystem = GetComponent<SkillSystem>();
         _input = PlayerInputManager.Instance;
         //animator = GetComponent<Animator>();
+    }
 
+    private void Start()
+    {
         ActorManager.Instance.RegistPlayer(gameObject);
         _damageReciever.OnTakeDamage += (damage, attacker) => _health.TakeDamage(damage, attacker);
         _health.OnDead += (_) => { _animator.SetTrigger("Die"); _isDead = true; ActorManager.Instance.DeleteActor(gameObject); };

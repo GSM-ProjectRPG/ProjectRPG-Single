@@ -1,12 +1,15 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Reflection;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class QuestManager : MonoBehaviour
 {
     public static QuestManager Instance { get; private set; }
 
-    public List<AQuest> CurrentQuests = new();
+    public List<Quest> CurrentQuests = new();
 
     private void Awake()
     {
@@ -14,18 +17,72 @@ public class QuestManager : MonoBehaviour
         else Destroy(this);
     }
 
-    public void RegistQuest(AQuest data)
+    private void Start()
+    {
+        ActorManager.Instance.Player.GetComponent<AttackSystem>().OnKill += (die) =>
+        {
+            Action _onCheckHuntQuest = null;
+            foreach (var quest in CurrentQuests)
+            {
+                if (quest.QuestData.QuestType == EQuestType.Hunt && quest.QuestData.TargetObject.name == die.name)
+                {
+                    _onCheckHuntQuest += () =>
+                    {
+                        quest.CurrentTargetCount++;
+                        quest.QuestClearCheck();
+                    };
+                }
+            }
+            _onCheckHuntQuest?.Invoke();
+        };
+
+        ActorManager.Instance.Player.GetComponent<Inventory>().OnAddItem += (item) =>
+        {
+            Action _onCheckItemQuest = null;
+            foreach (var quest in Instance.CurrentQuests)
+            {
+                Debug.Log(quest.QuestData.TargetObject.GetComponent<tempItem>().data);
+                Debug.Log(item.ItemID);
+                if (quest.QuestData.QuestType == EQuestType.Item && quest.QuestData.ItemData.itemID == item.ItemID)
+                {
+                    _onCheckItemQuest += () =>
+                    {
+                        quest.CurrentTargetCount = item.count;
+                        quest.QuestClearCheck();
+                    };
+                }
+            }
+            _onCheckItemQuest?.Invoke();
+        };
+
+        ActorManager.Instance.Player.GetComponent<Inventory>().OnReduceItem += (item) =>
+        {
+            Action _onCheckItemQuest = null;
+            foreach (var quest in Instance.CurrentQuests)
+            {
+                if (quest.QuestData.QuestType == EQuestType.Item && quest.QuestData.ItemData.itemID == item.ItemID)
+                {
+                    _onCheckItemQuest += () =>
+                    {
+                        quest.CurrentTargetCount = item.count;
+                        quest.QuestClearCheck();
+                    };
+                }
+            }
+            _onCheckItemQuest?.Invoke();
+        };
+    }
+
+    public void RegistQuest(Quest data)
     {
         if (data == null) return;
         if (!CurrentQuests.Contains(data))
         {
             CurrentQuests.Add(data);
-            data.OnRegistedQuest();
-            data.IsQuestProceeding = true;
         }
     }
 
-    public void RemoveQuest(AQuest data)
+    public void RemoveQuest(Quest data)
     {
         if (data == null) return;
         if (CurrentQuests.Contains(data))
@@ -35,22 +92,34 @@ public class QuestManager : MonoBehaviour
     }
 }
 
-public abstract class AQuest : MonoBehaviour
+public class Quest
 {
     public QuestData QuestData;
     public int CurrentTargetCount;
-    public bool IsQuestProceeding;
 
-    public abstract void OnRegistedQuest();
+    public Quest(QuestData questData)
+    {
+        QuestData = questData;
+        CurrentTargetCount = 0;
+    }
 
     public void QuestClearCheck()
     {
-        if (IsQuestClear())
+        if (CurrentTargetCount == QuestData.TargetCount)
         {
             OnQuestClear();
         }
     }
 
-    public abstract bool IsQuestClear();
-    public abstract void OnQuestClear();
+    public void OnQuestClear()
+    {
+        ActorManager.Instance.Player.GetComponent<CoinSystem>().Coin += QuestData.RewardCoin;
+        ActorManager.Instance.Player.GetComponent<PlayerStatSystem>().AddExp(QuestData.RewardExp);
+        if (QuestData.RewardItem != null)
+        {
+            ActorManager.Instance.Player.GetComponent<Inventory>().AddItemData(new Item(QuestData.RewardItem, QuestData.RewardItemCount));
+        }
+        CurrentTargetCount = 0;
+        QuestManager.Instance.RemoveQuest(this);
+    }
 }

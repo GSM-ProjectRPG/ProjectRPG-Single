@@ -4,17 +4,47 @@ using UnityEngine;
 
 public class PlayerInputManager : MonoBehaviour
 {
-    public static PlayerInputManager Instance { get; private set; }
+    private static PlayerInputManager _instance;
+    public static PlayerInputManager Instance
+    {
+        get
+        {
+            if (_instance == null)
+            {
+                _instance = FindAnyObjectByType<PlayerInputManager>();
+                if (_instance == null)
+                {
+                    GameObject g = new GameObject("PlayerInputManager");
+                    _instance = g.AddComponent<PlayerInputManager>();
+                }
+            }
+            return _instance;
+        }
+        private set { _instance = value; }
+    }
 
     public bool InputEnable = true;
+    public bool MouseLock
+    {
+        get { return !Cursor.visible; }
+        set
+        {
+            if (value)
+            {
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
+            }
+            else
+            {
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
+            }
+        }
+    }
 
     private void Awake()
     {
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-        else
+        if (Instance != this)
         {
             Debug.LogError("PlayerInputManager가 2개 이상 존재합니다.\nGameObject : " + gameObject.name);
             Destroy(Instance);

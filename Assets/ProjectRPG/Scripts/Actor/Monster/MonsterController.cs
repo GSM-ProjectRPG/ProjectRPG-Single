@@ -65,7 +65,7 @@ public class MonsterController : MonoBehaviour
 
     private void Chase()
     {
-        Vector3 moveVelocity = _playerDetector.GetDetectedPlayerPosition() - transform.position;
+        Vector3 moveVelocity = (_playerDetector.GetDetectedPlayerPosition() - transform.position).normalized;
         _rigid.velocity = new Vector3(moveVelocity.x, _rigid.velocity.y, moveVelocity.z) * _statManager.MoveSpeed;
         transform.rotation = Quaternion.LookRotation(_playerDetector.GetDetectedPlayerPosition() - transform.position);
         _animator.SetInteger("MoveMode", 1);

@@ -48,6 +48,10 @@ public class MonsterController : MonoBehaviour
         {
             _chaseHandler?.Invoke();
         }
+        else if (_canAct)
+        {
+            _animator.SetInteger("MoveMode", 0);
+        }
     }
 
     private void Attack()

@@ -10,7 +10,7 @@ public class Description : MonoBehaviour
 
     public GameObject DescriptionViewObj;
     public Inventory Inventory;
-    public int index;
+    public int Index;
     public bool IsView;
 
     Vector3 point;
@@ -23,7 +23,7 @@ public class Description : MonoBehaviour
         {
             if (gameObject.transform.position.y + 150 > point.y && gameObject.transform.position.y < point.y)
             {
-                if (Inventory.ItemList.Count > index)
+                if (Inventory.ItemList.Count > Index)
                 {
                     IsView = true;
                     return;

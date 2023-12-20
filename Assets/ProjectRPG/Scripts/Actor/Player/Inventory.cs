@@ -15,11 +15,16 @@ public class Inventory : MonoBehaviour
     public GameObject InventoryUI;
     public GameObject EquipmentWindowUI;
 
+    private void Awake()
+    {
+        InventoryUI.GetComponent<InventoryUI>().OnClickAction = Use;
+    }
+
     public void OpenInventory()
     {
         InventoryUI.SetActive(true);
         EquipmentWindowUI.SetActive(true);
-        GetComponentInChildren<InventoryUI>().OnClickAction += Use;
+        GetComponentInChildren<InventoryUI>().OnClickAction = Use;
     }
 
     public void CloseInventory()

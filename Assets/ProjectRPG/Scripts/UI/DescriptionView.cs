@@ -11,10 +11,6 @@ public class DescriptionView : MonoBehaviour
 
     Vector3 point;
 
-    private void Awake()
-    {
-        camera = Camera.main;
-    }
     private void Update()
     {
         point = new Vector3(Input.mousePosition.x, Input.mousePosition.y, -Camera.main.transform.position.z);
@@ -26,7 +22,7 @@ public class DescriptionView : MonoBehaviour
             {
                 if (description.IsView == true)
                 {
-                    OnDescription(description.index);
+                    SetDescription(description.Index);
                 }
             }
         }
@@ -49,8 +45,8 @@ public class DescriptionView : MonoBehaviour
         return ON;
     }
 
-    public void OnDescription(int index)
+    public void SetDescription(int descriptionIndex)
     {
-        GetComponentInChildren<Text>().text = Descriptions[index].Inventory.ItemList[index].itemData.itemDescription;
+        GetComponentInChildren<Text>().text = Descriptions[descriptionIndex].Inventory.ItemList[descriptionIndex].itemData.itemDescription;
     }
 }

@@ -38,20 +38,16 @@ public class Shop : MonoBehaviour
 
     public void Purchase(int index)
     {
-        if (Inventory.ItemList[index].itemData.price < coinSystem.Coin)
+        if (Inventory.ItemList[index].Price < coinSystem.Coin)
         {
-            coinSystem.currentCoin -= Inventory.ItemList[index].itemData.price;
+            coinSystem.currentCoin -= Inventory.ItemList[index].Price;
             Inventory.AddItemData(new Item(ShopList[index], 1));
         }
     }
 
     public void Sell(int index)
     {
-        foreach(Item item in Inventory.ItemList)
-        if (Inventory.ItemList[index].itemData)
-        {
-                coinSystem.currentCoin += Inventory.ItemList[index].itemData.price;
-                Inventory.ReduceItemData(new Item(Inventory.ItemList[index].itemData, 1));
-        }
+        coinSystem.currentCoin += Inventory.ItemList[index].Price;
+        Inventory.ReduceItemData(new Item(Inventory.ItemList[index].GetItemData(),1));
     }
 }

@@ -19,7 +19,7 @@ public class InventoryUI : MonoBehaviour
         {
             if (i < Inventory.ItemList.Count)
             {
-                InventoryImg[i].sprite = Inventory.ItemList[i].itemData.itemImg;
+                InventoryImg[i].sprite = Inventory.ItemList[i].ItemImg;
                 InventoryTxt[i].text = Inventory.ItemList[i].count.ToString();
             }
             else

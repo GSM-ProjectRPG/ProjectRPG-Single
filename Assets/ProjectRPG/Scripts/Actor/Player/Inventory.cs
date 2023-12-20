@@ -38,7 +38,7 @@ public class Inventory : MonoBehaviour
     {
         foreach (Item sourceItem in ItemList)
         {
-            if (sourceItem.itemData.itemID == compareItem.itemData.itemID)
+            if (sourceItem.ItemID == compareItem.ItemID)
             {
                 sourceItem.count += compareItem.count;
                 return;
@@ -58,7 +58,7 @@ public class Inventory : MonoBehaviour
     {
         foreach (Item sourceItem in ItemList)
         {
-            if (sourceItem.itemData.itemID == compareItem.itemData.itemID)
+            if (sourceItem.ItemID == compareItem.ItemID)
             {
                 if (sourceItem.count > compareItem.count)
                 {
@@ -84,11 +84,11 @@ public class Inventory : MonoBehaviour
         if (ItemList.Count <= index) return;
         if (ItemList[index] is null) return;
 
-        if (ItemList[index].itemData is Equipment)
+        if (ItemList[index].ItemType is ItemType.Weapon || ItemList[index].ItemType is ItemType.Accessory)
         {
             OnEquip?.Invoke(ItemList[index]);
         }
-        else if (ItemList[index].itemData is Use)
+        else if (ItemList[index].ItemType is ItemType.Use)
         {
             OnUse?.Invoke(ItemList[index]);
         }

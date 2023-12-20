@@ -47,6 +47,6 @@ public class DescriptionUI : MonoBehaviour
 
     public void SetDescription(int descriptionIndex)
     {
-        GetComponentInChildren<Text>().text = Descriptions[descriptionIndex].Inventory.ItemList[descriptionIndex].itemData.itemDescription;
+        GetComponentInChildren<Text>().text = Descriptions[descriptionIndex].Inventory.ItemList[descriptionIndex].ItemDescription;
     }
 }

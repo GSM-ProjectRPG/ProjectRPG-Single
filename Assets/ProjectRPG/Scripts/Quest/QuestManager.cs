@@ -29,6 +29,7 @@ public class QuestManager : MonoBehaviour
                     _onCheckHuntQuest += () =>
                     {
                         quest.CurrentTargetCount++;
+                        ShowQuestProgress.Instance.UpdateQuest(CurrentQuests.IndexOf(quest));
                         quest.QuestClearCheck();
                     };
                 }
@@ -41,13 +42,12 @@ public class QuestManager : MonoBehaviour
             Action _onCheckItemQuest = null;
             foreach (var quest in Instance.CurrentQuests)
             {
-                Debug.Log(quest.QuestData.TargetObject.GetComponent<tempItem>().data);
-                Debug.Log(item.ItemID);
                 if (quest.QuestData.QuestType == EQuestType.Item && quest.QuestData.ItemData.itemID == item.ItemID)
                 {
                     _onCheckItemQuest += () =>
                     {
                         quest.CurrentTargetCount = item.count;
+                        ShowQuestProgress.Instance.UpdateQuest(CurrentQuests.IndexOf(quest));
                         quest.QuestClearCheck();
                     };
                 }
@@ -65,6 +65,7 @@ public class QuestManager : MonoBehaviour
                     _onCheckItemQuest += () =>
                     {
                         quest.CurrentTargetCount = item.count;
+                        ShowQuestProgress.Instance.UpdateQuest(CurrentQuests.IndexOf(quest));
                         quest.QuestClearCheck();
                     };
                 }
@@ -79,6 +80,7 @@ public class QuestManager : MonoBehaviour
         if (!CurrentQuests.Contains(data))
         {
             CurrentQuests.Add(data);
+            ShowQuestProgress.Instance.AddQuest(CurrentQuests.Count - 1);
         }
     }
 
@@ -87,6 +89,7 @@ public class QuestManager : MonoBehaviour
         if (data == null) return;
         if (CurrentQuests.Contains(data))
         {
+            ShowQuestProgress.Instance.RemoveQuest(CurrentQuests.IndexOf(data));
             CurrentQuests.Remove(data);
         }
     }

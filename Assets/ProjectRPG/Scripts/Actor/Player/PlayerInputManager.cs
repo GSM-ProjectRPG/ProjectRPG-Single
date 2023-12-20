@@ -6,8 +6,6 @@ public class PlayerInputManager : MonoBehaviour
 {
     public static PlayerInputManager Instance { get; private set; }
 
-    public KeyCode[] SkillKeys = new KeyCode[] { KeyCode.Alpha1, KeyCode.Alpha2, KeyCode.Alpha3 };
-
     public bool InputEnable = true;
 
     private void Awake()
@@ -62,12 +60,6 @@ public class PlayerInputManager : MonoBehaviour
     public bool GetLookScrolling()
     {
         return InputEnable;
-    }
-
-    public bool GetSkill(int index)
-    {
-        if (!InputEnable) return false;
-        return Input.GetKeyDown(SkillKeys[index]);
     }
 
     public bool GetAttack()

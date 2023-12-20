@@ -14,14 +14,18 @@ public class SkillCoolTimeUI : MonoBehaviour
     {
         ActorManager.Instance.OnRegistedPlayer += () =>
         {
-            Skill curruntSkill = ActorManager.Instance.Player.GetComponent<SkillSystem>().CurruntSkill;
-            _skill = curruntSkill as CoolTimeSkill;
-            if( _skill == null )
+            SkillSystem skillSystem = ActorManager.Instance.Player.GetComponent<SkillSystem>();
+            skillSystem.OnChangeSkill += (skill) =>
             {
-                Image.sprite = curruntSkill.Sprite;
-                Cover.sprite = curruntSkill.Sprite;
-                Cover.fillAmount = 0;
-            }
+                _skill = skill as CoolTimeSkill;
+
+                Image.sprite = skill.Sprite;
+                Cover.sprite = skill.Sprite;
+                if (_skill == null)
+                {
+                    Cover.fillAmount = 0;
+                }
+            };
         };
     }
 

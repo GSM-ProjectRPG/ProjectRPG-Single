@@ -54,7 +54,7 @@ public class Inventory : MonoBehaviour
 
     public void RemoveItemData(Item item)
     {
-        /*foreach (Item item in itemList)
+        foreach (Item item in itemList)
         {
             if (item.itemData.itemID == item.itemData.itemID)
             {
@@ -73,7 +73,7 @@ public class Inventory : MonoBehaviour
                     return;
                 }
             }
-        }*/
+        }
     }
     
     public void Use(int index)

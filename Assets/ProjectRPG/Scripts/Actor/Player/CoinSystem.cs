@@ -8,16 +8,16 @@ public class CoinSystem : MonoBehaviour
 {
     public Action<int> SetCoinAction;
 
-    private int _coin;
+    public int currentCoin;
     public int Coin { 
         get
         {
-            return _coin;
+            return currentCoin;
         }
         protected set
         {
-            int origin = _coin;
-            _coin = value;
+            int origin = currentCoin;
+            currentCoin = value;
             SetCoinAction?.Invoke(origin - value);
         }
     }

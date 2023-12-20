@@ -51,7 +51,7 @@ public class Inventory : MonoBehaviour
         }
 
         ItemList.Add(compareItem);
-        CheckQuest?.Invoke();
+        OnAddItem?.Invoke(compareItem);
     }
 
     public void ReduceItemData(Item compareItem)
@@ -76,7 +76,7 @@ public class Inventory : MonoBehaviour
                 }
             }
         }
-        CheckQuest?.Invoke();
+        OnReduceItem?.Invoke(compareItem);
     }
 
     public void Use(int index)

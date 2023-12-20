@@ -40,7 +40,7 @@ public class Shop : MonoBehaviour
     {
         if (Inventory.ItemList[index].itemData.price < coinSystem.Coin)
         {
-            coinSystem.ReduceCoin(Inventory.ItemList[index].itemData.price);
+            coinSystem.currentCoin -= Inventory.ItemList[index].itemData.price;
             Inventory.AddItemData(new Item(ShopList[index], 1));
         }
     }
@@ -50,7 +50,7 @@ public class Shop : MonoBehaviour
         foreach(Item item in Inventory.ItemList)
         if (Inventory.ItemList[index].itemData)
         {
-                coinSystem.AddCoin(Inventory.ItemList[index].itemData.price);
+                coinSystem.currentCoin += Inventory.ItemList[index].itemData.price;
                 Inventory.ReduceItemData(new Item(Inventory.ItemList[index].itemData, 1));
         }
     }

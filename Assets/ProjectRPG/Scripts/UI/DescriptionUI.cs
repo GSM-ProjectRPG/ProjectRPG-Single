@@ -9,12 +9,12 @@ public class DescriptionUI : MonoBehaviour
     public Description[] Descriptions;
     public Camera camera;
 
-    Vector3 point;
+    Vector2 point;
 
     private void Update()
     {
-        point = new Vector3(Input.mousePosition.x, Input.mousePosition.y, -Camera.main.transform.position.z);
-        DescriptionViewObj.transform.position = new Vector3(point.x, point.y + 100, point.z);
+        point = new Vector3(Input.mousePosition.x, Input.mousePosition.y);
+        DescriptionViewObj.transform.position = new Vector2(point.x, point.y + 100);
         if (IsView())
         {
             DescriptionViewObj.SetActive(true);

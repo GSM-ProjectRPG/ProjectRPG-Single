@@ -37,7 +37,8 @@ public class QuestManager : MonoBehaviour
             _onCheckHuntQuest?.Invoke();
         };
 
-        ActorManager.Instance.Player.GetComponent<Inventory>().OnAddItem += (item) =>
+        Action<Item> _onItemChange = null;
+        _onItemChange += (item) =>
         {
             Action _onCheckItemQuest = null;
             foreach (var quest in Instance.CurrentQuests)
@@ -55,23 +56,8 @@ public class QuestManager : MonoBehaviour
             _onCheckItemQuest?.Invoke();
         };
 
-        ActorManager.Instance.Player.GetComponent<Inventory>().OnReduceItem += (item) =>
-        {
-            Action _onCheckItemQuest = null;
-            foreach (var quest in Instance.CurrentQuests)
-            {
-                if (quest.QuestData.QuestType == EQuestType.Item && quest.QuestData.ItemData.itemID == item.ItemID)
-                {
-                    _onCheckItemQuest += () =>
-                    {
-                        quest.CurrentTargetCount = item.count;
-                        ShowQuestProgress.Instance.UpdateQuest(CurrentQuests.IndexOf(quest));
-                        quest.QuestClearCheck();
-                    };
-                }
-            }
-            _onCheckItemQuest?.Invoke();
-        };
+        ActorManager.Instance.Player.GetComponent<Inventory>().OnAddItem += _onItemChange;
+        ActorManager.Instance.Player.GetComponent<Inventory>().OnReduceItem += _onItemChange;
     }
 
     public void RegistQuest(Quest data)

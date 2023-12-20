@@ -4,39 +4,42 @@ using UnityEngine;
 
 public class QuestManager : MonoBehaviour
 {
-    public static QuestManager instance { get; private set; }
+    public static QuestManager Instance { get; private set; }
 
-    public List<Quest> currentQuests = new();
+    public List<AQuest> CurrentQuests = new();
 
     private void Awake()
     {
-        if (instance == null) instance = this;
-        else if (instance != this) Destroy(instance);
+        if (Instance == null) Instance = this;
+        else Destroy(this);
     }
 
-    public void RegistQuest(Quest data)
+    public void RegistQuest(AQuest data)
     {
         if (data == null) return;
-        if (!currentQuests.Contains(data))
+        if (!CurrentQuests.Contains(data))
         {
-            currentQuests.Add(data);
+            CurrentQuests.Add(data);
             data.OnRegistedQuest();
+            data.IsQuestProceeding = true;
         }
     }
 
-    public void RemoveQuest(Quest data)
+    public void RemoveQuest(AQuest data)
     {
         if (data == null) return;
-        if (currentQuests.Contains(data))
+        if (CurrentQuests.Contains(data))
         {
-            currentQuests.Remove(data);
+            CurrentQuests.Remove(data);
         }
     }
 }
 
-public abstract class Quest : MonoBehaviour
+public abstract class AQuest : MonoBehaviour
 {
     public QuestData QuestData;
+    public int CurrentTargetCount;
+    public bool IsQuestProceeding;
 
     public abstract void OnRegistedQuest();
 

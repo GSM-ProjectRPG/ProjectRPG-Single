@@ -9,12 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4817cca5d3cde8e43923aca92d9adb7c, type: 3}
-  m_Name: TestWeapon
+  m_Script: {fileID: 11500000, guid: 93314549556b5904b9d99c762b406f57, type: 3}
+  m_Name: "\uC8FC\uBA39\uC9C8"
   m_EditorClassIdentifier: 
-  itemImg: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
-  itemName: Weapon
-  itemDescription: "\uBB34\uAE30"
-  itemID: 1
-  price: 100
-  damage: 25
+  Name: "\uC8FC\uBA39\uC9C8"
+  Description: "\uAE30\uBCF8 \uACF5\uACA9"
+  Sprite: {fileID: 0}

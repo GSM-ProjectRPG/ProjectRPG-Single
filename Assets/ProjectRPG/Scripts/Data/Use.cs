@@ -4,7 +4,7 @@ using UnityEngine;
 
 public enum EffectType { HEAL };
 
-[CreateAssetMenu(fileName = "Use", menuName = "ScriptableObject/Use")]
+[CreateAssetMenu(fileName = "Use", menuName = "Scriptable Object/Use")]
 public class Use : ItemData
 {
     public EffectType effectType;

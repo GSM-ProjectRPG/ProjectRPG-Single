@@ -13,7 +13,20 @@ public class InventoryUI : MonoBehaviour
     public Image[] InventoryImg;
     public Text[] InventoryTxt;
 
-    private void Update()
+    private void Awake()
+    {
+        Inventory.OnAddItem += (_) =>
+         {
+             SetInventory();
+         };
+
+        Inventory.OnReduceItem += (_) =>
+        {
+            SetInventory();
+        };
+    }
+
+    private void SetInventory()
     {
         for (int i = 0; i < 16; i++)
         {

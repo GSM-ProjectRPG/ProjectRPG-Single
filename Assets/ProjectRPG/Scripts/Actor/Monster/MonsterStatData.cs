@@ -14,5 +14,4 @@ public class MonsterStatData : ScriptableObject
     public float AttackRange;
     public float ChaseRange;
     public float DropExp;
-    public float ReturnRange;
 }

@@ -28,7 +28,7 @@ public class MonsterPlayerDetector : MonoBehaviour
 
     public Vector3 GetDetectedPlayerPosition()
     {
-        Vector3 playerPosition = Physics.OverlapSphere(transform.position, _statManager.ChaseRange, 1 << LayerMask.NameToLayer("Water"))[0].transform.position;
+        Vector3 playerPosition = ActorManager.Instance.Player.transform.position;
         return new Vector3(playerPosition.x, transform.position.y, playerPosition.z);
     }
 
@@ -39,14 +39,13 @@ public class MonsterPlayerDetector : MonoBehaviour
 
     private void DetectPlayer()
     {
-        Collider[] detectedPlayerInChaseRange = Physics.OverlapSphere(transform.position, _statManager.ChaseRange, 1 << LayerMask.NameToLayer("Water"));
-        Collider[] detectedPlayerInAttackRange = Physics.OverlapSphere(transform.position, _statManager.AttackRange, 1 << LayerMask.NameToLayer("Water"));
+        float distanceToPlayer = Vector3.Distance(ActorManager.Instance.Player.transform.position, transform.position);
 
-        if (detectedPlayerInChaseRange.Length > 0)
+        if (distanceToPlayer <= _statManager.ChaseRange)
         {
             _isPlayerDetectInChaseRange = true;
 
-            if (detectedPlayerInAttackRange.Length > 0)
+            if (distanceToPlayer <= _statManager.AttackRange)
             {
                 _isPlayerDetectInAttackRange = true;
             }

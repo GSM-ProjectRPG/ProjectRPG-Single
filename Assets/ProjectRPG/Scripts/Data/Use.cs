@@ -10,4 +10,6 @@ public class Use : ItemData
     public EffectType effectType;
     public int effectValue;
     public int effectRemainTime;
+
+    Use() { itemType = ItemType.Use; }
 }

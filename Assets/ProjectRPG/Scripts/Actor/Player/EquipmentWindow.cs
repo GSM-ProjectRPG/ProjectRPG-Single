@@ -17,7 +17,7 @@ public class EquipmentWindow : MonoBehaviour
     private void Awake()
     {
         OnEquip(new Item(itemData, 1));
-        OnEquip(new Item(itemData1, 2));
+        OnEquip(new Item(itemData1, 1));
 
         inventory.OnEquip += (item) =>
         {
@@ -30,7 +30,7 @@ public class EquipmentWindow : MonoBehaviour
         for (int i = 0; i < equipmentList.Count; i++)
         {
             if (equipmentList[i] is not null)
-                equipmentImg[i].sprite = equipmentList[i].itemData.itemImg;
+                equipmentImg[i].sprite = equipmentList[i].ItemImg;
             else
                 equipmentImg[i].sprite = null;
         }
@@ -40,21 +40,22 @@ public class EquipmentWindow : MonoBehaviour
     {
         int index = 0;
 
-        if (item.itemData is not Equipment) return;
-        if (item.itemData is Weapon) index = 0;
-        if (item.itemData is Accessory) index = 1;
+        if (item.ItemType is not ItemType.Weapon && item.ItemType is not ItemType.Accessory) return;
+        if (item.ItemType is ItemType.Weapon) index = 0;
+        if (item.ItemType is ItemType.Accessory) index = 1;
 
         if (equipmentList[index] is not null)
         {
             UnEquip(index);
         }
 
-        equipmentList[index] = item;
-        inventory.RemoveItemData(item);
+        equipmentList[index] = new Item(item.GetItemData(), 1);
+        inventory.ReduceItemData(new Item(item.GetItemData(), 1));
     }
 
     public void UnEquip(int index)
     {
+        if (equipmentList[index] is null) return;
         inventory.AddItemData(equipmentList[index]);
         equipmentList[index] = null;
     }

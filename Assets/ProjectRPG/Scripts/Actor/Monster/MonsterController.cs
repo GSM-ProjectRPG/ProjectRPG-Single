@@ -73,6 +73,17 @@ public class MonsterController : MonoBehaviour
 
     private void Die(GameObject killer)
     {
+        _animator.SetTrigger("Die");
+        StartCoroutine(DieCoroutine());
+    }
 
+    private IEnumerator DieCoroutine()
+    {
+        _motionStopTime = Time.time + 1;
+        yield return null;
+        _motionStopTime = Time.time + _animator.GetNextAnimatorClipInfo(0).Length;
+        yield return new WaitForSeconds(_animator.GetNextAnimatorClipInfo(0).Length);
+
+        Destroy(gameObject);
     }
 }

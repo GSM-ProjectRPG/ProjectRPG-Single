@@ -13,7 +13,7 @@ public class DescriptionUI : MonoBehaviour
 
     private void Update()
     {
-        point = new Vector3(Input.mousePosition.x, Input.mousePosition.y);
+        point = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
         DescriptionViewObj.transform.position = new Vector2(point.x, point.y + 100);
         if (IsView())
         {

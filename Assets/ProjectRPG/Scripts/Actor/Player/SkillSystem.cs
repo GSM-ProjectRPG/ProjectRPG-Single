@@ -72,13 +72,13 @@ public class CoolTimeSkill : Skill
     public CoolTimeSkill(SkillData skillData, Action onUseSkill, float coolTime) : base(skillData, onUseSkill)
     {
         CoolTime = coolTime;
-        onUseSkill = () =>
-        {
-            if (RemainingTime == 0)
-            {
-                lastUsedTime = Time.time;
-                onUseSkill?.Invoke();
-            }
-        };
+        _onUseSkill = () =>
+         {
+             if (RemainingTime == 0)
+             {
+                 lastUsedTime = Time.time;
+                 onUseSkill?.Invoke();
+             }
+         };
     }
 }

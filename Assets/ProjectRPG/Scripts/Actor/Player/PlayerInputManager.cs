@@ -9,7 +9,7 @@ public class PlayerInputManager : MonoBehaviour
     public bool InputEnable = true;
     public bool MouseLock
     {
-        get { return Cursor.visible; }
+        get { return !Cursor.visible; }
         set
         {
             if (value)

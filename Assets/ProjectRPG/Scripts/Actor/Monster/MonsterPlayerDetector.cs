@@ -26,11 +26,6 @@ public class MonsterPlayerDetector : MonoBehaviour
         return _isPlayerDetectInAttackRange;
     }
 
-    public bool IsNotDetectedPlayerInChaseRange()
-    {
-        return !_isPlayerDetectInChaseRange;
-    }
-
     public Vector3 GetDetectedPlayerPosition()
     {
         Vector3 playerPosition = Physics.OverlapSphere(transform.position, _statManager.ChaseRange, 1 << LayerMask.NameToLayer("Water"))[0].transform.position;

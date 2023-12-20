@@ -7,6 +7,23 @@ public class PlayerInputManager : MonoBehaviour
     public static PlayerInputManager Instance { get; private set; }
 
     public bool InputEnable = true;
+    public bool MouseLock
+    {
+        get { return !Cursor.visible; }
+        set
+        {
+            if (value)
+            {
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
+            }
+            else
+            {
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
+            }
+        }
+    }
 
     private void Awake()
     {

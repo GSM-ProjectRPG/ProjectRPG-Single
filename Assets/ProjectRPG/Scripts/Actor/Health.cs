@@ -45,14 +45,15 @@ public class Health : MonoBehaviour
     private bool _isDead = false;
     private GameObject _killer = null;
 
-    public void Start()
-    {
-        StatSystem statManager = GetComponent<StatSystem>();
-        if (statManager != null)
-        {
-            MaxHealth = statManager.GetCurruntStat().Health;
-        }
+    private StatSystem _statManager;
 
+    private void Awake()
+    {
+        _statManager = GetComponent<StatSystem>();
+        if (_statManager != null)
+        {
+            MaxHealth = _statManager.GetCurruntStat().Health;
+        }
         CurruntHealth = MaxHealth;
     }
 

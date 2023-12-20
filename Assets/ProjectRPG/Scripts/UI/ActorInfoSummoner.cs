@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class ActorInfoSummoner : MonoBehaviour
 {
-    public GameObject infoUI;
-    public float uiShowTime;
+    public GameObject InfoUIPrefab;
+    public float UiShowTime;
+    public float UiHeight;
 
     private Health _health;
     private ActorInfoUI _ui;
@@ -20,7 +21,7 @@ public class ActorInfoSummoner : MonoBehaviour
         {
             if (_ui == null)
             {
-                _ui = Instantiate(infoUI).GetComponent<ActorInfoUI>();
+                _ui = Instantiate(InfoUIPrefab).GetComponent<ActorInfoUI>();
                 _ui.BindActor(gameObject);
             }
 
@@ -32,7 +33,25 @@ public class ActorInfoSummoner : MonoBehaviour
     {
         if (_ui != null)
         {
-            _ui.gameObject.SetActive(lastDamagedTime + uiShowTime > Time.time);
+            _ui.gameObject.SetActive(lastDamagedTime + UiShowTime > Time.time);
+            _ui.transform.position = GetUIPos();
         }
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        if (InfoUIPrefab != null)
+        {
+            RectTransform rectTransfrom = InfoUIPrefab?.GetComponentInChildren<Canvas>()?.GetComponent<RectTransform>();
+            if (rectTransfrom != null)
+            {
+                Gizmos.DrawWireCube(GetUIPos(), new Vector3(rectTransfrom.rect.width * rectTransfrom.lossyScale.x, rectTransfrom.rect.height * rectTransfrom.lossyScale.y));
+            }
+        }
+    }
+
+    private Vector3 GetUIPos()
+    {
+        return transform.position + new Vector3(0, UiHeight, 0);
     }
 }

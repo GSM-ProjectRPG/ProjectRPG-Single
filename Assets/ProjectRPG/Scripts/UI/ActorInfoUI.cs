@@ -29,4 +29,12 @@ public class ActorInfoUI : MonoBehaviour
             Destroy(gameObject);
         };
     }
+
+    private void Update()
+    {
+        if(Camera.main != null)
+        {
+            transform.LookAt(Camera.main.transform.position);
+        }
+    }
 }

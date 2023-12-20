@@ -18,14 +18,12 @@ public class AttackSystem : MonoBehaviour
     /// <summary>
     /// GameObject : 공격을 맞은오브젝트, float : 가해진 최종 데미지
     /// </summary>
-    public event Action<GameObject, float> OnAttackHitted;
+    public event Action<GameObject, float> OnAttackHitted = (victim,damage)=> {  };
     public event Action<GameObject, float> OnSendedDamage;
     public event Action<GameObject> OnKill;
 
     private StatSystem _statSystem;
     private ActSystem _actSystem;
-
-    private List<Health> healths = new List<Health>();
 
     private void Awake()
     {
@@ -54,6 +52,7 @@ public class AttackSystem : MonoBehaviour
             attack.SetAttacker(this, _statSystem);
             attack.OnHitted += OnAttackHitted;
             attack.OnSendedDamage += OnSendedDamage;
+            attack.OnKill += OnKill;
         }
         #region 경고 메시지 출력
 #if UNITY_EDITOR

@@ -61,3 +61,24 @@ public class Skill
         _onUseSkill?.Invoke();
     }
 }
+
+public class CoolTimeSkill : Skill
+{
+    public float CoolTime { get; protected set; }
+    public float RemainingTime => Mathf.Max(0, lastUsedTime + CoolTime - Time.time);
+
+    private float lastUsedTime;
+
+    public CoolTimeSkill(SkillData skillData, Action onUseSkill, float coolTime) : base(skillData, onUseSkill)
+    {
+        CoolTime = coolTime;
+        onUseSkill = () =>
+        {
+            if (RemainingTime == 0)
+            {
+                lastUsedTime = Time.time;
+                onUseSkill?.Invoke();
+            }
+        };
+    }
+}

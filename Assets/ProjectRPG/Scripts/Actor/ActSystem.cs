@@ -7,7 +7,7 @@ public class ActSystem : MonoBehaviour
 {
     private BuffSystem _buffSystem;
 
-    private void Start()
+    private void Awake()
     {
         _buffSystem = GetComponent<BuffSystem>();
     }

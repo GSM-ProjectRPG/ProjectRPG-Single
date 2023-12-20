@@ -19,7 +19,7 @@ public class QuestManager : MonoBehaviour
 
     private void Start()
     {
-        GameObject.Find("Player").GetComponent<AttackSystem>().OnKill += (die) =>
+        ActorManager.Instance.Player.GetComponent<AttackSystem>().OnKill += (die) =>
         {
             Action _onCheckHuntQuest = null;
             foreach (var quest in CurrentQuests)
@@ -36,7 +36,7 @@ public class QuestManager : MonoBehaviour
             _onCheckHuntQuest?.Invoke();
         };
 
-        GameObject.Find("Player").GetComponent<Inventory>().OnAddItem += (item) =>
+        ActorManager.Instance.Player.GetComponent<Inventory>().OnAddItem += (item) =>
         {
             Action _onCheckItemQuest = null;
             foreach (var quest in Instance.CurrentQuests)
@@ -55,7 +55,7 @@ public class QuestManager : MonoBehaviour
             _onCheckItemQuest?.Invoke();
         };
 
-        GameObject.Find("Player").GetComponent<Inventory>().OnReduceItem += (item) =>
+        ActorManager.Instance.Player.GetComponent<Inventory>().OnReduceItem += (item) =>
         {
             Action _onCheckItemQuest = null;
             foreach (var quest in Instance.CurrentQuests)
@@ -113,11 +113,11 @@ public class Quest
 
     public void OnQuestClear()
     {
-        GameObject.Find("Player").GetComponent<CoinSystem>().Coin += QuestData.RewardCoin;
-        GameObject.Find("Player").GetComponent<PlayerStatSystem>().AddExp(QuestData.RewardExp);
+        ActorManager.Instance.Player.GetComponent<CoinSystem>().Coin += QuestData.RewardCoin;
+        ActorManager.Instance.Player.GetComponent<PlayerStatSystem>().AddExp(QuestData.RewardExp);
         if (QuestData.RewardItem != null)
         {
-            GameObject.Find("Player").GetComponent<Inventory>().AddItemData(new Item(QuestData.RewardItem, QuestData.RewardItemCount));
+            ActorManager.Instance.Player.GetComponent<Inventory>().AddItemData(new Item(QuestData.RewardItem, QuestData.RewardItemCount));
         }
         CurrentTargetCount = 0;
         QuestManager.Instance.RemoveQuest(this);

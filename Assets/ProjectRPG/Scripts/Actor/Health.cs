@@ -23,6 +23,7 @@ public class Health : MonoBehaviour
     {
         get
         {
+            if (_isDead) return null;
             return _onDead;
         }
         set

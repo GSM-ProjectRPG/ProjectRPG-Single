@@ -19,9 +19,9 @@ public class Description : MonoBehaviour
     {
         point = new Vector3(Input.mousePosition.x, Input.mousePosition.y, -Camera.main.transform.position.z);
 
-        if (gameObject.transform.position.x > point.x && gameObject.transform.position.x - 150 < point.x)
+        if (gameObject.transform.position.x > point.x && gameObject.transform.position.x - transform.lossyScale.x < point.x)
         {
-            if (gameObject.transform.position.y + 150 > point.y && gameObject.transform.position.y < point.y)
+            if (gameObject.transform.position.y + transform.lossyScale.y > point.y && gameObject.transform.position.y < point.y)
             {
                 if (Inventory.ItemList.Count > Index)
                 {

@@ -50,7 +50,7 @@ public class EquipmentWindow : MonoBehaviour
         }
 
         equipmentList[index] = new Item(item.itemData, 1);
-        inventory.RemoveItemData(new Item(item.itemData, 1));
+        inventory.ReduceItemData(new Item(item.itemData, 1));
     }
 
     public void UnEquip(int index)

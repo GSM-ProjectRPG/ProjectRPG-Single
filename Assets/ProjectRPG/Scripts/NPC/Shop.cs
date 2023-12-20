@@ -5,23 +5,25 @@ using UnityEngine;
 public class Shop : MonoBehaviour
 {
     public Inventory Inventory;
-    public CoinSystem CoinSystem;
 
     public GameObject ShopUI;
     public GameObject InventoryUI;
 
     public List<ItemData> ShopList;
 
-    InteractableObject interactable;
+    private InteractableObject interactable;
+    private CoinSystem coinSystem;
+
 
     private void Awake()
     {
         interactable = GetComponent<InteractableObject>();
-        interactable.OnInteracted += (playerInteractable) => OpenShop();
+        interactable.OnInteracted += (playerInteractable) => OpenShop(playerInteractable);
     }
 
-    public void OpenShop()
+    public void OpenShop(PlayerInteractor playerInteractor)
     {
+        coinSystem = playerInteractor.GetComponent<CoinSystem>();
         ShopUI.SetActive(true);
         InventoryUI.SetActive(true);
         GetComponentInChildren<InventoryUI>().OnClickAction = Sell;
@@ -29,15 +31,16 @@ public class Shop : MonoBehaviour
 
     public void CloseShop()
     {
+        coinSystem = null;
         ShopUI.SetActive(false);
         InventoryUI.SetActive(false);
     }
 
     public void Purchase(int index)
     {
-        if (Inventory.ItemList[index].itemData.price < CoinSystem.Coin)
+        if (Inventory.ItemList[index].itemData.price < coinSystem.Coin)
         {
-            CoinSystem.Coin -= Inventory.ItemList[index].itemData.price;
+            coinSystem.ReduceCoin(Inventory.ItemList[index].itemData.price);
             Inventory.AddItemData(new Item(ShopList[index], 1));
         }
     }
@@ -47,8 +50,8 @@ public class Shop : MonoBehaviour
         foreach(Item item in Inventory.ItemList)
         if (Inventory.ItemList[index].itemData)
         {
-            CoinSystem.Coin += Inventory.ItemList[index].itemData.price;
-            Inventory.RemoveItemData(new Item(Inventory.ItemList[index].itemData, 1));
+                coinSystem.AddCoin(Inventory.ItemList[index].itemData.price);
+                Inventory.ReduceItemData(new Item(Inventory.ItemList[index].itemData, 1));
         }
     }
 }

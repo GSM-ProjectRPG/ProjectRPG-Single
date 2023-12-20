@@ -53,7 +53,7 @@ public class Inventory : MonoBehaviour
         CheckQuest?.Invoke();
     }
 
-    public void RemoveItemData(Item compareItem)
+    public void ReduceItemData(Item compareItem)
     {
         foreach (Item sourceItem in ItemList)
         {

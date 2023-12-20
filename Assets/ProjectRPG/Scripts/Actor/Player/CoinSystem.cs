@@ -5,11 +5,23 @@ using UnityEngine;
 
 public class CoinSystem : MonoBehaviour
 {
-    public int Coin;
+    public int Coin { get; protected set; }
 
     public Text CoinTxt;
 
-    private void Update()
+    public void AddCoin(int value)
+    {
+        Coin += value;
+        CoinUIUpdate();
+    }
+
+    public void ReduceCoin(int value)
+    {
+        Coin -= value;
+        CoinUIUpdate();
+    }
+
+    private void CoinUIUpdate()
     {
         CoinTxt.text = Coin.ToString();
     }

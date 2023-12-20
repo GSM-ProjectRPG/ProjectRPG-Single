@@ -16,6 +16,7 @@ public class ItemData : ScriptableObject
 {
     public Sprite itemImg;
     public string itemName;
+    [TextArea]
     public string itemDescription;
     public int itemID;
     public int price;

@@ -17,7 +17,7 @@ public class EquipmentWindow : MonoBehaviour
     private void Awake()
     {
         OnEquip(new Item(itemData, 1));
-        OnEquip(new Item(itemData1, 2));
+        OnEquip(new Item(itemData1, 1));
 
         inventory.OnEquip += (item) =>
         {
@@ -49,12 +49,13 @@ public class EquipmentWindow : MonoBehaviour
             UnEquip(index);
         }
 
-        equipmentList[index] = item;
-        inventory.RemoveItemData(item);
+        equipmentList[index] = new Item(item.itemData, 1);
+        inventory.RemoveItemData(new Item(item.itemData, 1));
     }
 
     public void UnEquip(int index)
     {
+        if (equipmentList[index] is null) return;
         inventory.AddItemData(equipmentList[index]);
         equipmentList[index] = null;
     }

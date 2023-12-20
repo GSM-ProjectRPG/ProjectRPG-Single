@@ -6,7 +6,7 @@ using UnityEngine;
 public class Description : MonoBehaviour
 {
     public Camera Camera;
-    public DescriptionView DescriptionView;
+    public DescriptionUI DescriptionView;
 
     public GameObject DescriptionViewObj;
     public Inventory Inventory;

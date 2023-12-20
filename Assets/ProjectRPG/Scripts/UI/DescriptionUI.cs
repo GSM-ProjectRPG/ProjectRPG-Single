@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
 
-public class DescriptionView : MonoBehaviour
+public class DescriptionUI : MonoBehaviour
 {
     public GameObject DescriptionViewObj;
     public Description[] Descriptions;

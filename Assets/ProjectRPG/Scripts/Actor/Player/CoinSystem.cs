@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
@@ -5,24 +6,19 @@ using UnityEngine;
 
 public class CoinSystem : MonoBehaviour
 {
-    public int Coin { get; protected set; }
+    public Action<int> SetCoinAction;
 
-    public Text CoinTxt;
-
-    public void AddCoin(int value)
-    {
-        Coin += value;
-        CoinUIUpdate();
-    }
-
-    public void ReduceCoin(int value)
-    {
-        Coin -= value;
-        CoinUIUpdate();
-    }
-
-    private void CoinUIUpdate()
-    {
-        CoinTxt.text = Coin.ToString();
+    private int _coin;
+    public int Coin { 
+        get
+        {
+            return _coin;
+        }
+        protected set
+        {
+            int origin = _coin;
+            _coin = value;
+            SetCoinAction?.Invoke(origin - value);
+        }
     }
 }

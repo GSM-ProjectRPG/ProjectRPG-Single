@@ -10,7 +10,8 @@ public class Inventory : MonoBehaviour
 
     public Action<Item> OnEquip;
     public Action<Item> OnUse;
-    public Action CheckQuest;
+    public Action<Item> OnAddItem;
+    public Action<Item> OnReduceItem;
 
     public GameObject InventoryUI;
     public GameObject EquipmentWindowUI;

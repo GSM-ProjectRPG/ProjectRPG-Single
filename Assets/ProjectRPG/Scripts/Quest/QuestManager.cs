@@ -37,8 +37,7 @@ public class QuestManager : MonoBehaviour
             _onCheckHuntQuest?.Invoke();
         };
 
-        Action<Item> _onItemChange = null;
-        _onItemChange += (item) =>
+        Action<Item> _onItemChange = (item) =>
         {
             Action _onCheckItemQuest = null;
             foreach (var quest in Instance.CurrentQuests)

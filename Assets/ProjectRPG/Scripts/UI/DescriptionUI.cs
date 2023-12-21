@@ -47,6 +47,7 @@ public class DescriptionUI : MonoBehaviour
 
     public void SetDescription(int descriptionIndex)
     {
+        if (Descriptions[descriptionIndex].Inventory.ItemList.Count <= descriptionIndex) return;
         GetComponentInChildren<Text>().text = Descriptions[descriptionIndex].Inventory.ItemList[descriptionIndex].ItemDescription;
     }
 }

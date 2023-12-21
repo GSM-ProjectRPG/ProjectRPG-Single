@@ -16,10 +16,14 @@ public class Inventory : MonoBehaviour
     public GameObject InventoryUI;
     public GameObject EquipmentWindowUI;
 
+    public ItemData itemData;
+    public ItemData itemData1;
+
     public void OpenInventory()
     {
         InventoryUI.SetActive(true);
         EquipmentWindowUI.SetActive(true);
+        PlayerInputManager.Instance.MouseLock = false;
         GetComponentInChildren<InventoryUI>().OnClickAction = Use;
     }
 
@@ -27,16 +31,18 @@ public class Inventory : MonoBehaviour
     {
         InventoryUI.SetActive(false);
         EquipmentWindowUI.SetActive(false);
+        PlayerInputManager.Instance.MouseLock = true;
     }
 
     public void AddItemData(Item compareItem)
     {
+        bool add = true;
         foreach (Item sourceItem in ItemList)
         {
             if (sourceItem.ItemID == compareItem.ItemID)
             {
+                add = false;
                 sourceItem.count += compareItem.count;
-                return;
             }
         }
 
@@ -45,7 +51,7 @@ public class Inventory : MonoBehaviour
             return;
         }
 
-        ItemList.Add(compareItem);
+        if(add) ItemList.Add(compareItem);
         OnAddItem?.Invoke(compareItem);
     }
 
@@ -58,16 +64,15 @@ public class Inventory : MonoBehaviour
                 if (sourceItem.count > compareItem.count)
                 {
                     sourceItem.count -= compareItem.count;
-                    return;
                 }
                 else if (sourceItem.count == compareItem.count)
                 {
                     ItemList.Remove(sourceItem);
-                    return;
+                    break;
                 }
                 else if (sourceItem.count < compareItem.count)
                 {
-                    return;
+
                 }
             }
         }

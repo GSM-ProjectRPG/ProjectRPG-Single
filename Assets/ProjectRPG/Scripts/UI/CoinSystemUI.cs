@@ -6,9 +6,15 @@ using UnityEngine;
 public class CoinSystemUI : MonoBehaviour
 {
     public CoinSystem CoinSystem;
-    public Text CoinTxt;
+    public Text CoinText;
+
+    private void Update()
+    {
+        CoinUIUpdate();
+    }
+
     private void CoinUIUpdate()
     {
-        CoinTxt.text = CoinSystem.Coin.ToString();
+        CoinText.text = CoinSystem.Coin.ToString();
     }
 }

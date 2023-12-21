@@ -5,9 +5,9 @@ using UnityEngine;
 public class Shop : MonoBehaviour
 {
     public Inventory Inventory;
+    public InventoryUI InventoryUI;
 
     public GameObject ShopUI;
-    public GameObject InventoryUI;
 
     public List<ItemData> ShopList;
 
@@ -18,35 +18,38 @@ public class Shop : MonoBehaviour
     {
         interactable = GetComponent<InteractableObject>();
         interactable.OnInteracted += (playerInteractable) => OpenShop(playerInteractable);
-        InventoryUI.GetComponent<InventoryUI>().OnClickAction = Sell;
+        InventoryUI.OnClickAction = Sell;
     }
 
     public void OpenShop(PlayerInteractor playerInteractor)
     {
         coinSystem = playerInteractor.GetComponent<CoinSystem>();
         ShopUI.SetActive(true);
-        InventoryUI.SetActive(true);
-        GetComponentInChildren<InventoryUI>().OnClickAction = Sell;
+        InventoryUI.gameObject.SetActive(true);
+        PlayerInputManager.Instance.MouseLock = false;
+        InventoryUI.OnClickAction = Sell;
     }
 
     public void CloseShop()
     {
         coinSystem = null;
         ShopUI.SetActive(false);
-        InventoryUI.SetActive(false);
+        InventoryUI.gameObject.SetActive(false);
+        PlayerInputManager.Instance.MouseLock = true;
     }
 
     public void Purchase(int index)
     {
-        if (Inventory.ItemList[index].Price < coinSystem.Coin)
+        if (ShopList[index].price <= coinSystem.Coin)
         {
-            coinSystem.Coin -= Inventory.ItemList[index].Price;
+            coinSystem.Coin -= ShopList[index].price;
             Inventory.AddItemData(new Item(ShopList[index], 1));
         }
     }
 
     public void Sell(int index)
     {
+        if (Inventory.ItemList.Count <= index) return;
         coinSystem.Coin += Inventory.ItemList[index].Price;
         Inventory.ReduceItemData(new Item(Inventory.ItemList[index].GetItemData(),1));
     }

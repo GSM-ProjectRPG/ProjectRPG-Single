@@ -7,9 +7,15 @@ public class DescriptionUI : MonoBehaviour
 {
     public GameObject DescriptionViewObj;
     public Description[] Descriptions;
-    public Camera camera;
 
     Vector2 point;
+
+    private Camera _camera;
+
+    private void Awake()
+    {
+        _camera = Camera.main;
+    }
 
     private void Update()
     {
@@ -47,6 +53,7 @@ public class DescriptionUI : MonoBehaviour
 
     public void SetDescription(int descriptionIndex)
     {
+        if (Descriptions[descriptionIndex].Inventory.ItemList.Count <= descriptionIndex) return;
         GetComponentInChildren<Text>().text = Descriptions[descriptionIndex].Inventory.ItemList[descriptionIndex].ItemDescription;
     }
 }

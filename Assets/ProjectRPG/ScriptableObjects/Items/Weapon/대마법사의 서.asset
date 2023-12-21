@@ -20,3 +20,6 @@ MonoBehaviour:
   itemID: 5
   price: 800
   weaponType: 1
+  damage: 30
+  ModelObject: {fileID: 1856418370873769987, guid: 5f111ba2332a4dd479726c7e68f65064,
+    type: 3}

@@ -18,5 +18,7 @@ MonoBehaviour:
   itemDescription: "\uD798\uC774 \uC19F\uAD6C\uCE58\uB294 \uBC18\uC9C0."
   itemID: 6
   price: 100
+  damage: 10
   health: 0
   speed: 0
+  ModelObject: {fileID: 0}

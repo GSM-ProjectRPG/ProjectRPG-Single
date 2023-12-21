@@ -6,6 +6,8 @@ using UnityEngine.Events;
 
 public class MenuManager : MonoBehaviour
 {
+    private GameObject _currentSceneUI;
+
     private static MenuManager _instance;
     public static MenuManager Instance
     {
@@ -44,21 +46,25 @@ public class MenuManager : MonoBehaviour
 
     public void StartGame()
     {
+        Debug.Log("START");
+        var lobbyUi = _currentSceneUI.GetComponent<LobbyUI>();
+        Debug.Log(lobbyUi.NicknameInput.text);
         SceneManager.LoadScene("GamePlay");
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         Initialize();
-        var obj = Resources.Load<GameObject>($"Prefabs/SceneUI/{scene.name}SceneUI");
-        var sceneUi = Instantiate(obj);
+        var sceneUi = Instantiate(Resources.Load<GameObject>($"Prefabs/SceneUI/{scene.name}SceneUI"));
+        _currentSceneUI = sceneUi;
+
         var sceneComp = sceneUi.GetComponent<SceneUI>();
 
         if(sceneComp is LobbyUI)
         {
             LobbyUI lobbyUi = (LobbyUI)sceneComp;
             lobbyUi.ExitButton.onClick.AddListener(ExitGame);
-            lobbyUi.StartButton.onClick.AddListener(StartGame);
+            lobbyUi.StartGameButton.onClick.AddListener(StartGame);
         }
     }    
 }

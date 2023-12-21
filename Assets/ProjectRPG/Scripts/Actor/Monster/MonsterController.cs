@@ -56,15 +56,23 @@ public class MonsterController : MonoBehaviour
 
     private void Attack()
     {
+        Vector3 attackArea = new Vector3(2, 2, 2);
+        Collider[] checkedPlayer = Physics.OverlapBox(transform.position + transform.forward, attackArea, Quaternion.identity, 1 << LayerMask.NameToLayer("Player"));
+
+        if (checkedPlayer.Length > 0)
+        {
+            checkedPlayer[0].GetComponent<DamageReciever>().TakeDamage(_statManager.Attack, gameObject);
+        }
+
         _animator.SetTrigger("Attack");
-        StartCoroutine(SetMotionStun());
+        StartCoroutine(SetAttackMotionStun());
     }
 
-    private IEnumerator SetMotionStun()
+    private IEnumerator SetAttackMotionStun()
     {
         _motionStopTime = Time.time + 1;
         yield return null;
-        _motionStopTime = Time.time + _animator.GetNextAnimatorClipInfo(0).Length;
+        _motionStopTime = Time.time + _animator.GetNextAnimatorClipInfo(0).Length + _statManager.AttackSpeed;
     }
 
     private void Chase()

@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc9f6c52da990da418dc9e2d3902ae2a, type: 3}
+  m_Name: Rotten Ginseng
+  m_EditorClassIdentifier: 
+  Name: Rotten Ginseng
+  Attack: 300
+  Health: 3500
+  MoveSpeed: 0.6
+  AttackSpeed: 1
+  AttackRange: 2
+  ChaseRange: 5
+  DropExp: 17

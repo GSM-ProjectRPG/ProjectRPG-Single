@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 116b4ccb59515fa4790c0f28baa2ce67, type: 3}
   m_Name: BlackSlimeHunt
   m_EditorClassIdentifier: 
-  QuestId: 0
+  QuestId: 8
   QuestContents: "\uBE14\uB799 \uC2AC\uB77C\uC784 18\uB9C8\uB9AC\uB97C \uC0AC\uB0E5\uD558\uC790!"
   QuestType: 0
   TargetObject: {fileID: 852988721920347720, guid: 059de66113acbf0479bcd3b86baec0e9,

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 116b4ccb59515fa4790c0f28baa2ce67, type: 3}
   m_Name: GinsengQueenHunt
   m_EditorClassIdentifier: 
-  QuestId: 0
+  QuestId: 7
   QuestContents: "\uC778\uC0BC \uC5EC\uC655 15\uB9C8\uB9AC\uB97C \uC0AC\uB0E5\uD558\uC790!"
   QuestType: 0
   TargetObject: {fileID: 7012213117130684073, guid: 27af108f823dc1e49aa2d33f238fcd8a,

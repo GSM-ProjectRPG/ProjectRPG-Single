@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 116b4ccb59515fa4790c0f28baa2ce67, type: 3}
   m_Name: BabyGinsengHunt
   m_EditorClassIdentifier: 
-  QuestId: 0
+  QuestId: 5
   QuestContents: "\uC544\uAE30 \uC778\uC0BC 15\uB9C8\uB9AC\uB97C \uC0AC\uB0E5\uD558\uC790!"
   QuestType: 0
   TargetObject: {fileID: 6658419891780647803, guid: 2bb526525ba39614c950a1b1a0398efb,

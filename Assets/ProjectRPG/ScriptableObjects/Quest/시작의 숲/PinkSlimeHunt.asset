@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 116b4ccb59515fa4790c0f28baa2ce67, type: 3}
   m_Name: PinkSlimeHunt
   m_EditorClassIdentifier: 
-  QuestId: 0
+  QuestId: 1
   QuestContents: "\uD551\uD06C \uC2AC\uB77C\uC784 10\uB9C8\uB9AC\uB97C \uC0AC\uB0E5\uD558\uC790!"
   QuestType: 0
   TargetObject: {fileID: 7400792322845541657, guid: ad2c85d0fcf3651409a83e990539ca96,

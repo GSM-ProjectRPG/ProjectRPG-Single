@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 116b4ccb59515fa4790c0f28baa2ce67, type: 3}
   m_Name: SpiderKingHunt
   m_EditorClassIdentifier: 
-  QuestId: 0
+  QuestId: 12
   QuestContents: "\uC655\uAC70\uBBF8 20\uB9C8\uB9AC\uB97C \uC0AC\uB0E5\uD558\uC790!"
   QuestType: 0
   TargetObject: {fileID: 3761136218289213337, guid: 3e7fff7267de89b4d8c4d552556d1172,

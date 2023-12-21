@@ -11,7 +11,7 @@ public class ActorInfoSummoner : MonoBehaviour
     private Health _health;
     private ActorInfoUI _ui;
 
-    private float lastDamagedTime;
+    private float _lastDamagedTime;
 
 
     private void Awake()
@@ -25,7 +25,7 @@ public class ActorInfoSummoner : MonoBehaviour
                 _ui.BindActor(gameObject);
             }
 
-            lastDamagedTime = Time.time;
+            _lastDamagedTime = Time.time;
         };
     }
 
@@ -33,7 +33,7 @@ public class ActorInfoSummoner : MonoBehaviour
     {
         if (_ui != null)
         {
-            _ui.gameObject.SetActive(lastDamagedTime + UiShowTime > Time.time);
+            _ui.gameObject.SetActive(_lastDamagedTime + UiShowTime > Time.time);
             _ui.transform.position = GetUIPos();
         }
     }

@@ -8,16 +8,16 @@ public class ExpUI : MonoBehaviour
     public Text Text;
     public Slider Slider;
 
-    private PlayerStatSystem playerStatSystem;
+    private PlayerStatSystem _playerStatSystem;
 
     // Start is called before the first frame update
     private void Start()
     {
         ActorManager.Instance.OnRegistedPlayer += () =>
         {
-            playerStatSystem = ActorManager.Instance.Player?.GetComponent<PlayerStatSystem>();
-            playerStatSystem.OnAddedExp += (_) => UpdateUI();
-            playerStatSystem.OnLevelUp += () => UpdateUI();
+            _playerStatSystem = ActorManager.Instance.Player?.GetComponent<PlayerStatSystem>();
+            _playerStatSystem.OnAddedExp += (_) => UpdateUI();
+            _playerStatSystem.OnLevelUp += () => UpdateUI();
             UpdateUI();
         };
 
@@ -25,10 +25,10 @@ public class ExpUI : MonoBehaviour
 
     private void UpdateUI()
     {
-        if (playerStatSystem == null) return;
-        Slider.value = playerStatSystem.Exp / playerStatSystem.NeededExp;
-        int  percentText = (int)(playerStatSystem.Exp / playerStatSystem.NeededExp * 100f);
-        string text = percentText + "% (" + playerStatSystem.Exp + "/" + playerStatSystem.NeededExp + ")";
+        if (_playerStatSystem == null) return;
+        Slider.value = _playerStatSystem.Exp / _playerStatSystem.NeededExp;
+        int  percentText = (int)(_playerStatSystem.Exp / _playerStatSystem.NeededExp * 100f);
+        string text = percentText + "% (" + _playerStatSystem.Exp + "/" + _playerStatSystem.NeededExp + ")";
         Text.text = text;
     }
 }

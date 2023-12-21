@@ -12,11 +12,11 @@ public class SkillSystem : MonoBehaviour
     public List<Skill> HaveSkills { get; protected set; } = new();
     public Skill CurruntSkill { get; protected set; }
 
-    [SerializeField] private SkillData basicSkillData;
+    [SerializeField] private SkillData _basicSkillData;
 
     private void Awake()
     {
-        SelectSkill(new Skill(basicSkillData, null));
+        SelectSkill(new Skill(_basicSkillData, null));
     }
 
     public void RegistSkill(Skill skill)

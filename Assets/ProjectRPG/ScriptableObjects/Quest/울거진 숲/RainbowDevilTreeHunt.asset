@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 116b4ccb59515fa4790c0f28baa2ce67, type: 3}
+  m_Name: RainbowDevilTreeHunt
+  m_EditorClassIdentifier: 
+  QuestId: 0
+  QuestContents: "\uB808\uC778\uBCF4\uC6B0 \uB370\uBE4C\uD2B8\uB9AC 13\uB9C8\uB9AC\uB97C
+    \uC0AC\uB0E5\uD558\uC790!"
+  QuestType: 0
+  TargetObject: {fileID: 1077959776303732745, guid: cf1e1bf57c63710428ff3c7ab41a5bd0,
+    type: 3}
+  ItemData: {fileID: 0}
+  TargetCount: 13
+  RewardCoin: 70
+  RewardExp: 35
+  RewardItem: {fileID: 0}
+  RewardItemCount: 0

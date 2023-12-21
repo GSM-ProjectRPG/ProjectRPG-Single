@@ -32,6 +32,6 @@ public class PlayerInfoUI : MonoBehaviour
     private void RefreshUI()
     {
         HpSlider.value = _targetHealth.CurruntHealth / _targetHealth.MaxHealth;
-        HpText.text = _targetHealth.CurruntHealth + "/" + _targetHealth.MaxHealth;
+        HpText.text = (int)_targetHealth.CurruntHealth + "/" + (int)_targetHealth.MaxHealth;
     }
 }

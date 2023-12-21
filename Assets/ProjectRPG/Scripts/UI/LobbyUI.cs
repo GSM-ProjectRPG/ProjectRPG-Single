@@ -18,7 +18,7 @@ public class LobbyUI : SceneUI
     {
         ExitButton = GameObject.Find("ExitBtn").GetComponent<Button>();
         StartButton = GameObject.Find("StartBtn").GetComponent<Button>();
-        Popup = GameObject.Find("LobbyPopup");
+        Popup = GameObject.Find("CreatePopup");
         StartGameButton = Popup.transform.GetChild(3).GetComponent<Button>();
         NicknameInput = Popup.transform.GetChild(2).GetComponent<InputField>();
 
@@ -39,5 +39,10 @@ public class LobbyUI : SceneUI
         });
 
         Popup.SetActive(false);
+
+        NicknameInput.onEndEdit.AddListener((text) =>
+        {
+            GameManager.Instance.NickName = text;
+        });
     }
 }

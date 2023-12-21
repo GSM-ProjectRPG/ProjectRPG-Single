@@ -3,7 +3,6 @@ using System;
 
 public enum ItemType
 {
-    Default,
     Weapon,
     Accessory,
     Use,

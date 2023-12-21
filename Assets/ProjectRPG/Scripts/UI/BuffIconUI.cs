@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class BuffIconUI : MonoBehaviour
+public class BuffIconUI : MonoBehaviour, IBuffIconUI<Buff>
 {
     public Image BuffImage;
     public Image Cover;

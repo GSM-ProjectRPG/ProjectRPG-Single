@@ -1,10 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class BuffIconUILayer : MonoBehaviour
 {
-    public GameObject BuffIconPrefab;
+    public GameObject BasicBuffIconPrefab;
 
     private Dictionary<Buff, BuffIconUI> _icons = new();
 
@@ -16,14 +17,21 @@ public class BuffIconUILayer : MonoBehaviour
 
             buffSystem.OnAddedBuff += (buff) =>
             {
-                BuffIconUI icon = Instantiate(BuffIconPrefab, transform).GetComponent<BuffIconUI>();
+                BuffIconUI icon = Instantiate(BasicBuffIconPrefab, transform).GetComponent<BuffIconUI>();
                 icon.BindBuff(buff);
                 _icons.Add(buff, icon);
             };
             buffSystem.OnRemovedBuff += (buff) =>
             {
-                Destroy(_icons[buff].gameObject);
+                GameObject g = _icons[buff].gameObject;
+                _icons.Remove(buff);
+                Destroy(g);
             };
         };
     }
+}
+
+public interface IBuffIconUI<T> where T : Buff
+{
+    public void BindBuff(T buff);
 }

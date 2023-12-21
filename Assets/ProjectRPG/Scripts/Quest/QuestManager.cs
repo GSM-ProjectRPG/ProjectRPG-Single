@@ -25,7 +25,7 @@ public class QuestManager : MonoBehaviour
             Action _onCheckHuntQuest = null;
             foreach (var quest in CurrentQuests)
             {
-                if (quest.QuestData.QuestType == EQuestType.Hunt && quest.QuestData.TargetObject.name == die.name)
+                if (quest.QuestData.QuestType == EQuestType.Hunt && quest.QuestData.TargetObject.GetComponent<MonsterStatSystem>()._statData.Name == die.GetComponent<MonsterStatSystem>()._statData.Name)
                 {
                     _onCheckHuntQuest += () =>
                     {
@@ -79,22 +79,24 @@ public class QuestManager : MonoBehaviour
     public void RegistQuest(Quest data)
     {
         if (data == null) return;
-        if (!CurrentQuests.Contains(data))
+        foreach (var quest in CurrentQuests)
         {
-            CurrentQuests.Add(data);
-            ShowQuestProgress.Instance.AddQuest(CurrentQuests.Count - 1);
+            if (quest.QuestData.QuestId == data.QuestData.QuestId) return;
         }
+        CurrentQuests.Add(data);
+        ShowQuestProgress.Instance.AddQuest(CurrentQuests.Count - 1);
         _onRegist?.Invoke(data);
     }
 
     public void RemoveQuest(Quest data)
     {
         if (data == null) return;
-        if (CurrentQuests.Contains(data))
+        foreach (var quest in CurrentQuests)
         {
-            ShowQuestProgress.Instance.RemoveQuest(CurrentQuests.IndexOf(data));
-            CurrentQuests.Remove(data);
+            if (quest.QuestData.QuestId == data.QuestData.QuestId) return;
         }
+        ShowQuestProgress.Instance.RemoveQuest(CurrentQuests.IndexOf(data));
+        CurrentQuests.Remove(data);
     }
 }
 

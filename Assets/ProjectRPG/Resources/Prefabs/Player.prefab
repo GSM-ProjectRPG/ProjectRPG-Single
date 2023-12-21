@@ -20,6 +20,8 @@ GameObject:
   - component: {fileID: 3288502224778911381}
   - component: {fileID: 1737948761529796464}
   - component: {fileID: 2354460144339746182}
+  - component: {fileID: 5499073839841361830}
+  - component: {fileID: 1077869403365964432}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -197,6 +199,32 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   basicSkillData: {fileID: 11400000, guid: 2a64c5d19087f3a46b885e151cfa7503, type: 2}
+--- !u!114 &5499073839841361830
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6799289787203058824}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ddb4d7dde412b7f45bac4de1fc409253, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1077869403365964432
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6799289787203058824}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1af143f3a931cc4aaae68d90a75c43d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  InventoryUI: {fileID: 0}
+  EquipmentWindowUI: {fileID: 0}
 --- !u!1001 &6799289787372926813
 PrefabInstance:
   m_ObjectHideFlags: 0

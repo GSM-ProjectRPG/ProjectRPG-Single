@@ -7,5 +7,7 @@ public class Weapon : ItemData
 {
     public enum WeaponType { SWORD, WAND };
     public WeaponType weaponType;
+    public int damage;
+    public GameObject ModelObject;
     Weapon() { itemType = ItemType.Weapon; }
 }

@@ -37,8 +37,14 @@ public class MenuManager : MonoBehaviour
     }
 
     public void ExitGame()
-    {   
+    {
+        Debug.Log("EXIT_GAME");
         Application.Quit();
+    }
+
+    public void StartGame()
+    {
+        SceneManager.LoadScene("GamePlay");
     }
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
@@ -46,6 +52,13 @@ public class MenuManager : MonoBehaviour
         Initialize();
         var obj = Resources.Load<GameObject>($"Prefabs/SceneUI/{scene.name}SceneUI");
         var sceneUi = Instantiate(obj);
-        sceneUi.GetComponent<SceneUI>().ExitButton?.onClick.AddListener(ExitGame);
+        var sceneComp = sceneUi.GetComponent<SceneUI>();
+
+        if(sceneComp is LobbyUI)
+        {
+            LobbyUI lobbyUi = (LobbyUI)sceneComp;
+            lobbyUi.ExitButton.onClick.AddListener(ExitGame);
+            lobbyUi.StartButton.onClick.AddListener(StartGame);
+        }
     }    
 }

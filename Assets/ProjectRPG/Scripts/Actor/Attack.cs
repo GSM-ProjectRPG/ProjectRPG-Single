@@ -30,7 +30,7 @@ public abstract class Attack : MonoBehaviour
     /// <summary>
     /// 자식 클래스에서 호출할 데미지 부여 함수입니다. OnHitted 이벤트를 작동시킵니다.
     /// </summary>
-    protected void SendDamage(DamageReciever damageReciever, float damage)
+    public void SendDamage(DamageReciever damageReciever, float damage)
     {
         Health health = damageReciever.GetComponent<Health>();
 

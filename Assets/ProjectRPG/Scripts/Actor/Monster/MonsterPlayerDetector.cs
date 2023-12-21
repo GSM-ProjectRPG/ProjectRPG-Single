@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class MonsterPlayerDetector : MonoBehaviour
 {
-    [SerializeField] private LayerMask _playerLayer;
-
     private MonsterStatSystem _statManager;
 
     [SerializeField] private bool _isPlayerDetectInChaseRange;

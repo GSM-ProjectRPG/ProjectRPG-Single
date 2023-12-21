@@ -12,11 +12,11 @@ public class SkillSystem : MonoBehaviour
     public List<Skill> HaveSkills { get; protected set; } = new();
     public Skill CurruntSkill { get; protected set; }
 
-    [SerializeField] private SkillData basicSkillData;
+    [SerializeField] private SkillData _basicSkillData;
 
     private void Awake()
     {
-        SelectSkill(new Skill(basicSkillData, null));
+        SelectSkill(new Skill(_basicSkillData, null));
     }
 
     public void RegistSkill(Skill skill)
@@ -59,5 +59,26 @@ public class Skill
     public void Invoke()
     {
         _onUseSkill?.Invoke();
+    }
+}
+
+public class CoolTimeSkill : Skill
+{
+    public float CoolTime { get; protected set; }
+    public float RemainingTime => Mathf.Max(0, lastUsedTime + CoolTime - Time.time);
+
+    private float lastUsedTime;
+
+    public CoolTimeSkill(SkillData skillData, Action onUseSkill, float coolTime) : base(skillData, onUseSkill)
+    {
+        CoolTime = coolTime;
+        _onUseSkill = () =>
+         {
+             if (RemainingTime == 0)
+             {
+                 lastUsedTime = Time.time;
+                 onUseSkill?.Invoke();
+             }
+         };
     }
 }

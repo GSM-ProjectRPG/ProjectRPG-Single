@@ -70,7 +70,7 @@ public class PlayerController : MonoBehaviour
             _health.SetHealth(maxHealth, gameObject);
         };
 
-        Skill punchSkill = new Skill(_punchSkillData, _attackSystem.Attack(Punch));
+        Skill punchSkill = new CoolTimeSkill(_punchSkillData, _attackSystem.Attack(Punch), 2);
         _skillSystem.RegistSkill(punchSkill);
         _skillSystem.SelectSkill(punchSkill);
         _interactionHandler = _actSystem.Act(() => _interactor.TryInteract());

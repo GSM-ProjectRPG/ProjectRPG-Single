@@ -20,6 +20,7 @@ public class PlayerInfoUI : MonoBehaviour
             {
                 RefreshUI();
             };
+            RefreshUI();
         };
     }
 

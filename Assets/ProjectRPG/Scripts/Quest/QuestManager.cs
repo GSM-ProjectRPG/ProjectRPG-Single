@@ -93,10 +93,12 @@ public class QuestManager : MonoBehaviour
         if (data == null) return;
         foreach (var quest in CurrentQuests)
         {
-            if (quest.QuestData.QuestId == data.QuestData.QuestId) return;
+            if (quest.QuestData.QuestId == data.QuestData.QuestId)
+            {
+                ShowQuestProgress.Instance.RemoveQuest(CurrentQuests.IndexOf(data));
+                CurrentQuests.Remove(data);
+            }
         }
-        ShowQuestProgress.Instance.RemoveQuest(CurrentQuests.IndexOf(data));
-        CurrentQuests.Remove(data);
     }
 }
 

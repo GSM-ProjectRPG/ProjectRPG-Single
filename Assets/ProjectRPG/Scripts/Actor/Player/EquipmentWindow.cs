@@ -12,7 +12,7 @@ public class EquipmentWindow : MonoBehaviour
 
     public Image[] equipmentImg;
 
-    private void Start()
+    private void Awake()
     {
         ActorManager.Instance.OnRegistedPlayer += GetInventory;
     }

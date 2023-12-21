@@ -97,6 +97,7 @@ public class QuestManager : MonoBehaviour
             {
                 ShowQuestProgress.Instance.RemoveQuest(CurrentQuests.IndexOf(data));
                 CurrentQuests.Remove(data);
+                return;
             }
         }
     }

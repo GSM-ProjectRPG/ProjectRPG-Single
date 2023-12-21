@@ -57,7 +57,7 @@ public class MonsterController : MonoBehaviour
     private void Attack()
     {
         Vector3 attackArea = new Vector3(2, 2, 2);
-        Collider[] checkedPlayer = Physics.OverlapBox(transform.position + transform.forward.normalized, attackArea, Quaternion.identity, 1 << LayerMask.NameToLayer("Player"));
+        Collider[] checkedPlayer = Physics.OverlapBox(transform.position + transform.forward, attackArea, Quaternion.identity, 1 << LayerMask.NameToLayer("Player"));
 
         if (checkedPlayer.Length > 0)
         {

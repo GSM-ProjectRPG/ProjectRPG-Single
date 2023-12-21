@@ -61,7 +61,7 @@ public class MonsterController : MonoBehaviour
 
         if (checkedPlayer.Length > 0)
         {
-            checkedPlayer[0].GetComponent<DamageReciever>().TakeDamage(_statManager.Attack, gameObject);
+            _attackSystem.SendDamage(checkedPlayer[0].GetComponent<DamageReciever>(), _statManager.Attack);
         }
 
         _animator.SetTrigger("Attack");

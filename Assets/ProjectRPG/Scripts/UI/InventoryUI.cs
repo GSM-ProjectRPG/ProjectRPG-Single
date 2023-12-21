@@ -12,6 +12,7 @@ public class InventoryUI : MonoBehaviour
 
     public Action<int> OnClickAction;
 
+    public Sprite NullImg;
     public Image[] InventoryImg;
     public Text[] InventoryTxt;
 
@@ -25,7 +26,7 @@ public class InventoryUI : MonoBehaviour
     {
         InventoryView.SetActive(true);
         EquipmentView.SetActive(true);
-        PlayerInputManager.Instance.MouseLock = false;
+        PlayerInputManager.Instance.MouseLock = false; 
         OnClickAction = Inventory.Use;
     }
 
@@ -39,6 +40,7 @@ public class InventoryUI : MonoBehaviour
     private void GetInventory()
     {
         Inventory = ActorManager.Instance.Player.GetComponent<Inventory>();
+        SetInventory();
         Inventory.OnAddItem += (_) =>
         {
             SetInventory();
@@ -61,7 +63,7 @@ public class InventoryUI : MonoBehaviour
             }
             else
             {
-                InventoryImg[i].sprite = null;
+                InventoryImg[i].sprite = NullImg;
                 InventoryTxt[i].text = null;
             }
         }

@@ -5,11 +5,11 @@ using UnityEngine.UI;
 
 public class EquipmentWindow : MonoBehaviour
 {
-    public InventoryUI InventoryUI;
     public Inventory Inventory;
 
     public List<Item> equipmentList = new List<Item>() { null, null };
 
+    public Sprite NullImg;
     public Image[] equipmentImg;
 
     private void Awake()
@@ -24,14 +24,14 @@ public class EquipmentWindow : MonoBehaviour
             if (equipmentList[i] is not null)
                 equipmentImg[i].sprite = equipmentList[i].ItemImg;
             else
-                equipmentImg[i].sprite = null;
+                equipmentImg[i].sprite = NullImg;
         }
     }
 
     private void GetInventory()
     {
         Inventory = ActorManager.Instance.Player.GetComponent<Inventory>();
-        InventoryUI.Inventory.OnEquip += (item) =>
+        Inventory.OnEquip += (item) =>  
         {
             OnEquip(item);
         };
@@ -47,13 +47,13 @@ public class EquipmentWindow : MonoBehaviour
 
         UnEquip(index);
         equipmentList[index] = new Item(item.GetItemData(), 1);
-        InventoryUI.Inventory.ReduceItemData(new Item(item.GetItemData(), 1));
+        Inventory.ReduceItemData(new Item(item.GetItemData(), 1));
     }
 
     public void UnEquip(int index)
     {
         if (equipmentList[index] is null) return;
-        InventoryUI.Inventory.AddItemData(equipmentList[index]);
+        Inventory.AddItemData(equipmentList[index]);
         equipmentList[index] = null;
     }
 }

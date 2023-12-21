@@ -5,8 +5,9 @@ using UnityEngine;
 
 public class DescriptionUI : MonoBehaviour
 {
-    public GameObject DescriptionViewObj;
-    public Description[] Descriptions;
+    public GameObject DescriptionView;
+    public GameObject[] Descriptions;
+    public Inventory Inventory;
 
     Vector2 point;
 
@@ -15,45 +16,42 @@ public class DescriptionUI : MonoBehaviour
     private void Awake()
     {
         _camera = Camera.main;
+        ActorManager.Instance.OnRegistedPlayer += GetInventory;
     }
 
     private void Update()
     {
         point = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
-        DescriptionViewObj.transform.position = new Vector2(point.x, point.y + 100);
-        if (IsView())
-        {
-            DescriptionViewObj.SetActive(true);
-            foreach (Description description in Descriptions)
-            {
-                if (description.IsView == true)
-                {
-                    SetDescription(description.Index);
-                }
-            }
-        }
-        else
-        {
-            DescriptionViewObj.SetActive(false);
-        }
+        DescriptionView.transform.position = new Vector2(point.x, point.y + 100);
+        IsView();
+        
     }
 
-    bool IsView()
+    private void GetInventory()
     {
-        bool ON = false;
-        foreach (Description description in Descriptions)
+        Inventory = ActorManager.Instance.Player.GetComponent<Inventory>();
+    }
+
+    private void IsView()
+    {
+        bool isView = false;
+        point = new Vector3(Input.mousePosition.x, Input.mousePosition.y, -Camera.main.transform.position.z);
+
+        for (int index = 0; index < Inventory.ItemList.Count; index++)
         {
-            if (description.IsView == true)
-            {
-                ON = true;
-            }
+            if (Inventory is null) continue;
+            if (Descriptions[index].transform.position.x < point.x || Descriptions[index].transform.position.x - Descriptions[index].GetComponent<RectTransform>().rect.height > point.x) continue;
+            if (Descriptions[index].transform.position.y + Descriptions[index].GetComponent<RectTransform>().rect.width < point.y || Descriptions[index].transform.position.y > point.y) continue;
+            DescriptionView.SetActive(true);
+            SetDescription(index);
+            return;
         }
-        return ON;
+        DescriptionView.SetActive(false);
     }
 
     public void SetDescription(int descriptionIndex)
     {
-        if (Descriptions[descriptionIndex].Inventory.ItemList.Count <= descriptionIndex) return;
-        GetComponentInChildren<Text>().text = Descriptions[descriptionIndex].Inventory.ItemList[descriptionIndex].ItemDescription;
+        if (Inventory.ItemList.Count <= descriptionIndex) return;
+        GetComponentInChildren<Text>().text = Inventory.ItemList[descriptionIndex].ItemDescription;
     }
 }

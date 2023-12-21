@@ -6,6 +6,9 @@ using UnityEngine;
 
 public class BuffSystem : MonoBehaviour
 {
+    public event Action<Buff> OnAddedBuff;
+    public event Action<Buff> OnRemovedBuff;
+
     private Dictionary<Type, Buff> _buffs = new();
 
     /// <summary>
@@ -42,8 +45,9 @@ public class BuffSystem : MonoBehaviour
         else
         {
             _buffs.Add(addedBuff.GetType(), addedBuff);
+            addedBuff.OnAdded(this);
+            OnAddedBuff?.Invoke(addedBuff);
         }
-        addedBuff.OnAdded(this);
     }
 
     /// <summary>
@@ -56,6 +60,7 @@ public class BuffSystem : MonoBehaviour
         {
             _buffs.Remove(type);
             buff.OnDeleted(this);
+            OnRemovedBuff?.Invoke(buff);
         }
     }
 

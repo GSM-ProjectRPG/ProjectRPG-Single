@@ -11,19 +11,18 @@ public class Shop : MonoBehaviour
 
     public List<ItemData> ShopList;
 
-    private InteractableObject interactable;
-    private CoinSystem coinSystem;
+    private InteractableObject _interactable;
+    private CoinSystem _coinSystem;
 
     private void Awake()
     {
-        interactable = GetComponent<InteractableObject>();
-        interactable.OnInteracted += (playerInteractable) => OpenShop(playerInteractable);
-        InventoryUI.OnClickAction = Sell;
+        _interactable = GetComponent<InteractableObject>();
+        _interactable.OnInteracted += (playerInteractable) => OpenShop(playerInteractable);
     }
 
     public void OpenShop(PlayerInteractor playerInteractor)
     {
-        coinSystem = playerInteractor.GetComponent<CoinSystem>();
+        _coinSystem = playerInteractor.GetComponent<CoinSystem>();
         ShopUI.SetActive(true);
         InventoryUI.gameObject.SetActive(true);
         PlayerInputManager.Instance.MouseLock = false;
@@ -32,7 +31,7 @@ public class Shop : MonoBehaviour
 
     public void CloseShop()
     {
-        coinSystem = null;
+        _coinSystem = null;
         ShopUI.SetActive(false);
         InventoryUI.gameObject.SetActive(false);
         PlayerInputManager.Instance.MouseLock = true;
@@ -40,9 +39,9 @@ public class Shop : MonoBehaviour
 
     public void Purchase(int index)
     {
-        if (ShopList[index].price <= coinSystem.Coin)
+        if (ShopList[index].price <= _coinSystem.Coin)
         {
-            coinSystem.Coin -= ShopList[index].price;
+            _coinSystem.Coin -= ShopList[index].price;
             Inventory.AddItemData(new Item(ShopList[index], 1));
         }
     }
@@ -50,7 +49,7 @@ public class Shop : MonoBehaviour
     public void Sell(int index)
     {
         if (Inventory.ItemList.Count <= index) return;
-        coinSystem.Coin += Inventory.ItemList[index].Price;
+        _coinSystem.Coin += Inventory.ItemList[index].Price;
         Inventory.ReduceItemData(new Item(Inventory.ItemList[index].GetItemData(),1));
     }
 }

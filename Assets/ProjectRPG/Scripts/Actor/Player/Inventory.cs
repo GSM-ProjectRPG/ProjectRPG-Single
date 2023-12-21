@@ -16,9 +16,6 @@ public class Inventory : MonoBehaviour
     public GameObject InventoryUI;
     public GameObject EquipmentWindowUI;
 
-    public ItemData itemData;
-    public ItemData itemData1;
-
     public void OpenInventory()
     {
         InventoryUI.SetActive(true);

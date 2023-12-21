@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 116b4ccb59515fa4790c0f28baa2ce67, type: 3}
   m_Name: GreenDevilTreeHunt
   m_EditorClassIdentifier: 
-  QuestId: 0
+  QuestId: 2
   QuestContents: "\uADF8\uB9B0 \uB370\uBE4C\uD2B8\uB9AC 13\uB9C8\uB9AC\uB97C \uC0AC\uB0E5\uD558\uC790!"
   QuestType: 0
   TargetObject: {fileID: 1721950047534289444, guid: 2fd3f0b0aa1154d46adbe8517615f9e0,

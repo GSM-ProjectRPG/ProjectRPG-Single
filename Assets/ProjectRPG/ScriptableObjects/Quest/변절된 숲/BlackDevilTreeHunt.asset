@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 116b4ccb59515fa4790c0f28baa2ce67, type: 3}
   m_Name: BlackDevilTreeHunt
   m_EditorClassIdentifier: 
-  QuestId: 0
+  QuestId: 9
   QuestContents: "\uBE14\uB799 \uB370\uBE4C\uD2B8\uB9AC 18\uB9C8\uB9AC\uB97C \uC0AC\uB0E5\uD558\uC790!"
   QuestType: 0
   TargetObject: {fileID: 6172055811301816109, guid: fcbbef6927a270b4aa620caec027cbd6,

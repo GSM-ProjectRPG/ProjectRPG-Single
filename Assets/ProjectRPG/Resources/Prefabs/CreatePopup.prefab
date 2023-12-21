@@ -468,7 +468,7 @@ GameObject:
   - component: {fileID: 1532982985419024465}
   - component: {fileID: 9130220581846340208}
   m_Layer: 5
-  m_Name: LobbyPopup
+  m_Name: CreatePopup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -11,7 +11,7 @@ public class Description : MonoBehaviour
     public int Index;
     public bool IsView;
 
-    public Camera _camera;
+    private Camera _camera;
 
     Vector3 point;
 

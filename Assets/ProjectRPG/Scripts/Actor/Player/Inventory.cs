@@ -13,24 +13,6 @@ public class Inventory : MonoBehaviour
     public Action<Item> OnAddItem;
     public Action<Item> OnReduceItem;
 
-    public GameObject InventoryUI;
-    public GameObject EquipmentWindowUI;
-
-    public void OpenInventory()
-    {
-        InventoryUI.SetActive(true);
-        EquipmentWindowUI.SetActive(true);
-        PlayerInputManager.Instance.MouseLock = false;
-        GetComponentInChildren<InventoryUI>().OnClickAction = Use;
-    }
-
-    public void CloseInventory()
-    {
-        InventoryUI.SetActive(false);
-        EquipmentWindowUI.SetActive(false);
-        PlayerInputManager.Instance.MouseLock = true;
-    }
-
     public void AddItemData(Item compareItem)
     {
         bool add = true;
@@ -47,8 +29,7 @@ public class Inventory : MonoBehaviour
         {
             return;
         }
-
-        if(add) ItemList.Add(compareItem);
+        if (add) ItemList.Add(compareItem);
         OnAddItem?.Invoke(compareItem);
     }
 

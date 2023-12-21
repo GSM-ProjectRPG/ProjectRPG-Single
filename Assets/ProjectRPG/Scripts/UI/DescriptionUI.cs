@@ -7,9 +7,15 @@ public class DescriptionUI : MonoBehaviour
 {
     public GameObject DescriptionViewObj;
     public Description[] Descriptions;
-    public Camera camera;
 
     Vector2 point;
+
+    private Camera _camera;
+
+    private void Awake()
+    {
+        _camera = Camera.main;
+    }
 
     private void Update()
     {

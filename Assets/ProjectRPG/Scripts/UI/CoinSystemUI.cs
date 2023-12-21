@@ -8,9 +8,18 @@ public class CoinSystemUI : MonoBehaviour
     public CoinSystem CoinSystem;
     public Text CoinText;
 
-    private void Update()
+    private void Awake()
     {
-        CoinUIUpdate();
+        ActorManager.Instance.OnRegistedPlayer += GetCoinSystem;
+    }
+
+    private void GetCoinSystem()
+    {
+        CoinSystem = ActorManager.Instance.Player.GetComponent<CoinSystem>();
+        CoinSystem.SetCoinAction += (_) =>
+        {
+            CoinUIUpdate();
+        };
     }
 
     private void CoinUIUpdate()

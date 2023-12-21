@@ -5,7 +5,24 @@ using UnityEngine;
 
 public class ActorManager : MonoBehaviour
 {
-    public static ActorManager Instance { get; private set; }
+    private static ActorManager _instance;
+    public static ActorManager Instance
+    {
+        get
+        {
+            if (_instance == null)
+            {
+                _instance = FindAnyObjectByType<ActorManager>();
+                if (_instance == null)
+                {
+                    GameObject g = new GameObject("ActorManager");
+                    _instance = g.AddComponent<ActorManager>();
+                }
+            }
+            return _instance;
+        }
+        private set { _instance = value; }
+    }
 
     public Action<GameObject> OnRegistedActor;
     public Action<GameObject> OnDeletedActor;
@@ -18,12 +35,9 @@ public class ActorManager : MonoBehaviour
 
     private void Awake()
     {
-        if(Instance == null)
+        if(Instance != this)
         {
-            Instance = this;
-        }
-        else
-        {
+            Debug.LogError("ActorManager가 2개 이상 존재합니다.\nGameObject : " + gameObject.name);
             Destroy(this);
         }
     }
@@ -47,8 +61,8 @@ public class ActorManager : MonoBehaviour
         {
             Actors.Remove(actor);
             OnDeletedActor?.Invoke(actor);
-            
-            if(actor == Player)
+
+            if (actor == Player)
             {
                 Player = null;
                 OnDeletedPlayer?.Invoke();

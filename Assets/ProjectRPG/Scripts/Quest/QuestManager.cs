@@ -10,8 +10,7 @@ public class QuestManager : MonoBehaviour
     public static QuestManager Instance { get; private set; }
 
     public List<Quest> CurrentQuests = new();
-
-    private Action<Quest> _onRegist;
+    public event Action<Quest> _onRegist;
 
     private void Awake()
     {

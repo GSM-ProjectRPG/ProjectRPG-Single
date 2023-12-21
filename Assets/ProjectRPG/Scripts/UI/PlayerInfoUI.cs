@@ -24,9 +24,13 @@ public class PlayerInfoUI : MonoBehaviour
         };
     }
 
-    private void RefreshUI()
+    private void Start()
     {
         NameText.text = GameManager.Instance.NickName;
+    }
+
+    private void RefreshUI()
+    {
         HpSlider.value = _targetHealth.CurruntHealth / _targetHealth.MaxHealth;
         HpText.text = _targetHealth.CurruntHealth + "/" + _targetHealth.MaxHealth;
     }

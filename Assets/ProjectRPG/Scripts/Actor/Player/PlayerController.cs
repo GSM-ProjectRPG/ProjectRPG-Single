@@ -77,7 +77,6 @@ public class PlayerController : MonoBehaviour
         _jumpHandler = _actSystem.Act(Jump);
         _moveHandler = _actSystem.Act(() => Move(_input.GetMoveVector()));
 
-        _input.MouseLock = true;
         _cameraDistance = _cameraMaxDistance;
     }
 

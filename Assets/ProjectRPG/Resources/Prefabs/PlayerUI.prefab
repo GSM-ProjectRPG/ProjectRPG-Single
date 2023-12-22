@@ -540,46 +540,7 @@ RectTransform:
   - {fileID: 9157124803812984050}
   - {fileID: 9157124804227748949}
   m_Father: {fileID: 5171707428877612782}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!1 &3022602931893517194
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 568363818138714896}
-  m_Layer: 5
-  m_Name: EquipmentWindowView
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!224 &568363818138714896
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3022602931893517194}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 9157124804885304818}
-  - {fileID: 9157124803654770616}
-  - {fileID: 9157124805105911226}
-  m_Father: {fileID: 9157124804666522673}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1451,7 +1412,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 9157124805140580426}
-  - {fileID: 9157124803445721042}
   - {fileID: 8532321232594633375}
   m_Father: {fileID: 9157124805208551002}
   m_RootOrder: 0
@@ -1537,6 +1497,45 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &9152824951593180888
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4650390356360194442}
+  m_Layer: 5
+  m_Name: GoldView
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &4650390356360194442
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9152824951593180888}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 9157124804198754624}
+  - {fileID: 9157124803911806435}
+  - {fileID: 9157124805098837288}
+  m_Father: {fileID: 9157124803445721042}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &9157124803436845407
 GameObject:
   m_ObjectHideFlags: 0
@@ -1628,7 +1627,7 @@ GameObject:
   - component: {fileID: 9157124803445721042}
   - component: {fileID: 133421715492594339}
   m_Layer: 5
-  m_Name: Gold
+  m_Name: GoldUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1646,15 +1645,13 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 9157124804198754624}
-  - {fileID: 9157124803911806435}
-  - {fileID: 9157124805098837288}
-  m_Father: {fileID: 5171707428877612782}
+  - {fileID: 4650390356360194442}
+  m_Father: {fileID: 9157124804284976208}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -950, y: 540}
+  m_AnchoredPosition: {x: -40, y: 50}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &133421715492594339
@@ -1796,7 +1793,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 9157124805208551000}
         m_TargetAssemblyTypeName: InventoryUI, Assembly-CSharp
-        m_MethodName: OnClick
+        m_MethodName: OnClickInventory
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2154,7 +2151,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7854933490599986455}
-  m_Father: {fileID: 568363818138714896}
+  m_Father: {fileID: 9157124804666522673}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -2244,9 +2241,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 9157124804666522678}
-        m_TargetAssemblyTypeName: EquipmentWindow, Assembly-CSharp
-        m_MethodName: UnEquip
+      - m_Target: {fileID: 9157124805208551000}
+        m_TargetAssemblyTypeName: InventoryUI, Assembly-CSharp
+        m_MethodName: OnClickEquipment
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2461,7 +2458,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 9157124805208551000}
         m_TargetAssemblyTypeName: InventoryUI, Assembly-CSharp
-        m_MethodName: OnClick
+        m_MethodName: OnClickInventory
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2890,7 +2887,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 9157124805208551000}
         m_TargetAssemblyTypeName: InventoryUI, Assembly-CSharp
-        m_MethodName: OnClick
+        m_MethodName: OnClickInventory
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3001,12 +2998,12 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9157124803911806434}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 9157124803445721042}
+  m_Father: {fileID: 4650390356360194442}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -3257,7 +3254,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 9157124805208551000}
         m_TargetAssemblyTypeName: InventoryUI, Assembly-CSharp
-        m_MethodName: OnClick
+        m_MethodName: OnClickInventory
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3297,7 +3294,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 9157124803445721042}
+  m_Father: {fileID: 4650390356360194442}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -3468,7 +3465,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 9157124805208551000}
         m_TargetAssemblyTypeName: InventoryUI, Assembly-CSharp
-        m_MethodName: OnClick
+        m_MethodName: OnClickInventory
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3510,10 +3507,11 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 9157124805208551002}
+  - {fileID: 9157124803445721042}
   - {fileID: 9157124804666522673}
-  - {fileID: 9157124804649363427}
-  - {fileID: 9157124804797169082}
   - {fileID: 9157124805325095003}
+  - {fileID: 9157124804797169082}
+  - {fileID: 9157124804649363427}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3708,7 +3706,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 9157124805208551000}
         m_TargetAssemblyTypeName: InventoryUI, Assembly-CSharp
-        m_MethodName: OnClick
+        m_MethodName: OnClickInventory
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4056,7 +4054,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 9157124805208551000}
         m_TargetAssemblyTypeName: InventoryUI, Assembly-CSharp
-        m_MethodName: OnClick
+        m_MethodName: OnClickInventory
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4191,7 +4189,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 9157124805208551000}
         m_TargetAssemblyTypeName: InventoryUI, Assembly-CSharp
-        m_MethodName: OnClick
+        m_MethodName: OnClickInventory
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4326,7 +4324,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 9157124805208551000}
         m_TargetAssemblyTypeName: InventoryUI, Assembly-CSharp
-        m_MethodName: OnClick
+        m_MethodName: OnClickInventory
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4359,14 +4357,14 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9157124804649363426}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4360458162203871957}
   m_Father: {fileID: 9157124804284976208}
-  m_RootOrder: 2
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -4382,14 +4380,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9157124804666522673}
-  - component: {fileID: 9157124804666522678}
   m_Layer: 5
   m_Name: EquipmentWindowUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &9157124804666522673
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4402,32 +4399,17 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 568363818138714896}
+  - {fileID: 9157124804885304818}
+  - {fileID: 9157124803654770616}
+  - {fileID: 9157124805105911226}
   m_Father: {fileID: 9157124804284976208}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 1, y: 1}
---- !u!114 &9157124804666522678
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9157124804666522672}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c3e5d296f85ea540844e3351f58f572, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Inventory: {fileID: 0}
-  NullImg: {fileID: 21300000, guid: 3be7bcf8624cc2048b187e4499092b34, type: 3}
-  equipmentImg:
-  - {fileID: 4307762574844306926}
-  - {fileID: 4563402551334545014}
 --- !u!1 &9157124804707226421
 GameObject:
   m_ObjectHideFlags: 0
@@ -4633,7 +4615,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 9157124805208551000}
         m_TargetAssemblyTypeName: InventoryUI, Assembly-CSharp
-        m_MethodName: OnClick
+        m_MethodName: OnClickInventory
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4754,7 +4736,7 @@ RectTransform:
   m_Children:
   - {fileID: 9157124804826056418}
   m_Father: {fileID: 9157124804284976208}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -4955,7 +4937,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 9157124805208551000}
         m_TargetAssemblyTypeName: InventoryUI, Assembly-CSharp
-        m_MethodName: OnClick
+        m_MethodName: OnClickInventory
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4995,7 +4977,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 568363818138714896}
+  m_Father: {fileID: 9157124804666522673}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -5242,7 +5224,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 9157124805208551000}
         m_TargetAssemblyTypeName: InventoryUI, Assembly-CSharp
-        m_MethodName: OnClick
+        m_MethodName: OnClickInventory
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5438,12 +5420,12 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9157124805098837291}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 9157124803445721042}
+  m_Father: {fileID: 4650390356360194442}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -5685,7 +5667,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4734120953135227902}
-  m_Father: {fileID: 568363818138714896}
+  m_Father: {fileID: 9157124804666522673}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -5775,9 +5757,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 9157124804666522678}
-        m_TargetAssemblyTypeName: EquipmentWindow, Assembly-CSharp
-        m_MethodName: UnEquip
+      - m_Target: {fileID: 9157124805208551000}
+        m_TargetAssemblyTypeName: InventoryUI, Assembly-CSharp
+        m_MethodName: OnClickEquipment
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5912,7 +5894,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 9157124805208551000}
         m_TargetAssemblyTypeName: InventoryUI, Assembly-CSharp
-        m_MethodName: OnClick
+        m_MethodName: OnClickInventory
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6129,7 +6111,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   InventoryView: {fileID: 8634091817965466982}
-  EquipmentView: {fileID: 3022602931893517194}
+  EquipmentView: {fileID: 9157124804666522672}
+  CoinView: {fileID: 9152824951593180888}
   Inventory: {fileID: 0}
   NullImg: {fileID: 21300000, guid: 3be7bcf8624cc2048b187e4499092b34, type: 3}
   InventoryImg:
@@ -6166,6 +6149,10 @@ MonoBehaviour:
   - {fileID: 9157124805267536158}
   - {fileID: 9157124803681843248}
   - {fileID: 9157124804050319908}
+  EquipmentImg:
+  - {fileID: 4307762574844306926}
+  - {fileID: 4563402551334545014}
+  EquipmentTxt: []
 --- !u!1 &9157124805267536152
 GameObject:
   m_ObjectHideFlags: 0
@@ -6371,7 +6358,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 9157124805208551000}
         m_TargetAssemblyTypeName: InventoryUI, Assembly-CSharp
-        m_MethodName: OnClick
+        m_MethodName: OnClickInventory
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6506,7 +6493,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 9157124805208551000}
         m_TargetAssemblyTypeName: InventoryUI, Assembly-CSharp
-        m_MethodName: OnClick
+        m_MethodName: OnClickInventory
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6547,7 +6534,7 @@ RectTransform:
   - {fileID: 9157124804895727744}
   - {fileID: 9157124804441429151}
   m_Father: {fileID: 9157124804284976208}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
@@ -6679,7 +6666,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 9157124805208551000}
         m_TargetAssemblyTypeName: InventoryUI, Assembly-CSharp
-        m_MethodName: OnClick
+        m_MethodName: OnClickInventory
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

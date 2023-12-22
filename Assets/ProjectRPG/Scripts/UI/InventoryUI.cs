@@ -8,32 +8,40 @@ public class InventoryUI : MonoBehaviour
 {
     public GameObject InventoryView;
     public GameObject EquipmentView;
+    public GameObject CoinView;
     public Inventory Inventory;
 
-    public Action<int> OnClickAction;
+    public Action<int> OnClickInventoryAction;
+    public Action<int> OnClickEquipmentAction;
 
     public Sprite NullImg;
+
     public Image[] InventoryImg;
     public Text[] InventoryTxt;
+
+    public Image[] EquipmentImg;
+    public Text[] EquipmentTxt;
 
     private void Awake()
     {
         ActorManager.Instance.OnRegistedPlayer += GetInventory;
-        ActorManager.Instance.OnRegistedPlayer += OpenInventory;
     }
 
     public void OpenInventory()
     {
         InventoryView.SetActive(true);
         EquipmentView.SetActive(true);
-        PlayerInputManager.Instance.MouseLock = false; 
-        OnClickAction = Inventory.Use;
+        CoinView.SetActive(true);
+        PlayerInputManager.Instance.MouseLock = false;
+        OnClickInventoryAction = Inventory.UseItem;
+        OnClickEquipmentAction = Inventory.UnEquipItem;
     }
 
     public void CloseInventory()
     {
         InventoryView.SetActive(false);
         EquipmentView.SetActive(false);
+        CoinView.SetActive(false);
         PlayerInputManager.Instance.MouseLock = true;
     }
 
@@ -41,15 +49,17 @@ public class InventoryUI : MonoBehaviour
     {
         Inventory = ActorManager.Instance.Player.GetComponent<Inventory>();
         SetInventory();
-        Inventory.OnAddItem += (_) =>
+        Inventory.OnAddItemAction += (_) =>
         {
             SetInventory();
         };
 
-        Inventory.OnReduceItem += (_) =>
+        Inventory.OnReduceItemAction += (_) =>
         {
             SetInventory();
         };
+        Inventory.OnEquipItemAction += SetEquipment;
+        Inventory.UnEquipItemAction += SetEquipment;
     }
 
     private void SetInventory()
@@ -69,8 +79,24 @@ public class InventoryUI : MonoBehaviour
         }
     }
 
-    public void OnClick(int index)
+    private void SetEquipment()
     {
-        OnClickAction?.Invoke(index);
+        for (int i = 0; i < Inventory.EquipmentList.Count; i++)
+        {
+            if (Inventory.EquipmentList[i] is not null)
+                EquipmentImg[i].sprite = Inventory.EquipmentList[i].ItemImg;
+            else
+                EquipmentImg[i].sprite = NullImg;
+        }
+    }
+
+    public void OnClickInventory(int index)
+    {
+        OnClickInventoryAction?.Invoke(index);
+    }
+
+    public void OnClickEquipment(int index)
+    {
+        OnClickEquipmentAction?.Invoke(index);
     }
 }

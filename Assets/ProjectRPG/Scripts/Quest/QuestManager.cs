@@ -56,8 +56,8 @@ public class QuestManager : MonoBehaviour
             _onCheckItemQuest?.Invoke();
         };
 
-        ActorManager.Instance.Player.GetComponent<Inventory>().OnAddItem += _onItemChange;
-        ActorManager.Instance.Player.GetComponent<Inventory>().OnReduceItem += _onItemChange;
+        ActorManager.Instance.Player.GetComponent<Inventory>().OnAddItemAction += _onItemChange;
+        ActorManager.Instance.Player.GetComponent<Inventory>().OnReduceItemAction += _onItemChange;
 
         _onRegist += (quest) =>
         {
@@ -126,7 +126,7 @@ public class Quest
         ActorManager.Instance.Player.GetComponent<PlayerStatSystem>().AddExp(QuestData.RewardExp);
         if (QuestData.RewardItem != null)
         {
-            ActorManager.Instance.Player.GetComponent<Inventory>().AddItemData(new Item(QuestData.RewardItem, QuestData.RewardItemCount));
+            ActorManager.Instance.Player.GetComponent<Inventory>().AddItem(new Item(QuestData.RewardItem, QuestData.RewardItemCount));
         }
         CurrentTargetCount = 0;
         QuestManager.Instance.RemoveQuest(this);

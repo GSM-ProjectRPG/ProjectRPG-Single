@@ -26,7 +26,7 @@ public class Shop : MonoBehaviour
         ShopUI.SetActive(true);
         InventoryUI.gameObject.SetActive(true);
         PlayerInputManager.Instance.MouseLock = false;
-        InventoryUI.OnClickAction = Sell;
+        InventoryUI.OnClickInventoryAction = Sell;
     }
 
     public void CloseShop()
@@ -42,7 +42,7 @@ public class Shop : MonoBehaviour
         if (ShopList[index].price <= _coinSystem.Coin)
         {
             _coinSystem.Coin -= ShopList[index].price;
-            Inventory.AddItemData(new Item(ShopList[index], 1));
+            Inventory.AddItem(new Item(ShopList[index], 1));
         }
     }
 
@@ -50,6 +50,6 @@ public class Shop : MonoBehaviour
     {
         if (Inventory.ItemList.Count <= index) return;
         _coinSystem.Coin += Inventory.ItemList[index].Price;
-        Inventory.ReduceItemData(new Item(Inventory.ItemList[index].GetItemData(),1));
+        Inventory.ReduceItem(new Item(Inventory.ItemList[index].GetItemData(),1));
     }
 }

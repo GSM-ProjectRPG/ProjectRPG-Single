@@ -36,7 +36,6 @@ public class InventoryUI : MonoBehaviour
         CoinView.SetActive(true);
         PlayerInputManager.Instance.MouseLock = false;
         OnClickInventoryAction = Inventory.UseItem;
-        OnClickEquipmentAction = Inventory.UnEquipItem;
         isOpenInventory = true;
     }
 
@@ -64,6 +63,7 @@ public class InventoryUI : MonoBehaviour
         };
         Inventory.OnEquipItemAction += SetEquipment;
         Inventory.UnEquipItemAction += SetEquipment;
+        OnClickEquipmentAction = Inventory.UnEquipItem;
     }
 
     private void SetInventory()

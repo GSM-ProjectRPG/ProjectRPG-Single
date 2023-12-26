@@ -22,6 +22,8 @@ public class InventoryUI : MonoBehaviour
     public Image[] EquipmentImg;
     public Text[] EquipmentTxt;
 
+    public bool isOpenInventory;
+
     private void Awake()
     {
         ActorManager.Instance.OnRegistedPlayer += GetInventory;
@@ -35,6 +37,7 @@ public class InventoryUI : MonoBehaviour
         PlayerInputManager.Instance.MouseLock = false;
         OnClickInventoryAction = Inventory.UseItem;
         OnClickEquipmentAction = Inventory.UnEquipItem;
+        isOpenInventory = true;
     }
 
     public void CloseInventory()
@@ -43,6 +46,7 @@ public class InventoryUI : MonoBehaviour
         EquipmentView.SetActive(false);
         CoinView.SetActive(false);
         PlayerInputManager.Instance.MouseLock = true;
+        isOpenInventory = false;
     }
 
     private void GetInventory()

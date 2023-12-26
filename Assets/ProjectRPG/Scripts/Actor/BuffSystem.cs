@@ -54,7 +54,7 @@ public class BuffSystem : MonoBehaviour
         {
             _buffs.Add(addedBuff.GetType(), addedBuff);
             addedBuff.OnAdded(this);
-            OnAddedBuff?.Invoke(addedBuff);
+            OnAddBuff?.Invoke(addedBuff);
         }
         addedBuff.OnAdded(this);
         OnAddBuff?.Invoke(addedBuff);

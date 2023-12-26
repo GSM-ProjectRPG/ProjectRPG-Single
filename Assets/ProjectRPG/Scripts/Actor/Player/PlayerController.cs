@@ -10,6 +10,8 @@ public class PlayerController : MonoBehaviour
     public float RunSpeed => MoveSpeed * 1.5f;
     public float AttackStat => 0;
 
+    public InventoryUI InventoryUI { private get; set; } = null;
+
     private Rigidbody _rigid;
     private PlayerInputManager _input;
     private Health _health;
@@ -103,7 +105,21 @@ public class PlayerController : MonoBehaviour
         {
             _interactionHandler?.Invoke();
         }
+        if (_input.GetInventory() && InventoryUI != null)
+        {
+            if (_isOpeningInventory)
+            {
+                InventoryUI.CloseInventory();
+            }
+            else
+            {
+                InventoryUI.OpenInventory();
+            }
+            _isOpeningInventory = !_isOpeningInventory;
+        }
     }
+
+    private bool _isOpeningInventory;
 
     private void Punch()
     {

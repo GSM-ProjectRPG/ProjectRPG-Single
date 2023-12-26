@@ -4,15 +4,13 @@ using UnityEngine;
 
 public class GamePlayUI : SceneUI
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public InventoryUI InventoryUI;
 
-    // Update is called once per frame
-    void Update()
+    private void Awake()
     {
-        
+        ActorManager.Instance.OnRegistedPlayer += () =>
+        {
+            ActorManager.Instance.Player.GetComponent<PlayerController>().InventoryUI = InventoryUI;
+        };
     }
 }

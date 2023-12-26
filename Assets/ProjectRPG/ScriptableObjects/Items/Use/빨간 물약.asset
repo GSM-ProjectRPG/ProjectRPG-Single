@@ -17,7 +17,7 @@ MonoBehaviour:
   itemName: "\uBE68\uAC04 \uBB3C\uC57D"
   itemDescription: "\uCCB4\uB825\uC744 \uD68C\uBCF5\uC2DC\uCF1C\uC8FC\uB294 \uBE68\uAC04
     \uBB3C\uC57D."
-  itemID: 10
+  itemID: 9
   price: 10
   effectType: 0
   effectValue: 50

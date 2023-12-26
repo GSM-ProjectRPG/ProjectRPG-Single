@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 116b4ccb59515fa4790c0f28baa2ce67, type: 3}
+  m_Name: SpiderHunt
+  m_EditorClassIdentifier: 
+  QuestId: 11
+  QuestContents: "\uC77C\uBC18\uAC70\uBBF8 20\uB9C8\uB9AC\uB97C \uC0AC\uB0E5\uD558\uC790!"
+  QuestType: 0
+  TargetObject: {fileID: 7846145718084144197, guid: ba67092f66039c54e9dd95557782c01f,
+    type: 3}
+  ItemData: {fileID: 0}
+  TargetCount: 20
+  RewardCoin: 200
+  RewardExp: 100
+  RewardItem: {fileID: 0}
+  RewardItemCount: 0

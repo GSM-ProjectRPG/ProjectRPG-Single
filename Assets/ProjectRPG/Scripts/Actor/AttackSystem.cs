@@ -18,12 +18,12 @@ public class AttackSystem : MonoBehaviour
     /// <summary>
     /// GameObject : 공격을 맞은오브젝트, float : 가해진 최종 데미지
     /// </summary>
-    public Action<GameObject, float> OnAttackHitted;
-    public Action<GameObject> OnKill;
+    public event Action<GameObject, float> OnAttackHitted = (victim,damage)=> {  };
+    public event Action<GameObject, float> OnSendedDamage;
+    public event Action<GameObject> OnKill;
 
     private StatSystem _statSystem;
     private ActSystem _actSystem;
-
 
     private void Awake()
     {
@@ -51,21 +51,8 @@ public class AttackSystem : MonoBehaviour
         {
             attack.SetAttacker(this, _statSystem);
             attack.OnHitted += OnAttackHitted;
-            attack.OnHitted += (victim, damage) =>
-            {
-                Health health = victim.GetComponent<Health>();
-                if (health != null)
-                {
-                    if (health.OnDead == null)
-                    {
-                        health.OnDead = OnKill;
-                    }
-                    else if (!health.OnDead.GetInvocationList().Contains(OnKill))
-                    {
-                        health.OnDead += OnKill;
-                    }
-                }
-            };
+            attack.OnSendedDamage += OnSendedDamage;
+            attack.OnKill += OnKill;
         }
         #region 경고 메시지 출력
 #if UNITY_EDITOR
@@ -92,5 +79,17 @@ public class AttackSystem : MonoBehaviour
         #endregion
 
         return instance;
+    }
+
+    /// <summary>
+    /// 데미지 부여 함수입니다. OnHitted 이벤트를 작동시킵니다.
+    /// </summary>
+    public void SendDamage(DamageReciever damageReciever, float damage)
+    {
+        Action<float, GameObject> action = (damageResult, _) => { OnAttackHitted?.Invoke(damageReciever.gameObject, damageResult); };
+
+        damageReciever.OnTakeDamage += action;
+        damageReciever.TakeDamage(damage, gameObject);
+        damageReciever.OnTakeDamage -= action;
     }
 }

@@ -12,6 +12,8 @@ public abstract class Attack : MonoBehaviour
     /// GameObject : 맞은오브젝트, float : 준 데미지
     /// </summary>
     public Action<GameObject, float> OnHitted;
+    public Action<GameObject, float> OnSendedDamage;
+    public Action<GameObject> OnKill;
 
     protected AttackSystem attacker;
     protected StatSystem attackerStatSystem;
@@ -28,17 +30,34 @@ public abstract class Attack : MonoBehaviour
     /// <summary>
     /// 자식 클래스에서 호출할 데미지 부여 함수입니다. OnHitted 이벤트를 작동시킵니다.
     /// </summary>
-    protected void SendDamage(DamageReciever damageReciever, float damage)
+    public void SendDamage(DamageReciever damageReciever, float damage)
     {
-        Action<float, GameObject> action = (damageResult, _) => { OnHitted?.Invoke(damageReciever.gameObject, damageResult); };
+        Health health = damageReciever.GetComponent<Health>();
 
-        damageReciever.OnTakeDamage += action;
+        Action<float, GameObject> onHitted = (damageResult, _) => { OnHitted?.Invoke(damageReciever.gameObject, damageResult); };
+        Action<float,GameObject> onSendedDamage = (damageResult, _) => { OnSendedDamage?.Invoke(health.gameObject, damageResult); };
+        Action<GameObject> onKill = (_) => { OnKill?.Invoke(health.gameObject); };
+
+        damageReciever.OnTakeDamage += onHitted;
+        if (health != null)
+        {
+            health.OnDamaged += onSendedDamage;
+            health.OnDead += onKill;
+        }
+
         GameObject attackerObject = null;
         if (attacker != null)
         {
             attackerObject = attacker.gameObject;
         }
+
         damageReciever.TakeDamage(damage, attackerObject);
-        damageReciever.OnTakeDamage -= action;
+
+        if (health != null)
+        {
+            health.OnDead -= onKill;
+            health.OnDamaged -= onSendedDamage;
+        }
+        damageReciever.OnTakeDamage -= onHitted;
     }
 }

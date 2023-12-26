@@ -44,7 +44,7 @@ public class PlayerController : MonoBehaviour
     private Action _jumpHandler;
     private Action _moveHandler;
 
-    private void Start()
+    private void Awake()
     {
         _rigid = GetComponent<Rigidbody>();
         _health = GetComponent<Health>();
@@ -56,7 +56,10 @@ public class PlayerController : MonoBehaviour
         _skillSystem = GetComponent<SkillSystem>();
         _input = PlayerInputManager.Instance;
         //animator = GetComponent<Animator>();
+    }
 
+    private void Start()
+    {
         ActorManager.Instance.RegistPlayer(gameObject);
         _damageReciever.OnTakeDamage += (damage, attacker) => _health.TakeDamage(damage, attacker);
         _health.OnDead += (_) => { _animator.SetTrigger("Die"); _isDead = true; ActorManager.Instance.DeleteActor(gameObject); };
@@ -67,15 +70,13 @@ public class PlayerController : MonoBehaviour
             _health.SetHealth(maxHealth, gameObject);
         };
 
-        Skill punchSkill = new Skill(_punchSkillData, _attackSystem.Attack(Punch));
+        Skill punchSkill = new CoolTimeSkill(_punchSkillData, _attackSystem.Attack(Punch), 2);
         _skillSystem.RegistSkill(punchSkill);
         _skillSystem.SelectSkill(punchSkill);
         _interactionHandler = _actSystem.Act(() => _interactor.TryInteract());
         _jumpHandler = _actSystem.Act(Jump);
         _moveHandler = _actSystem.Act(() => Move(_input.GetMoveVector()));
 
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
         _cameraDistance = _cameraMaxDistance;
     }
 

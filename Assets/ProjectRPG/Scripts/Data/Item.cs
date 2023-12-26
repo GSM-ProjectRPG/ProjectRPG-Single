@@ -3,11 +3,10 @@ using System;
 
 public enum ItemType
 {
-    Default,
+    Etc,
     Weapon,
     Accessory,
-    Use,
-    Etc
+    Use
 }
 
 public class Item

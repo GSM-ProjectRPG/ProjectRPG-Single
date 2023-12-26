@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class InventoryUI : MonoBehaviour
 {
+    public GameObject InventoryView;
+    public GameObject EquipmentView;
     public Inventory Inventory;
 
     public Action<int> OnClickAction;
@@ -15,10 +17,32 @@ public class InventoryUI : MonoBehaviour
 
     private void Awake()
     {
+        ActorManager.Instance.OnRegistedPlayer += GetInventory;
+        ActorManager.Instance.OnRegistedPlayer += OpenInventory;
+    }
+
+    public void OpenInventory()
+    {
+        InventoryView.SetActive(true);
+        EquipmentView.SetActive(true);
+        PlayerInputManager.Instance.MouseLock = false;
+        OnClickAction = Inventory.Use;
+    }
+
+    public void CloseInventory()
+    {
+        InventoryView.SetActive(false);
+        EquipmentView.SetActive(false);
+        PlayerInputManager.Instance.MouseLock = true;
+    }
+
+    private void GetInventory()
+    {
+        Inventory = ActorManager.Instance.Player.GetComponent<Inventory>();
         Inventory.OnAddItem += (_) =>
-         {
-             SetInventory();
-         };
+        {
+            SetInventory();
+        };
 
         Inventory.OnReduceItem += (_) =>
         {

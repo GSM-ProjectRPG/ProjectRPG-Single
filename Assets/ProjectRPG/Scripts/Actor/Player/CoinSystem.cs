@@ -8,13 +8,13 @@ public class CoinSystem : MonoBehaviour
 {
     public Action<int> SetCoinAction;
 
-    public int currentCoin;
+    private int currentCoin;
     public int Coin { 
         get
         {
             return currentCoin;
         }
-        protected set
+        set
         {
             int origin = currentCoin;
             currentCoin = value;

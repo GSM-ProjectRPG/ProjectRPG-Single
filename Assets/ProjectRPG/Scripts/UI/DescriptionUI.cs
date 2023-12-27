@@ -23,7 +23,7 @@ public class DescriptionUI : MonoBehaviour
     {
         point = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
         DescriptionView.transform.position = new Vector2(point.x, point.y + 100);
-        IsView();
+        CheckShowingView();
         
     }
 
@@ -32,7 +32,7 @@ public class DescriptionUI : MonoBehaviour
         Inventory = ActorManager.Instance.Player.GetComponent<Inventory>();
     }
 
-    private void IsView()
+    private void CheckShowingView()
     {
         bool isView = false;
         point = new Vector3(Input.mousePosition.x, Input.mousePosition.y, -Camera.main.transform.position.z);

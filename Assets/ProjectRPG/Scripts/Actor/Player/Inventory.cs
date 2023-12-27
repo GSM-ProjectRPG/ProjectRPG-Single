@@ -20,7 +20,7 @@ public class Inventory : MonoBehaviour
 
     private void Awake()
     {
-        OnEquipAction += OnSwitchItem;
+        OnEquipAction += SwitchItem;
     }
 
     public void AddItem(Item compareItem)
@@ -67,7 +67,7 @@ public class Inventory : MonoBehaviour
         OnReduceItemAction?.Invoke(compareItem);
     }
 
-    public void OnSwitchItem(int itemIndex)
+    public void SwitchItem(int itemIndex)
     {
         int index = 0;
 
@@ -79,7 +79,7 @@ public class Inventory : MonoBehaviour
         OnEquipItem(index,itemIndex);
     }
 
-    public void OnEquipItem(int equipmentItemindex, int inventoryItemIndex)
+    protected void OnEquipItem(int equipmentItemindex, int inventoryItemIndex)
     {
         EquipmentList[equipmentItemindex] = new Item(ItemList[inventoryItemIndex].GetItemData(), 1);
         ReduceItem(new Item(ItemList[inventoryItemIndex].GetItemData(), 1));

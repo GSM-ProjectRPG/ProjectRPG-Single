@@ -18,6 +18,8 @@ public class ShopUI : MonoBehaviour
 
     public Action<int> OnClickShopAction;
 
+    public bool isOpenShop;
+
     private void Awake()
     {
         Shop = FindObjectOfType<Shop>();
@@ -34,6 +36,7 @@ public class ShopUI : MonoBehaviour
         SetShop();
         PlayerInputManager.Instance.MouseLock = false;
         InventoryUI.OnClickInventoryAction = Shop.Sell;
+        isOpenShop = true;
     }
 
     public void CloseShop()
@@ -42,6 +45,7 @@ public class ShopUI : MonoBehaviour
         ShopView.SetActive(false);
         InventoryUI.CloseInventory();
         PlayerInputManager.Instance.MouseLock = true;
+        isOpenShop = false;
     }
     
     public void SetShop()
@@ -49,7 +53,7 @@ public class ShopUI : MonoBehaviour
         for (int i = 0; i < Shop.ShopList.Count; i++)
         {
             ShopImg[i].sprite = Shop.ShopList[i].itemImg;
-            ShopTxt[i].text = Shop.ShopList[i].itemName;
+            ShopTxt[i].text = Shop.ShopList[i].itemName + "\n" + Shop.ShopList[i].price + "골드";
         }
     }
 

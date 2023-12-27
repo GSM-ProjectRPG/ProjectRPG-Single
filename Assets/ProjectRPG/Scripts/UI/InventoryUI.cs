@@ -9,6 +9,8 @@ public class InventoryUI : MonoBehaviour
     public GameObject InventoryView;
     public GameObject EquipmentView;
     public GameObject CoinView;
+
+    public ShopUI ShopUI;
     public Inventory Inventory;
 
     public Action<int> OnClickInventoryAction;
@@ -31,6 +33,7 @@ public class InventoryUI : MonoBehaviour
 
     public void OpenInventory()
     {
+        if (ShopUI.isOpenShop) return;
         InventoryView.SetActive(true);
         EquipmentView.SetActive(true);
         CoinView.SetActive(true);
@@ -41,6 +44,7 @@ public class InventoryUI : MonoBehaviour
 
     public void CloseInventory()
     {
+        if (ShopUI.isOpenShop) return;
         InventoryView.SetActive(false);
         EquipmentView.SetActive(false);
         CoinView.SetActive(false);

@@ -15,7 +15,7 @@ public class StoryProcessor : MonoBehaviour
         foreach (var content in story)
         {
             GetComponentInChildren<Text>().text = content;
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(2);
         }
         gameObject.SetActive(false);
     }

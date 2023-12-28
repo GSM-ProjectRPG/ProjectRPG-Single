@@ -13,6 +13,10 @@ MonoBehaviour:
   m_Name: GinsengQueenHunt
   m_EditorClassIdentifier: 
   QuestId: 7
+  Story:
+  - "\uC778\uC0BC\uC5EC\uC655"
+  - "\uD0DC\uD604\uC774\uB791"
+  - "\uACB0\uD63C\uD574"
   QuestContents: "\uC778\uC0BC \uC5EC\uC655 15\uB9C8\uB9AC\uB97C \uC0AC\uB0E5\uD558\uC790!"
   QuestType: 0
   TargetObject: {fileID: 7012213117130684073, guid: 27af108f823dc1e49aa2d33f238fcd8a,

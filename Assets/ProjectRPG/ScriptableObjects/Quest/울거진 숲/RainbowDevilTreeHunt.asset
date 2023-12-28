@@ -13,6 +13,10 @@ MonoBehaviour:
   m_Name: RainbowDevilTreeHunt
   m_EditorClassIdentifier: 
   QuestId: 4
+  Story:
+  - "\uB808\uC778\uBCF4\uC6B0 \uB370\uBE4C\uD2B8\uB9AC"
+  - "\uC8FD\uC5EC\uC918"
+  - "\uC528\uBC1C"
   QuestContents: "\uB808\uC778\uBCF4\uC6B0 \uB370\uBE4C\uD2B8\uB9AC 13\uB9C8\uB9AC\uB97C
     \uC0AC\uB0E5\uD558\uC790!"
   QuestType: 0

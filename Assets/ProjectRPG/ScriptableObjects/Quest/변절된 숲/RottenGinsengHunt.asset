@@ -13,6 +13,10 @@ MonoBehaviour:
   m_Name: RottenGinsengHunt
   m_EditorClassIdentifier: 
   QuestId: 10
+  Story:
+  - "\uC369\uC740 \uC778\uC0BC"
+  - "\uC8FD\uC5EC\uC918"
+  - "\uC528\uBC1C"
   QuestContents: "\uC369\uC740 \uC778\uC0BC 18\uB9C8\uB9AC\uB97C \uC0AC\uB0E5\uD558\uC790!"
   QuestType: 0
   TargetObject: {fileID: 7515585048428922601, guid: 4d005575fa0a49246808c48decd736ce,

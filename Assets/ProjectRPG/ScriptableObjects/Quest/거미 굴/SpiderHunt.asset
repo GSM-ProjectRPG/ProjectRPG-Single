@@ -13,6 +13,10 @@ MonoBehaviour:
   m_Name: SpiderHunt
   m_EditorClassIdentifier: 
   QuestId: 11
+  Story:
+  - "\uC77C\uBC18\uAC70\uBBF8"
+  - "\uC8FD\uC5EC\uC918"
+  - "\uC528"
   QuestContents: "\uC77C\uBC18\uAC70\uBBF8 20\uB9C8\uB9AC\uB97C \uC0AC\uB0E5\uD558\uC790!"
   QuestType: 0
   TargetObject: {fileID: 7846145718084144197, guid: ba67092f66039c54e9dd95557782c01f,

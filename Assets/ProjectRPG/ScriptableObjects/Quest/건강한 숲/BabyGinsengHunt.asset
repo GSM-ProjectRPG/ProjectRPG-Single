@@ -13,6 +13,10 @@ MonoBehaviour:
   m_Name: BabyGinsengHunt
   m_EditorClassIdentifier: 
   QuestId: 5
+  Story:
+  - "\uC544\uAE30\uC778\uC0BC"
+  - "\uC8FD\uC5EC\uC918"
+  - "\uC528\uBC1C"
   QuestContents: "\uC544\uAE30 \uC778\uC0BC 15\uB9C8\uB9AC\uB97C \uC0AC\uB0E5\uD558\uC790!"
   QuestType: 0
   TargetObject: {fileID: 6658419891780647803, guid: 2bb526525ba39614c950a1b1a0398efb,

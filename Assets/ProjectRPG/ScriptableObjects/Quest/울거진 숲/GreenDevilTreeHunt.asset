@@ -13,6 +13,10 @@ MonoBehaviour:
   m_Name: GreenDevilTreeHunt
   m_EditorClassIdentifier: 
   QuestId: 2
+  Story:
+  - "\uADF8\uB9B0 \uB370\uBE4C\uD2B8\uB9AC"
+  - "\uC8FD\uC5EC\uC918"
+  - "\uC528\uBC1C"
   QuestContents: "\uADF8\uB9B0 \uB370\uBE4C\uD2B8\uB9AC 13\uB9C8\uB9AC\uB97C \uC0AC\uB0E5\uD558\uC790!"
   QuestType: 0
   TargetObject: {fileID: 1721950047534289444, guid: 2fd3f0b0aa1154d46adbe8517615f9e0,

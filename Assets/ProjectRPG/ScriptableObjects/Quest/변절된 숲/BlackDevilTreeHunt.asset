@@ -13,6 +13,10 @@ MonoBehaviour:
   m_Name: BlackDevilTreeHunt
   m_EditorClassIdentifier: 
   QuestId: 9
+  Story:
+  - "\uBE14\uB799\uB370\uBE4C\uD2B8\uB9AC"
+  - "\uC8FD\uC5EC\uC918"
+  - "\uC528\uBC1C"
   QuestContents: "\uBE14\uB799 \uB370\uBE4C\uD2B8\uB9AC 18\uB9C8\uB9AC\uB97C \uC0AC\uB0E5\uD558\uC790!"
   QuestType: 0
   TargetObject: {fileID: 6172055811301816109, guid: fcbbef6927a270b4aa620caec027cbd6,

@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
+  m_Script: {fileID: 11500000, guid: 3907588d383b2724d824f7928368c246, type: 3}
   m_Name: "\uC2DC\uC791\uC758 \uC232\uC758 \uC815\uC218"
-  m_EditorClassIdentifier: Assembly-CSharp::ItemData
+  m_EditorClassIdentifier: 
   itemType: 0
   itemImg: {fileID: 21300000, guid: beb4181ef568e0f4fa18f06a2b4210d2, type: 3}
   itemName: "\uC2DC\uC791\uC758 \uC232\uC758 \uC815\uC218"

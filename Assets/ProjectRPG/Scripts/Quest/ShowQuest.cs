@@ -32,6 +32,6 @@ public class ShowQuest : MonoBehaviour
     public void RemoveQuest(int idx)
     {
         if (idx == -1) return;
-        Destroy(Parent.GetChild(idx).gameObject);
+        StartCoroutine(Parent.GetChild(idx).gameObject.GetComponentInChildren<QuestClearEffect>().OnClear());
     }
 }

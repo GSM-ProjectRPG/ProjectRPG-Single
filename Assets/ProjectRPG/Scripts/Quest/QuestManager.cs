@@ -121,7 +121,7 @@ public class Quest
 
     public IEnumerator OnQuestClear()
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0.5f);
         ActorManager.Instance.Player.GetComponent<CoinSystem>().Coin += QuestData.RewardCoin;
         ActorManager.Instance.Player.GetComponent<PlayerStatSystem>().AddExp(QuestData.RewardExp);
         if (QuestData.RewardItem != null)

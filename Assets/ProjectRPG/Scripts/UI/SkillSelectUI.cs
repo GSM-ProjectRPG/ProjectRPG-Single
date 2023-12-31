@@ -9,6 +9,7 @@ public class SkillSelectUI : MonoBehaviour
     [SerializeField] private GameObject _globalSkillTabButton;
     [SerializeField] private GameObject _meleeSkillTabButton;
     [SerializeField] private GameObject _rangeSkillTabButton;
+    [SerializeField] private Button _UICloseButton;
 
     [SerializeField] private GameObject skillSelectUILayer;
     [SerializeField] private RectTransform _content;
@@ -40,10 +41,10 @@ public class SkillSelectUI : MonoBehaviour
         skillTabImage[0] = _globalSkillTabButton.GetComponent<Image>();
         skillTabImage[1] = _meleeSkillTabButton.GetComponent<Image>();
         skillTabImage[2] = _rangeSkillTabButton.GetComponent<Image>();
-        skillTabImage[0].GetComponent<Button>().onClick.AddListener(new UnityEngine.Events.UnityAction(() => ChangeTab(SkillWeaponType.Global)));
-        skillTabImage[1].GetComponent<Button>().onClick.AddListener(new UnityEngine.Events.UnityAction(() => ChangeTab(SkillWeaponType.Melee)));
-        skillTabImage[2].GetComponent<Button>().onClick.AddListener(new UnityEngine.Events.UnityAction(() => ChangeTab(SkillWeaponType.Range)));
-
+        skillTabImage[0].GetComponent<Button>().onClick.AddListener(() => ChangeTab(SkillWeaponType.Global));
+        skillTabImage[1].GetComponent<Button>().onClick.AddListener(() => ChangeTab(SkillWeaponType.Melee));
+        skillTabImage[2].GetComponent<Button>().onClick.AddListener(() => ChangeTab(SkillWeaponType.Range));
+        _UICloseButton.onClick.AddListener(() => { HideSkillMenu(); });
 
         _skillMenuBackGround.color = skillTabImage[0].color;
     }

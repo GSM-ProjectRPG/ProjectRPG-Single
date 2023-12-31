@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class SkillSelectUI : MonoBehaviour
 {
-    public bool IsOpeningUI => skillSelectUILayer.activeSelf;
+    public bool IsOpeningUI => _skillSelectUILayer.activeSelf;
 
     [Header("스킬메뉴 전환 버튼")]
     [SerializeField] private GameObject _globalSkillTabButton;
@@ -13,12 +13,12 @@ public class SkillSelectUI : MonoBehaviour
     [SerializeField] private GameObject _rangeSkillTabButton;
     [SerializeField] private Button _UICloseButton;
 
-    [SerializeField] private GameObject skillSelectUILayer;
+    [SerializeField] private GameObject _skillSelectUILayer;
     [SerializeField] private RectTransform _content;
     [SerializeField] private Image _skillMenuBackGround;
     [SerializeField] private GameObject _skillInfoPrefab;
 
-    private Image[] skillTabImage;
+    private Image[] _skillTabImage;
     private SkillSystem _skillSystem;
     private SkillWeaponType _curruntSkillTabType;
 
@@ -37,36 +37,36 @@ public class SkillSelectUI : MonoBehaviour
     }
 
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        skillTabImage = new Image[3];
-        skillTabImage[0] = _globalSkillTabButton.GetComponent<Image>();
-        skillTabImage[1] = _meleeSkillTabButton.GetComponent<Image>();
-        skillTabImage[2] = _rangeSkillTabButton.GetComponent<Image>();
-        skillTabImage[0].GetComponent<Button>().onClick.AddListener(() => ChangeTab(SkillWeaponType.Global));
-        skillTabImage[1].GetComponent<Button>().onClick.AddListener(() => ChangeTab(SkillWeaponType.Melee));
-        skillTabImage[2].GetComponent<Button>().onClick.AddListener(() => ChangeTab(SkillWeaponType.Range));
+        _skillTabImage = new Image[3];
+        _skillTabImage[0] = _globalSkillTabButton.GetComponent<Image>();
+        _skillTabImage[1] = _meleeSkillTabButton.GetComponent<Image>();
+        _skillTabImage[2] = _rangeSkillTabButton.GetComponent<Image>();
+        _skillTabImage[0].GetComponent<Button>().onClick.AddListener(() => ChangeTab(SkillWeaponType.Global));
+        _skillTabImage[1].GetComponent<Button>().onClick.AddListener(() => ChangeTab(SkillWeaponType.Melee));
+        _skillTabImage[2].GetComponent<Button>().onClick.AddListener(() => ChangeTab(SkillWeaponType.Range));
         _UICloseButton.onClick.AddListener(() => { HideSkillMenu(); });
 
-        _skillMenuBackGround.color = skillTabImage[0].color;
+        _skillMenuBackGround.color = _skillTabImage[0].color;
     }
 
     public void ShowSkillMenu()
     {
-        skillSelectUILayer.SetActive(true);
+        _skillSelectUILayer.SetActive(true);
         RefreshSkillInfo();
     }
 
     public void HideSkillMenu()
     {
-        skillSelectUILayer.SetActive(false);
+        _skillSelectUILayer.SetActive(false);
     }
 
     public void ChangeTab(SkillWeaponType tabType)
     {
         Debug.Log(tabType);
         _curruntSkillTabType = tabType;
-        _skillMenuBackGround.color = skillTabImage[(int)tabType].color;
+        _skillMenuBackGround.color = _skillTabImage[(int)tabType].color;
         RefreshSkillInfo();
     }
 

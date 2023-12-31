@@ -24,7 +24,12 @@ public class SkillSelectUI : MonoBehaviour
         ActorManager.Instance.OnRegistedPlayer += () =>
         {
             _skillSystem = ActorManager.Instance.Player.GetComponent<SkillSystem>();
-            _skillSystem.OnRegistedSkill += (registedSkill) => InstantiateSkillInfo(registedSkill);
+            _skillSystem.OnRegistedSkill += (registedSkill) => {
+                if (registedSkill.SkillData.SkillWeaponType == _curruntSkillTabType)
+                {
+                    InstantiateSkillInfo(registedSkill);
+                }
+            };
         };
     }
 

@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class SkillSelectUI : MonoBehaviour
 {
+    public bool IsOpeningUI => skillSelectUILayer.activeSelf;
+
     [Header("스킬메뉴 전환 버튼")]
     [SerializeField] private GameObject _globalSkillTabButton;
     [SerializeField] private GameObject _meleeSkillTabButton;

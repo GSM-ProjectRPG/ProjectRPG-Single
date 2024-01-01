@@ -96,6 +96,7 @@ MonoBehaviour:
   _cameraHeight: 1
   _cameraInclination: 0.5
   _cameraLookHegit: 1
+  _healSkillData: {fileID: 11400000, guid: c15375dc2ce25064d813e1001e741369, type: 2}
 --- !u!114 &6799289787203058826
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -198,7 +199,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7aa77741313c8394c82d4022f0c8384a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  basicSkillData: {fileID: 11400000, guid: 2a64c5d19087f3a46b885e151cfa7503, type: 2}
+  _basicSkillData: {fileID: 0}
 --- !u!114 &5499073839841361830
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -223,8 +224,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1af143f3a931cc4aaae68d90a75c43d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InventoryUI: {fileID: 0}
-  EquipmentWindowUI: {fileID: 0}
 --- !u!1001 &6799289787372926813
 PrefabInstance:
   m_ObjectHideFlags: 0

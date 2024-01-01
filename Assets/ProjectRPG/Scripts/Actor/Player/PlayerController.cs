@@ -32,6 +32,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float _cameraHeight = 1f;
     [SerializeField] private float _cameraInclination = 0.5f;
     [SerializeField] private float _cameraLookHegit = 1f;
+    [Header("스킬 설정")]
+    [SerializeField] private SkillData _healSkillData;
 
     private float _cameraDistance;
     private float _cameraRotation = 0;
@@ -197,6 +199,11 @@ public class PlayerController : MonoBehaviour
     {
         _animator.SetTrigger("Attack");
         StartCoroutine(SetMotionStun());
+    }
+
+    public void HealSkill()
+    {
+        _health.TakeHeal(_health.MaxHealth * 0.3f, gameObject);
     }
     #endregion
 }

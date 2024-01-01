@@ -19,6 +19,7 @@ public class PlayerController : MonoBehaviour
     private AttackSystem _attackSystem;
     private ActSystem _actSystem;
     private SkillSystem _skillSystem;
+    private BuffSystem _buffSystem;
 
     [SerializeField] private Animator _animator;
 
@@ -34,6 +35,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float _cameraLookHegit = 1f;
     [Header("스킬 설정")]
     [SerializeField] private SkillData _healSkillData;
+    [SerializeField] private SkillData _playerATKBuffSkillData;
 
     private float _cameraDistance;
     private float _cameraRotation = 0;
@@ -56,6 +58,7 @@ public class PlayerController : MonoBehaviour
         _attackSystem = GetComponent<AttackSystem>();
         _actSystem = GetComponent<ActSystem>();
         _skillSystem = GetComponent<SkillSystem>();
+        _buffSystem = GetComponent<BuffSystem>();
         _input = PlayerInputManager.Instance;
         //animator = GetComponent<Animator>();
     }
@@ -204,6 +207,11 @@ public class PlayerController : MonoBehaviour
     public void HealSkill()
     {
         _health.TakeHeal(_health.MaxHealth * 0.3f, gameObject);
+    }
+
+    public void ATKBuffSkill()
+    {
+        _buffSystem.AddBuff(new ATKBuff(5));
     }
     #endregion
 }

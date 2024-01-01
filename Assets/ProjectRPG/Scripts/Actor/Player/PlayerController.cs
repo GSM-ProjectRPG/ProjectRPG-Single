@@ -105,12 +105,6 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void Punch()
-    {
-        _animator.SetTrigger("Attack");
-        StartCoroutine(SetMotionStun());
-    }
-
     private void SetCameraPos()
     {
         Vector3 rayDirection = Quaternion.Euler(0, _cameraRotation + 180, 0) * new Vector3(0, _cameraInclination, 1);
@@ -131,13 +125,6 @@ public class PlayerController : MonoBehaviour
     {
         _cameraDistance = _cameraMaxDistance;
         SetCameraPos();
-    }
-
-    private IEnumerator SetMotionStun()
-    {
-        _motionStopTime = Time.time + 1;
-        yield return null;
-        _motionStopTime = Time.time + _animator.GetNextAnimatorClipInfo(0).Length;
     }
 
     private void FixedUpdate()
@@ -197,4 +184,19 @@ public class PlayerController : MonoBehaviour
 
         _rigid.velocity = new Vector3(moveVelocity.x, _rigid.velocity.y, moveVelocity.z);
     }
+
+    #region 스킬 로직 구현
+    private IEnumerator SetMotionStun()
+    {
+        _motionStopTime = Time.time + 1;
+        yield return null;
+        _motionStopTime = Time.time + _animator.GetNextAnimatorClipInfo(0).Length;
+    }
+
+    private void Punch()
+    {
+        _animator.SetTrigger("Attack");
+        StartCoroutine(SetMotionStun());
+    }
+    #endregion
 }

@@ -47,10 +47,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float _cameraInclination = 0.5f;
     [SerializeField] private float _cameraLookHegit = 1f;
     [Header("스킬 설정")]
-    [SerializeField] private SkillData _healSkillData;
-    [SerializeField] private SkillData _playerATKBuffSkillData;
-    [SerializeField] private SkillData _moveSpeedBuffSkillData;
-    [SerializeField] private SkillData _fearSkillData;
     [SerializeField] private float _fearRange;
 
     private float _cameraDistance;

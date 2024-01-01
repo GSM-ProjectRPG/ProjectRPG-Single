@@ -14,10 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   QuestId: 11
   Story:
-  - "\uC77C\uBC18\uAC70\uBBF8"
-  - "\uC8FD\uC5EC\uC918"
-  - "\uC528"
-  QuestContents: "\uC77C\uBC18\uAC70\uBBF8 20\uB9C8\uB9AC\uB97C \uC0AC\uB0E5\uD558\uC790!"
+  - "\uAC70\uBBF8\uB4E4\uC5D0 \uC758\uD55C \uD53C\uD574\uAC00 \uC810\uC810 \uB298\uC5B4\uB098\uACE0
+    \uC788\uC5B4"
+  - "\uD53C\uD574\uB97C \uC904\uC774\uAE30 \uC704\uD574\uC11C\uB77C\uB3C4 \uAC70\uBBF8\uB97C
+    \uCD5C\uB300\uD55C \uCC98\uB9AC\uD574\uC57C \uD574"
+  - "\uC77C\uBC18 \uAC70\uBBF8 20\uB9C8\uB9AC\uB97C \uCC98\uB9AC\uD574\uC918"
+  QuestContents: "\uC77C\uBC18 \uAC70\uBBF8 20\uB9C8\uB9AC\uB97C \uC0AC\uB0E5\uD558\uC790!"
   QuestType: 0
   TargetObject: {fileID: 7846145718084144197, guid: ba67092f66039c54e9dd95557782c01f,
     type: 3}
@@ -25,5 +27,5 @@ MonoBehaviour:
   TargetCount: 20
   RewardCoin: 200
   RewardExp: 100
-  RewardItem: {fileID: 0}
-  RewardItemCount: 0
+  RewardItem: {fileID: 11400000, guid: 93dcfa7435d246b44940cd6cd07e6f16, type: 2}
+  RewardItemCount: 10

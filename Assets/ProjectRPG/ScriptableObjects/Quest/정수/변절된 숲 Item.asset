@@ -14,9 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   QuestId: 16
   Story:
-  - "\uBCC0\uC808 \uC815\uC218"
-  - "30\uAC1C"
-  - "\uC5BB\uC5B4"
+  - "\uBCC0\uC808\uB41C \uC232\uC758 \uC815\uC218\uAC00 \uD544\uC694\uD574"
+  - "\uBCC0\uC808\uB41C \uC232\uC758 \uC815\uC218 30\uAC1C\uB97C \uC5BB\uC5B4\uC918"
   QuestContents: "\uBCC0\uC808\uB41C \uC232\uC758 \uC815\uC218\uB97C 30\uAC1C \uC5BB\uC790!"
   QuestType: 1
   TargetObject: {fileID: 0}

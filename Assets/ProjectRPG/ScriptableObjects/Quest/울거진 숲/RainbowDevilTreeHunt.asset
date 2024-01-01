@@ -14,9 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   QuestId: 4
   Story:
-  - "\uB808\uC778\uBCF4\uC6B0 \uB370\uBE4C\uD2B8\uB9AC"
-  - "\uC8FD\uC5EC\uC918"
-  - "\uC528\uBC1C"
+  - "\uBB34\uC9C0\uAC1C\uBE5B \uBB3C\uC744 \uB9CC\uB4E4\uACE0 \uC2F6\uC740\uB370"
+  - "\uC774 \uBB3C\uC744 \uB9CC\uB4E4\uAE30 \uC704\uD574\uC11C\uB294 \uB808\uC778\uBCF4\uC6B0
+    \uB370\uBE4C\uD2B8\uB9AC\uAC00 \uD544\uC694\uD574"
+  - "\uB808\uC778\uBCF4\uC6B0 \uB370\uBE4C\uD2B8\uB9AC 13\uB9C8\uB9AC\uB97C \uC7A1\uC544\uC918"
   QuestContents: "\uB808\uC778\uBCF4\uC6B0 \uB370\uBE4C\uD2B8\uB9AC 13\uB9C8\uB9AC\uB97C
     \uC0AC\uB0E5\uD558\uC790!"
   QuestType: 0
@@ -26,5 +27,5 @@ MonoBehaviour:
   TargetCount: 13
   RewardCoin: 70
   RewardExp: 35
-  RewardItem: {fileID: 0}
-  RewardItemCount: 0
+  RewardItem: {fileID: 11400000, guid: 9de5ea4550c8e524fac571f064f8bc47, type: 2}
+  RewardItemCount: 1

@@ -14,9 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   QuestId: 3
   Story:
-  - "\uB808\uB4DC \uB370\uBE4C\uD2B8\uB9AC"
-  - "\uC8FD\uC5EC\uC918"
-  - "\uC528\uBC1C"
+  - "\uADF8\uAC70 \uC54C\uC544?"
+  - "\uB808\uB4DC \uB370\uBE4C\uD2B8\uB9AC\uC5D0 \uBD88\uC744 \uBD99\uC774\uBA74"
+  - "\uB2E4\uB978 \uB098\uBB34\uBCF4\uB2E4 \uC624\uB7AC\uB3D9\uC548 \uBD88\uC5D0
+    \uD0C4\uB300"
+  - "\uC7A5\uC791\uC774 \uD544\uC694\uD588\uB294\uB370 \uB9C8\uCE68 \uC798 \uB410\uB2E4"
+  - "\uB808\uB4DC \uB370\uBE4C\uD2B8\uB9AC 13\uB9C8\uB9AC\uB97C \uC7A1\uC544\uC918"
   QuestContents: "\uB808\uB4DC \uB370\uBE4C\uD2B8\uB9AC 13\uB9C8\uB9AC\uB97C \uC0AC\uB0E5\uD558\uC790!"
   QuestType: 0
   TargetObject: {fileID: 6559497344300583378, guid: b663816419c139a4aa5f6fcd3b204607,
@@ -25,5 +28,5 @@ MonoBehaviour:
   TargetCount: 13
   RewardCoin: 60
   RewardExp: 30
-  RewardItem: {fileID: 0}
-  RewardItemCount: 0
+  RewardItem: {fileID: 11400000, guid: 93dcfa7435d246b44940cd6cd07e6f16, type: 2}
+  RewardItemCount: 3

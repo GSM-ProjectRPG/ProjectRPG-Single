@@ -206,6 +206,11 @@ public class PlayerController : MonoBehaviour
     }
 
     #region 스킬 로직 구현
+    public Action HearSkillHandler => _actSystem.Act(HealSkillLogic);
+    public Action ATKBuffSkillHandler => _actSystem.Act(ATKBuffSkillLogic);
+    public Action MoveSpeedBuffSkillHandler => _actSystem.Act(MoveSpeedBuffSkillLogic);
+    public Action FearSkillHandler => _attackSystem.Attack(FearSkillLogic);
+
     private IEnumerator SetMotionStun()
     {
         _motionStopTime = Time.time + 1;
@@ -219,22 +224,22 @@ public class PlayerController : MonoBehaviour
         StartCoroutine(SetMotionStun());
     }
 
-    public void HealSkill()
+    private void HealSkillLogic()
     {
         _health.TakeHeal(_health.MaxHealth * 0.3f, gameObject);
     }
 
-    public void ATKBuffSkill()
+    private void ATKBuffSkillLogic()
     {
         _buffSystem.AddBuff(new ATKBuff(5));
     }
 
-    public void MoveSpeedBuffSkill()
+    private void MoveSpeedBuffSkillLogic()
     {
         _buffSystem.AddBuff(new MoveSpeedBuff(5));
     }
 
-    public void FearSkill()
+    private void FearSkillLogic()
     {
         Collider[] cols = Physics.OverlapSphere(transform.position, _fearRange, LayerMask.NameToLayer("Monster"));
         for(int i=0;i<cols.Length; i++)

@@ -23,7 +23,7 @@ public class StatSystem : MonoBehaviour
         stat.Attack = Attack;
         stat.MoveSpeed = MoveSpeed;
 
-        if (_buffSystem.ContainsBuff<ATKBuff>())
+        if (_buffSystem != null && _buffSystem.ContainsBuff<ATKBuff>())
         {
             stat.Attack *= 1.2f;
         }

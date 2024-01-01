@@ -39,7 +39,6 @@ public class PlayerController : MonoBehaviour
     [Header("캐릭터 설정")]
     [SerializeField] private float _moveSpeed = 3f;
     [SerializeField] private float _jumpPower = 3f;
-    [SerializeField] private SkillData _punchSkillData;
     [Header("카메라 설정")]
     [SerializeField] private Camera _camera;
     [SerializeField] private float _cameraMaxDistance = 3f;
@@ -59,6 +58,7 @@ public class PlayerController : MonoBehaviour
     private bool _isActing => _motionStopTime >= Time.time;
     private bool _canAct => !_isActing && !_isDead;
 
+    private Action _attackHandler;
     private Action _interactionHandler;
     private Action _jumpHandler;
     private Action _moveHandler;
@@ -90,9 +90,7 @@ public class PlayerController : MonoBehaviour
             _health.SetHealth(maxHealth, gameObject);
         };
 
-        Skill punchSkill = new CoolTimeSkill(_punchSkillData, _attackSystem.Attack(Punch), 2);
-        _skillSystem.RegistSkill(punchSkill);
-        _skillSystem.SelectSkill(punchSkill);
+        _attackHandler = _attackSystem.Attack(Punch);
         _interactionHandler = _actSystem.Act(() => _interactor.TryInteract());
         _jumpHandler = _actSystem.Act(Jump);
         _moveHandler = _actSystem.Act(() => Move(_input.GetMoveVector()));
@@ -113,7 +111,7 @@ public class PlayerController : MonoBehaviour
 
         if (_input.GetAttack() && _canAct)
         {
-            _skillSystem.UseSkill();
+            _attackHandler?.Invoke();
         }
         if (_input.GetJump() && _canAct)
         {

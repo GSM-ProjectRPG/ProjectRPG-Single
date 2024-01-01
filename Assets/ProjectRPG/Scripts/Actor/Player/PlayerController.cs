@@ -80,6 +80,7 @@ public class PlayerController : MonoBehaviour
         _moveHandler = _actSystem.Act(() => Move(_input.GetMoveVector()));
 
         _cameraDistance = _cameraMaxDistance;
+        _input.MouseLock = true;
     }
 
     // Update is called once per frame

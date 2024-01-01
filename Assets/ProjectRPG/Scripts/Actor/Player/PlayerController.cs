@@ -50,6 +50,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private SkillData _healSkillData;
     [SerializeField] private SkillData _playerATKBuffSkillData;
     [SerializeField] private SkillData _moveSpeedBuffSkillData;
+    [SerializeField] private SkillData _fearSkillData;
+    [SerializeField] private float _fearRange;
 
     private float _cameraDistance;
     private float _cameraRotation = 0;
@@ -230,6 +232,15 @@ public class PlayerController : MonoBehaviour
     public void MoveSpeedBuffSkill()
     {
         _buffSystem.AddBuff(new MoveSpeedBuff(5));
+    }
+
+    public void FearSkill()
+    {
+        Collider[] cols = Physics.OverlapSphere(transform.position, _fearRange, LayerMask.NameToLayer("Monster"));
+        for(int i=0;i<cols.Length; i++)
+        {
+            cols[i].GetComponent<BuffSystem>().AddBuff(new Stun(3));
+        }
     }
     #endregion
 }

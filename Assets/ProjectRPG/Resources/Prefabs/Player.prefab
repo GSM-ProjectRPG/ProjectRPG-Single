@@ -90,7 +90,6 @@ MonoBehaviour:
   _animator: {fileID: 0}
   _moveSpeed: 3
   _jumpPower: 3
-  _punchSkillData: {fileID: 11400000, guid: 2a64c5d19087f3a46b885e151cfa7503, type: 2}
   _camera: {fileID: 0}
   _cameraMaxDistance: 3
   _cameraMinDistance: 2
@@ -102,6 +101,8 @@ MonoBehaviour:
     type: 2}
   _moveSpeedBuffSkillData: {fileID: 11400000, guid: 1e6eadd405c5c8d40a14cae0934c0cea,
     type: 2}
+  _fearSkillData: {fileID: 11400000, guid: 4b924ab85d1831c40bcf4f5a15a40a35, type: 2}
+  _fearRange: 0
 --- !u!114 &6799289787203058826
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -6,7 +6,20 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public float MoveSpeed => 3;
+    public float MoveSpeed
+    {
+        get
+        {
+            if (_buffSystem.ContainsBuff<MoveSpeedBuff>())
+            {
+                return _moveSpeed * 1.3f;
+            }
+            else
+            {
+                return _moveSpeed;
+            }
+        }
+    }
     public float RunSpeed => MoveSpeed * 1.5f;
     public float AttackStat => 0;
 
@@ -24,6 +37,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Animator _animator;
 
     [Header("캐릭터 설정")]
+    [SerializeField] private float _moveSpeed = 3f;
     [SerializeField] private float _jumpPower = 3f;
     [SerializeField] private SkillData _punchSkillData;
     [Header("카메라 설정")]
@@ -36,6 +50,7 @@ public class PlayerController : MonoBehaviour
     [Header("스킬 설정")]
     [SerializeField] private SkillData _healSkillData;
     [SerializeField] private SkillData _playerATKBuffSkillData;
+    [SerializeField] private SkillData _moveSpeedBuffSkillData;
 
     private float _cameraDistance;
     private float _cameraRotation = 0;
@@ -212,6 +227,11 @@ public class PlayerController : MonoBehaviour
     public void ATKBuffSkill()
     {
         _buffSystem.AddBuff(new ATKBuff(5));
+    }
+
+    public void MoveSpeedBuffSkill()
+    {
+        _buffSystem.AddBuff(new MoveSpeedBuff(5));
     }
     #endregion
 }

@@ -88,6 +88,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _animator: {fileID: 0}
+  _moveSpeed: 3
   _jumpPower: 3
   _punchSkillData: {fileID: 11400000, guid: 2a64c5d19087f3a46b885e151cfa7503, type: 2}
   _camera: {fileID: 0}
@@ -97,6 +98,10 @@ MonoBehaviour:
   _cameraInclination: 0.5
   _cameraLookHegit: 1
   _healSkillData: {fileID: 11400000, guid: c15375dc2ce25064d813e1001e741369, type: 2}
+  _playerATKBuffSkillData: {fileID: 11400000, guid: bfe347cf2b235b447a6da7c9b3a10b38,
+    type: 2}
+  _moveSpeedBuffSkillData: {fileID: 11400000, guid: 1e6eadd405c5c8d40a14cae0934c0cea,
+    type: 2}
 --- !u!114 &6799289787203058826
 MonoBehaviour:
   m_ObjectHideFlags: 0

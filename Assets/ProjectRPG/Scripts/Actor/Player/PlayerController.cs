@@ -61,7 +61,7 @@ public class PlayerController : MonoBehaviour
     }
 
     private void Start()
-    {
+    {InventoryUI=FindObjectOfType<InventoryUI>();
         ActorManager.Instance.RegistPlayer(gameObject);
         _damageReciever.OnTakeDamage += (damage, attacker) => _health.TakeDamage(damage, attacker);
         _health.OnDead += (_) => { _animator.SetTrigger("Die"); _isDead = true; ActorManager.Instance.DeleteActor(gameObject); };
@@ -107,7 +107,7 @@ public class PlayerController : MonoBehaviour
         }
         if (_input.GetInventory() && InventoryUI != null)
         {
-            if (_isOpeningInventory)
+            if (InventoryUI.isOpenInventory)
             {
                 InventoryUI.CloseInventory();
             }
@@ -115,11 +115,8 @@ public class PlayerController : MonoBehaviour
             {
                 InventoryUI.OpenInventory();
             }
-            _isOpeningInventory = !_isOpeningInventory;
         }
     }
-
-    private bool _isOpeningInventory;
 
     private void Punch()
     {

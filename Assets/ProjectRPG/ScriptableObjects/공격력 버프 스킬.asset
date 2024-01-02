@@ -16,3 +16,4 @@ MonoBehaviour:
   Description: "5\uCD08\uAC04 \uACF5\uACA9\uB825\uC774 20% \uC99D\uAC00\uD569\uB2C8\uB2E4."
   Sprite: {fileID: 21300000, guid: 466f07d608e814c4f8dbce5adddc34c3, type: 3}
   CoolTime: 8
+  SkillWeaponType: 1

@@ -15,7 +15,7 @@ MonoBehaviour:
   Name: Spider King
   Attack: 700
   Health: 10000
-  MoveSpeed: 0.7
+  MoveSpeed: 2.1
   AttackSpeed: 1
   AttackRange: 2
   ChaseRange: 5

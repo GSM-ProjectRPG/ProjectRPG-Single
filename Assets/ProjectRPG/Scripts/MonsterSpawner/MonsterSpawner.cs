@@ -87,7 +87,7 @@ public class MonsterSpawner : MonoBehaviour
         Vector2 addedPos = new Vector2(Mathf.Cos(degree * Mathf.Deg2Rad), Mathf.Sin(degree * Mathf.Deg2Rad)) * distance;
         Vector2 centorPos = new(transform.position.x, transform.position.z);
         Vector3 pos = new Vector3(centorPos.x + addedPos.x,
-            terrain.SampleHeight(transform.position + new Vector3(addedPos.x, 0, addedPos.y)),
+            terrain.SampleHeight(transform.position + new Vector3(addedPos.x, 0, addedPos.y)) + terrain.transform.position.y,
             centorPos.y + addedPos.y);
         return pos;
     }

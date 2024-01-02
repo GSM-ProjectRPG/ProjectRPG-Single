@@ -15,7 +15,7 @@ MonoBehaviour:
   Name: Red Devil Tree
   Attack: 30
   Health: 300
-  MoveSpeed: 0.4
+  MoveSpeed: 1.2
   AttackSpeed: 2
   AttackRange: 2
   ChaseRange: 5

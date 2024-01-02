@@ -322,7 +322,7 @@ GameObject:
   - component: {fileID: 6172055811301816112}
   - component: {fileID: 6172055811301816111}
   - component: {fileID: 6172055811301816110}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Black Devil Tree
   m_TagString: Untagged
   m_Icon: {fileID: 0}

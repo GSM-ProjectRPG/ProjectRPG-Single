@@ -55,6 +55,11 @@ public class Health : MonoBehaviour
             MaxHealth = _statManager.GetCurruntStat().Health;
         }
         CurruntHealth = MaxHealth;
+
+        if(gameObject.layer == LayerMask.NameToLayer("Monster"))
+        {
+            gameObject.AddComponent<ActorInfoSummoner>();
+        }
     }
 
     public void TakeDamage(float damage, GameObject attacker)

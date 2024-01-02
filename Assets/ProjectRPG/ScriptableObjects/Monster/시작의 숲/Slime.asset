@@ -15,7 +15,7 @@ MonoBehaviour:
   Name: Slime
   Attack: 5
   Health: 60
-  MoveSpeed: 0.6
+  MoveSpeed: 1.8
   AttackSpeed: 1
   AttackRange: 2
   ChaseRange: 5

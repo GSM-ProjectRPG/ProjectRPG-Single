@@ -15,7 +15,7 @@ MonoBehaviour:
   Name: Spider
   Attack: 500
   Health: 5000
-  MoveSpeed: 0.8
+  MoveSpeed: 2.4
   AttackSpeed: 0.5
   AttackRange: 2
   ChaseRange: 5

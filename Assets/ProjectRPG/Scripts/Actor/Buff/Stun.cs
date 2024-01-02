@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Stun : TimerBuff<Stun>
 {
-    protected override BuffData _buffData => ResourceManager.ResourceBindingData.FearData;
+    protected override BuffData _buffData => ResourceManager.ResourceBindingData.StunData;
 
     private Animator animator;
 

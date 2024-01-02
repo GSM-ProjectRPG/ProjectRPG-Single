@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MoveSpeedBuffData: {fileID: 11400000, guid: 298221b395ae1fc4e80419839dbb5fd0, type: 2}
   DamageBuffData: {fileID: 11400000, guid: 363d437589cbf25409f6e21ce113e047, type: 2}
-  FearData: {fileID: 11400000, guid: 4c4bf85fb7154b046b1acf446f1972e1, type: 2}
+  StunData: {fileID: 11400000, guid: 4c4bf85fb7154b046b1acf446f1972e1, type: 2}

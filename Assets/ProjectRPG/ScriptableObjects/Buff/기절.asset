@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 43753263ee770f8478f257336e111181, type: 3}
-  m_Name: "\uACF5\uD3EC"
+  m_Name: "\uAE30\uC808"
   m_EditorClassIdentifier: 
-  BuffName: "\uACF5\uD3EC"
+  BuffName: "\uAE30\uC808"
   BuffDescription: "\uC9C0\uC18D\uC2DC\uAC04\uB3D9\uC548 \uD589\uB3D9\uC774 \uBD88\uAC00\uB2A5\uD569\uB2C8\uB2E4."
-  BuffImage: {fileID: 21300000, guid: aa31b636f2462ec46af633be48291015, type: 3}
+  BuffImage: {fileID: 21300000, guid: fcb2cd3d5861bb743b5f28ed97eac14b, type: 3}

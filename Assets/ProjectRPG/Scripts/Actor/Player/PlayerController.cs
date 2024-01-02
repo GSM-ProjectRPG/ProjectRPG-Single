@@ -10,6 +10,8 @@ public class PlayerController : MonoBehaviour
     public float RunSpeed => MoveSpeed * 1.5f;
     public float AttackStat => 0;
 
+    public InventoryUI InventoryUI { private get; set; } = null;
+
     private Rigidbody _rigid;
     private PlayerInputManager _input;
     private Health _health;
@@ -59,7 +61,7 @@ public class PlayerController : MonoBehaviour
     }
 
     private void Start()
-    {
+    {InventoryUI=FindObjectOfType<InventoryUI>();
         ActorManager.Instance.RegistPlayer(gameObject);
         _damageReciever.OnTakeDamage += (damage, attacker) => _health.TakeDamage(damage, attacker);
         _health.OnDead += (_) => { _animator.SetTrigger("Die"); _isDead = true; ActorManager.Instance.DeleteActor(gameObject); };
@@ -78,6 +80,7 @@ public class PlayerController : MonoBehaviour
         _moveHandler = _actSystem.Act(() => Move(_input.GetMoveVector()));
 
         _cameraDistance = _cameraMaxDistance;
+        _input.MouseLock = true;
     }
 
     // Update is called once per frame
@@ -102,6 +105,17 @@ public class PlayerController : MonoBehaviour
         if (_input.GetInteraction())
         {
             _interactionHandler?.Invoke();
+        }
+        if (_input.GetInventory() && InventoryUI != null)
+        {
+            if (InventoryUI.isOpenInventory)
+            {
+                InventoryUI.CloseInventory();
+            }
+            else
+            {
+                InventoryUI.OpenInventory();
+            }
         }
     }
 

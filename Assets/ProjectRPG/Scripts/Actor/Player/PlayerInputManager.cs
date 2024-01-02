@@ -109,4 +109,10 @@ public class PlayerInputManager : MonoBehaviour
         if (!InputEnable) return false;
         return Input.GetKeyDown(KeyCode.F);
     }
+
+    public bool GetInventory()
+    {
+        if (!InputEnable) return false;
+        return Input.GetKeyDown(KeyCode.I);
+    }
 }

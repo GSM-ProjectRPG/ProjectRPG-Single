@@ -36,6 +36,7 @@ public class PlayerController : MonoBehaviour
     private ActSystem _actSystem;
     private SkillSystem _skillSystem;
     private BuffSystem _buffSystem;
+    private Camera _camera => Camera.main;
 
     [SerializeField] private Animator _animator;
 
@@ -43,7 +44,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float _moveSpeed = 3f;
     [SerializeField] private float _jumpPower = 3f;
     [Header("카메라 설정")]
-    [SerializeField] private Camera _camera;
     [SerializeField] private float _cameraMaxDistance = 3f;
     [SerializeField] private float _cameraMinDistance = 2f;
     [SerializeField] private float _cameraHeight = 1f;
@@ -118,7 +118,7 @@ public class PlayerController : MonoBehaviour
         {
             PunchHandler?.Invoke();
         }
-        if(_input.GetSkill() && _canAct)
+        if (_input.GetSkill() && _canAct)
         {
             SkillSystem.Instance.UseSkill();
         }

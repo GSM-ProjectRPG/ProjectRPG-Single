@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class StatSystem : MonoBehaviour
 {
-    public string Name;
-    public float Attack;
-    public float Health;
-    public float MoveSpeed;
+    public string Name { get; set; }
+    public float Attack { get; set; }
+    public float Health { get; set; }
+    public float MoveSpeed { get; set; }
 
     private BuffSystem _buffSystem;
 

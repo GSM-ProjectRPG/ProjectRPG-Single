@@ -250,10 +250,11 @@ public class PlayerController : MonoBehaviour
     {
         _animator.SetTrigger("Attack");
         StartCoroutine(SetMotionStun());
-        Collider[] cols = Physics.OverlapSphere(transform.position + transform.rotation * Vector3.forward, 1, LayerMask.NameToLayer("Monster"));
+        Collider[] cols = Physics.OverlapSphere(transform.position + transform.forward + Vector3.up * 0.5f, 1, 1 << LayerMask.NameToLayer("Monster"));
         float damage = _statManager.GetCurruntStat().Attack;
         for (int i = 0; i < cols.Length; i++)
         {
+            Debug.Log(cols[i].gameObject.name);
             if (cols[i].gameObject.layer != gameObject.layer)
             {
                 _attackSystem.SendDamage(cols[i].GetComponent<DamageReciever>(), damage);
@@ -278,7 +279,7 @@ public class PlayerController : MonoBehaviour
 
     private void FearSkillLogic()
     {
-        Collider[] cols = Physics.OverlapSphere(transform.position, _fearRange, LayerMask.NameToLayer("Monster"));
+        Collider[] cols = Physics.OverlapSphere(transform.position, _fearRange, 1 << LayerMask.NameToLayer("Monster"));
         for (int i = 0; i < cols.Length; i++)
         {
             cols[i].GetComponent<BuffSystem>().AddBuff(new Stun(3));
@@ -290,7 +291,7 @@ public class PlayerController : MonoBehaviour
 
     private void FireBallLogic()
     {
-        List<Collider> cols = Physics.OverlapSphere(transform.position, _fireBallRange, LayerMask.NameToLayer("Monster")).ToList();
+        List<Collider> cols = Physics.OverlapSphere(transform.position, _fireBallRange, 1 << LayerMask.NameToLayer("Monster")).ToList();
         cols.Sort((a, b) => { return (int)Mathf.Sign(Vector3.Distance(transform.position, a.transform.position) - Vector3.Distance(transform.position, b.transform.position)); });
 
         DamageReciever target = null;

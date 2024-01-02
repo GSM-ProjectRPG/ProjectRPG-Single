@@ -15,7 +15,7 @@ MonoBehaviour:
   Name: Black Devil Tree
   Attack: 250
   Health: 3000
-  MoveSpeed: 0.3
+  MoveSpeed: 0.9
   AttackSpeed: 0.5
   AttackRange: 2
   ChaseRange: 5

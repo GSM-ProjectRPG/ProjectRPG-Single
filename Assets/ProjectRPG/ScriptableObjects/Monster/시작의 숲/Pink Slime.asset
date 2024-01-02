@@ -15,7 +15,7 @@ MonoBehaviour:
   Name: Pink Slime
   Attack: 20
   Health: 200
-  MoveSpeed: 0.5
+  MoveSpeed: 1.5
   AttackSpeed: 2
   AttackRange: 2
   ChaseRange: 5

@@ -106,6 +106,7 @@ public class PlayerController : MonoBehaviour
         {
             _interactionHandler?.Invoke();
         }
+
         if (_input.GetInventory() && InventoryUI != null)
         {
             if (InventoryUI.isOpenInventory)
@@ -115,6 +116,13 @@ public class PlayerController : MonoBehaviour
             else
             {
                 InventoryUI.OpenInventory();
+            }
+        }
+        else
+        {
+            if(_input.GetMouseMove() == _input.MouseLock)
+            {
+                _input.MouseLock = !_input.GetMouseMove();
             }
         }
     }

@@ -115,4 +115,10 @@ public class PlayerInputManager : MonoBehaviour
         if (!InputEnable) return false;
         return Input.GetKeyDown(KeyCode.I);
     }
+
+    public bool GetMouseMove()
+    {
+        if (!InputEnable) return false;
+        return Input.GetKey(KeyCode.LeftAlt);
+    }
 }

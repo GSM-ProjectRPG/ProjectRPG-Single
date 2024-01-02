@@ -13,6 +13,11 @@ MonoBehaviour:
   m_Name: OldGinsengHunt
   m_EditorClassIdentifier: 
   QuestId: 6
+  Story:
+  - "\uC694\uC998 \uAC74\uAC15\uC774 \uC880 \uB098\uBE60\uC9C4 \uAC83 \uAC19\uC544"
+  - "\uB299\uC740 \uC778\uC0BC\uC744 \uB2EC\uC5EC\uBA71\uC73C\uBA74 \uC880 \uAD1C\uCC2E\uC544
+    \uC9C8 \uAC83 \uAC19\uC740\uB370"
+  - "\uB299\uC740 \uC778\uC0BC 15\uB9C8\uB9AC\uB97C \uC7A1\uC544\uC918"
   QuestContents: "\uB299\uC740 \uC778\uC0BC 15\uB9C8\uB9AC\uB97C \uC0AC\uB0E5\uD558\uC790!"
   QuestType: 0
   TargetObject: {fileID: 7509034288452827870, guid: cf3d63cad4ce65644bfe256f59c682ee,
@@ -21,5 +26,5 @@ MonoBehaviour:
   TargetCount: 15
   RewardCoin: 110
   RewardExp: 55
-  RewardItem: {fileID: 0}
-  RewardItemCount: 0
+  RewardItem: {fileID: 11400000, guid: 93dcfa7435d246b44940cd6cd07e6f16, type: 2}
+  RewardItemCount: 4

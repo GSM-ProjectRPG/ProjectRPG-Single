@@ -30,7 +30,7 @@ public class QuestManager : MonoBehaviour
                     _onCheckHuntQuest += () =>
                     {
                         quest.CurrentTargetCount++;
-                        ShowQuestProgress.Instance.UpdateQuest(CurrentQuests.IndexOf(quest));
+                        ShowQuest.Instance.UpdateQuest(CurrentQuests.IndexOf(quest));
                         if (quest.QuestClearCheck()) StartCoroutine(quest.OnQuestClear());
                     };
                 }
@@ -48,7 +48,7 @@ public class QuestManager : MonoBehaviour
                     _onCheckItemQuest += () =>
                     {
                         quest.CurrentTargetCount = item.count;
-                        ShowQuestProgress.Instance.UpdateQuest(CurrentQuests.IndexOf(quest));
+                        ShowQuest.Instance.UpdateQuest(CurrentQuests.IndexOf(quest));
                         if (quest.QuestClearCheck()) StartCoroutine(quest.OnQuestClear());
                     };
                 }
@@ -56,8 +56,8 @@ public class QuestManager : MonoBehaviour
             _onCheckItemQuest?.Invoke();
         };
 
-        ActorManager.Instance.Player.GetComponent<Inventory>().OnAddItem += _onItemChange;
-        ActorManager.Instance.Player.GetComponent<Inventory>().OnReduceItem += _onItemChange;
+        ActorManager.Instance.Player.GetComponent<Inventory>().OnAddItemAction += _onItemChange;
+        ActorManager.Instance.Player.GetComponent<Inventory>().OnReduceItemAction += _onItemChange;
 
         _onRegist += (quest) =>
         {
@@ -68,7 +68,7 @@ public class QuestManager : MonoBehaviour
                     if (item.ItemID == quest.QuestData.ItemData.itemID)
                     {
                         quest.CurrentTargetCount = item.count;
-                        ShowQuestProgress.Instance.UpdateQuest(CurrentQuests.IndexOf(quest));
+                        ShowQuest.Instance.UpdateQuest(CurrentQuests.IndexOf(quest));
                         if (quest.QuestClearCheck()) StartCoroutine(quest.OnQuestClear());
                     }
                 }
@@ -84,7 +84,7 @@ public class QuestManager : MonoBehaviour
             if (quest.QuestData.QuestId == data.QuestData.QuestId) return;
         }
         CurrentQuests.Add(data);
-        ShowQuestProgress.Instance.AddQuest(CurrentQuests.Count - 1);
+        ShowQuest.Instance.AddQuest(CurrentQuests.Count - 1);
         _onRegist?.Invoke(data);
     }
 
@@ -95,7 +95,7 @@ public class QuestManager : MonoBehaviour
         {
             if (quest.QuestData.QuestId == data.QuestData.QuestId)
             {
-                ShowQuestProgress.Instance.RemoveQuest(CurrentQuests.IndexOf(data));
+                ShowQuest.Instance.RemoveQuest(CurrentQuests.IndexOf(data));
                 CurrentQuests.Remove(data);
                 return;
             }
@@ -121,12 +121,12 @@ public class Quest
 
     public IEnumerator OnQuestClear()
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0.5f);
         ActorManager.Instance.Player.GetComponent<CoinSystem>().Coin += QuestData.RewardCoin;
         ActorManager.Instance.Player.GetComponent<PlayerStatSystem>().AddExp(QuestData.RewardExp);
         if (QuestData.RewardItem != null)
         {
-            ActorManager.Instance.Player.GetComponent<Inventory>().AddItemData(new Item(QuestData.RewardItem, QuestData.RewardItemCount));
+            ActorManager.Instance.Player.GetComponent<Inventory>().AddItem(new Item(QuestData.RewardItem, QuestData.RewardItemCount));
         }
         CurrentTargetCount = 0;
         QuestManager.Instance.RemoveQuest(this);

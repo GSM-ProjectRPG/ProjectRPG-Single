@@ -2,15 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ATKBuff : Buff
+public class ATKBuff : TimerBuff<ATKBuff>
 {
-    public override string Name => "날카로운 칼날";
-    public override string Description => "공격력이 20% 증가합니다.";
-    public override Sprite Sprite => null;
-
     private float _endTime;
 
-    public ATKBuff(float time)
+    public ATKBuff(BuffData buffData, float time) : base(buffData, time)
     {
         _endTime = Time.time + time;
     }
@@ -33,9 +29,8 @@ public class ATKBuff : Buff
 
     }
 
-    public override void MergeBuff(Buff other)
+    public override void MergeBuff(ATKBuff other)
     {
-        ATKBuff otherBuff = other as ATKBuff;
-        _endTime = Mathf.Max(_endTime, otherBuff._endTime);
+        _endTime = Mathf.Max(_endTime, other._endTime);
     }
 }

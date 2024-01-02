@@ -42,13 +42,14 @@ public class BuffSystem : MonoBehaviour
     /// <summary>
     /// 버프 추가
     /// </summary>
-    public void AddBuff(Buff addedBuff)
+    public void AddBuff<T>(T addedBuff) where T : Buff<T>
     {
         if (addedBuff == null) return;
 
         if (_buffs.ContainsKey(addedBuff.GetType()))
         {
-            _buffs[addedBuff.GetType()].MergeBuff(addedBuff);
+            T originBuff = _buffs[addedBuff.GetType()] as T;
+            originBuff.MergeBuff(addedBuff);
         }
         else
         {
@@ -62,7 +63,7 @@ public class BuffSystem : MonoBehaviour
     /// <summary>
     /// 특정 타입의 버프 제거
     /// </summary>
-    public void RemoveBuff<T>() where T : Buff
+    public void RemoveBuff<T>() where T : Buff<T>
     {
         Type type = typeof(T);
         if (_buffs.TryGetValue(type, out Buff buff))
@@ -93,7 +94,7 @@ public class BuffSystem : MonoBehaviour
 
     public void BuffForeach(Action<Buff> action)
     {
-        foreach(var item in _buffs.Values)
+        foreach (var item in _buffs.Values)
         {
             action?.Invoke(item);
         }
@@ -128,12 +129,27 @@ public class BuffSystem : MonoBehaviour
 
 public abstract class Buff
 {
-    public abstract string Name { get; }
-    public abstract string Description { get; }
-    public abstract Sprite Sprite { get; }
+    public virtual string Name => _buffData.BuffName;
+    public virtual string Description => _buffData.BuffDescription;
+    public virtual Sprite Sprite => _buffData.BuffImage;
 
-    public abstract void MergeBuff(Buff other);
+    protected BuffData _buffData;
+
+    public Buff(BuffData buffData)
+    {
+        _buffData = buffData;
+    }
+
     public abstract void OnAdded(BuffSystem manager);
     public abstract void OnUpdate(BuffSystem manager);
     public abstract void OnDeleted(BuffSystem manager);
+}
+
+public abstract class Buff<T> : Buff where T : Buff<T>
+{
+    protected Buff(BuffData buffData) : base(buffData)
+    {
+    }
+
+    public abstract void MergeBuff(T other);
 }

@@ -3,21 +3,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Stun : Buff
+public class Stun : TimerBuff<Stun>
 {
-    public override string Name => "기절";
-    public override string Description => "일정 시간동안 행동이 불가능합니다.";
-    public override Sprite Sprite => null;
-
     public float endTime;
     private Animator animator;
 
-    public Stun(float stunTime)
+    public Stun(BuffData buffData, float stunTime) : base(buffData, stunTime)
     {
         endTime = Time.time + stunTime;
     }
 
-    public override void MergeBuff(Buff other)
+    public override void MergeBuff(Stun other)
     {
         endTime = MathF.Max(endTime, ((Stun)other).endTime);
     }
@@ -30,7 +26,7 @@ public class Stun : Buff
 
     public override void OnUpdate(BuffSystem manager)
     {
-        if(endTime < Time.time)
+        if (endTime < Time.time)
         {
             manager.RemoveBuff<Stun>();
         }

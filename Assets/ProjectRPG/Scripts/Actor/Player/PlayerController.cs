@@ -51,7 +51,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float _cameraInclination = 0.5f;
     [SerializeField] private float _cameraLookHegit = 1f;
     [Header("스킬 설정")]
+    [SerializeField] private BuffData _moveSpeedBuffData;
+    [SerializeField] private BuffData _damageBuffData;
     [SerializeField] private float _fearRange;
+    [SerializeField] private BuffData _fearBuffData;
     [SerializeField] private GameObject _slashPrefab;
     [SerializeField] private GameObject _fireBallPrefab;
     [SerializeField] private float _fireBallRange;
@@ -284,12 +287,12 @@ public class PlayerController : MonoBehaviour
 
     private void ATKBuffSkillLogic()
     {
-        _buffSystem.AddBuff(new ATKBuff(5));
+        _buffSystem.AddBuff(new ATKBuff(_damageBuffData, 5));
     }
 
     private void MoveSpeedBuffSkillLogic()
     {
-        _buffSystem.AddBuff(new MoveSpeedBuff(5));
+        _buffSystem.AddBuff(new MoveSpeedBuff(_moveSpeedBuffData, 5));
     }
 
     private void FearSkillLogic()
@@ -297,7 +300,7 @@ public class PlayerController : MonoBehaviour
         Collider[] cols = Physics.OverlapSphere(transform.position, _fearRange, 1 << LayerMask.NameToLayer("Monster"));
         for (int i = 0; i < cols.Length; i++)
         {
-            cols[i].GetComponent<BuffSystem>()?.AddBuff(new Stun(3));
+            cols[i].GetComponent<BuffSystem>()?.AddBuff(new Stun(_fearBuffData, 3));
         }
 
         _animator.SetTrigger("Fear");

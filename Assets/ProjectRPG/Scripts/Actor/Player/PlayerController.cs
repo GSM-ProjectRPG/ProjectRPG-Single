@@ -270,7 +270,6 @@ public class PlayerController : MonoBehaviour
         float damage = _statManager.GetCurruntStat().Attack;
         for (int i = 0; i < cols.Length; i++)
         {
-            Debug.Log(cols[i].gameObject.name);
             if (cols[i].gameObject.layer != gameObject.layer)
             {
                 _attackSystem.SendDamage(cols[i].GetComponent<DamageReciever>(), damage);

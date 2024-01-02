@@ -23,6 +23,10 @@ public class RespawnManager : MonoBehaviour
     private void HandleSpawn()
     {
         _player = Instantiate(PlayerPrefab, SpawnPoint.position, Quaternion.identity);
-        _player.GetComponent<Health>().OnDead += (_) => { StartCoroutine(Spawn(2)); };
+        _player.GetComponent<Health>().OnDead += (_) =>
+        {
+            Destroy(_player);
+            StartCoroutine(Spawn(2));
+        };
     }
 }

@@ -37,6 +37,7 @@ public class MonsterPlayerDetector : MonoBehaviour
 
     private void DetectPlayer()
     {
+        if (ActorManager.Instance.Player == null) return;
         float distanceToPlayer = Vector3.Distance(ActorManager.Instance.Player.transform.position, transform.position);
 
         if (distanceToPlayer <= _statManager.ChaseRange)

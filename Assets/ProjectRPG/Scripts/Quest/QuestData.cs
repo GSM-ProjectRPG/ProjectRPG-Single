@@ -9,6 +9,7 @@ public class QuestData : ScriptableObject
 {
     public int QuestId;
 
+    public List<string> Story;
     public string QuestContents;
 
     public EQuestType QuestType;

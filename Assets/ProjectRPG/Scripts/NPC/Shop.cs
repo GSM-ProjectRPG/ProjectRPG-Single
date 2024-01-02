@@ -5,51 +5,34 @@ using UnityEngine;
 public class Shop : MonoBehaviour
 {
     public Inventory Inventory;
-    public InventoryUI InventoryUI;
-
-    public GameObject ShopUI;
 
     public List<ItemData> ShopList;
 
-    private InteractableObject _interactable;
-    private CoinSystem _coinSystem;
+    public CoinSystem CoinSystem;
 
     private void Awake()
     {
-        _interactable = GetComponent<InteractableObject>();
-        _interactable.OnInteracted += (playerInteractable) => OpenShop(playerInteractable);
+        ActorManager.Instance.OnRegistedPlayer += GetInventory;
     }
 
-    public void OpenShop(PlayerInteractor playerInteractor)
+    private void GetInventory()
     {
-        _coinSystem = playerInteractor.GetComponent<CoinSystem>();
-        ShopUI.SetActive(true);
-        InventoryUI.gameObject.SetActive(true);
-        PlayerInputManager.Instance.MouseLock = false;
-        InventoryUI.OnClickAction = Sell;
-    }
-
-    public void CloseShop()
-    {
-        _coinSystem = null;
-        ShopUI.SetActive(false);
-        InventoryUI.gameObject.SetActive(false);
-        PlayerInputManager.Instance.MouseLock = true;
+        Inventory = ActorManager.Instance.Player.GetComponent<Inventory>();
     }
 
     public void Purchase(int index)
     {
-        if (ShopList[index].price <= _coinSystem.Coin)
+        if (ShopList[index].price <= CoinSystem.Coin)
         {
-            _coinSystem.Coin -= ShopList[index].price;
-            Inventory.AddItemData(new Item(ShopList[index], 1));
+            CoinSystem.Coin -= ShopList[index].price;
+            Inventory.AddItem(new Item(ShopList[index], 1));
         }
     }
 
     public void Sell(int index)
     {
         if (Inventory.ItemList.Count <= index) return;
-        _coinSystem.Coin += Inventory.ItemList[index].Price;
-        Inventory.ReduceItemData(new Item(Inventory.ItemList[index].GetItemData(),1));
+        CoinSystem.Coin += Inventory.ItemList[index].Price;
+        Inventory.ReduceItem(new Item(Inventory.ItemList[index].GetItemData(),1));
     }
 }

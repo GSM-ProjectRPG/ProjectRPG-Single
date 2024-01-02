@@ -16,6 +16,7 @@ public class CoinSystemUI : MonoBehaviour
     private void GetCoinSystem()
     {
         CoinSystem = ActorManager.Instance.Player.GetComponent<CoinSystem>();
+        CoinUIUpdate();
         CoinSystem.SetCoinAction += (_) =>
         {
             CoinUIUpdate();

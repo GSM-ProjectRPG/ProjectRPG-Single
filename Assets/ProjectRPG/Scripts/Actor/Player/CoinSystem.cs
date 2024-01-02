@@ -8,17 +8,24 @@ public class CoinSystem : MonoBehaviour
 {
     public Action<int> SetCoinAction;
 
-    private int currentCoin;
     public int Coin { 
         get
         {
-            return currentCoin;
+            return GameManager.Instance.Coin;
         }
         set
         {
-            int origin = currentCoin;
-            currentCoin = value;
+            int origin = GameManager.Instance.Coin;
+            GameManager.Instance.Coin = value;
             SetCoinAction?.Invoke(origin - value);
+        }
+    }
+
+    private void Start()
+    {
+        if(Coin != 0)
+        {
+            SetCoinAction?.Invoke(Coin);
         }
     }
 }

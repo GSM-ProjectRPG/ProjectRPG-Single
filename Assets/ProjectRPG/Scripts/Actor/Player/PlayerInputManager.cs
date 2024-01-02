@@ -23,7 +23,6 @@ public class PlayerInputManager : MonoBehaviour
         private set { _instance = value; }
     }
 
-    public bool InputEnable = true;
     public bool MouseLock
     {
         get { return !Cursor.visible; }
@@ -53,60 +52,70 @@ public class PlayerInputManager : MonoBehaviour
 
     public float GetHorizontal()
     {
-        if (!InputEnable) return 0;
+        if (!MouseLock) return 0;
         return Input.GetAxisRaw("Horizontal");
     }
 
     public float GetVertical()
     {
-        if (!InputEnable) return 0;
+        if (!MouseLock) return 0;
         return Input.GetAxisRaw("Vertical");
     }
 
     public Vector2 GetMoveVector()
     {
-        if (!InputEnable) return Vector2.zero;
+        if (!MouseLock) return Vector2.zero;
         return new Vector2(GetHorizontal(), GetVertical());
     }
 
     public bool GetRunning()
     {
-        if (!InputEnable) return false;
+        if (!MouseLock) return false;
         return Input.GetKey(KeyCode.LeftShift);
     }
 
     public bool GetJump()
     {
-        if (!InputEnable) return false;
+        if (!MouseLock) return false;
         return Input.GetKeyDown(KeyCode.Space);
     }
 
     public Vector2 GetLookDelta()
     {
-        if (!InputEnable || Cursor.lockState != CursorLockMode.Locked) return Vector2.zero;
+        if (!MouseLock || Cursor.lockState != CursorLockMode.Locked) return Vector2.zero;
         return new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
     }
 
     public bool GetLookScrolling()
     {
-        return InputEnable;
+        return MouseLock;
     }
 
     public bool GetAttack()
     {
-        if (!InputEnable) return false;
+        if (!MouseLock) return false;
         return Input.GetMouseButton(0);
     }
 
     public float GetCameraDistanceDelta()
     {
-        if (!InputEnable) return 0f;
+        if (!MouseLock) return 0f;
         return -Input.GetAxis("Mouse ScrollWheel");
     }
 
     public bool GetInteraction()
     {
-        if (!InputEnable) return false;
+        if (!MouseLock) return false;
         return Input.GetKeyDown(KeyCode.F);
+    }
+
+    public bool GetInventory()
+    {
+        return Input.GetKeyDown(KeyCode.I);
+    }
+
+    public bool GetMouseMove()
+    {
+        return Input.GetKey(KeyCode.LeftAlt);
     }
 }

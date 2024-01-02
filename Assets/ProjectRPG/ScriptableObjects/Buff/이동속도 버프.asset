@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BuffName: "\uAC00\uBCBC\uC6B4 \uBC1C\uAC78\uC74C"
   BuffDescription: "\uC774\uB3D9\uC18D\uB3C4\uAC00 30% \uC99D\uAC00\uD569\uB2C8\uB2E4."
-  BuffImage: {fileID: 0}
+  BuffImage: {fileID: 21300000, guid: ec9e1f1eb6849ed4aa8d9040eff75802, type: 3}

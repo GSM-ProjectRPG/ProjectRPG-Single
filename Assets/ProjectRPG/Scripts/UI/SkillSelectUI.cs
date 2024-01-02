@@ -33,6 +33,8 @@ public class SkillSelectUI : MonoBehaviour
                     InstantiateSkillInfo(registedSkill);
                 }
             };
+
+            ActorManager.Instance.Player.GetComponent<PlayerController>().SkillSelectUI = this;
         };
     }
 

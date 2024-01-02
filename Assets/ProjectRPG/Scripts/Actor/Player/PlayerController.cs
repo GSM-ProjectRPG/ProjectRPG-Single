@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     public float AttackStat => 0;
 
     public InventoryUI InventoryUI { private get; set; } = null;
+    public SkillSelectUI SkillSelectUI { private get; set; } = null;
 
     private Rigidbody _rigid;
     private PlayerInputManager _input;
@@ -61,7 +62,8 @@ public class PlayerController : MonoBehaviour
     }
 
     private void Start()
-    {InventoryUI=FindObjectOfType<InventoryUI>();
+    {
+        InventoryUI = FindObjectOfType<InventoryUI>();
         ActorManager.Instance.RegistPlayer(gameObject);
         _damageReciever.OnTakeDamage += (damage, attacker) => _health.TakeDamage(damage, attacker);
         _health.OnDead += (_) => { _animator.SetTrigger("Die"); _isDead = true; ActorManager.Instance.DeleteActor(gameObject); };
@@ -115,12 +117,27 @@ public class PlayerController : MonoBehaviour
             }
             else
             {
+                SkillSelectUI.HideSkillMenu();
                 InventoryUI.OpenInventory();
             }
         }
-        else
+        if (_input.GetSkillSelectUI() && SkillSelectUI != null)
         {
-            if(_input.GetMouseMove() == _input.MouseLock)
+            if (SkillSelectUI.IsOpeningUI)
+            {
+                SkillSelectUI.HideSkillMenu();
+                _input.MouseLock = true;
+            }
+            else
+            {
+                InventoryUI.CloseInventory();
+                SkillSelectUI.ShowSkillMenu();
+                _input.MouseLock = false;
+            }
+        }
+        if (!InventoryUI.isOpenInventory && !SkillSelectUI.IsOpeningUI)
+        {
+            if (_input.GetMouseMove() == _input.MouseLock)
             {
                 _input.MouseLock = !_input.GetMouseMove();
             }

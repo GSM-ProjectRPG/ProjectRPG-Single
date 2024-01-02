@@ -15,7 +15,7 @@ public abstract class TimerBuff<T> : Buff<T>, TimerBuff where T : TimerBuff<T>
 
     private float _originTime;
 
-    public TimerBuff(BuffData buffData, float remainingTime) : base(buffData)
+    public TimerBuff(float remainingTime)
     {
         _originTime = remainingTime;
         RemainingTime = remainingTime;

@@ -287,12 +287,12 @@ public class PlayerController : MonoBehaviour
 
     private void ATKBuffSkillLogic()
     {
-        _buffSystem.AddBuff(new ATKBuff(_damageBuffData, 5));
+        _buffSystem.AddBuff(new ATKBuff(5));
     }
 
     private void MoveSpeedBuffSkillLogic()
     {
-        _buffSystem.AddBuff(new MoveSpeedBuff(_moveSpeedBuffData, 5));
+        _buffSystem.AddBuff(new MoveSpeedBuff(5));
     }
 
     private void FearSkillLogic()
@@ -300,7 +300,7 @@ public class PlayerController : MonoBehaviour
         Collider[] cols = Physics.OverlapSphere(transform.position, _fearRange, 1 << LayerMask.NameToLayer("Monster"));
         for (int i = 0; i < cols.Length; i++)
         {
-            cols[i].GetComponent<BuffSystem>()?.AddBuff(new Stun(_fearBuffData, 3));
+            cols[i].GetComponent<BuffSystem>()?.AddBuff(new Stun(3));
         }
 
         _animator.SetTrigger("Fear");

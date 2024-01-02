@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class ATKBuff : TimerBuff<ATKBuff>
 {
+    protected override BuffData _buffData => ResourceManager.ResourceBindingData.DamageBuffData;
+
     private float _endTime;
 
-    public ATKBuff(BuffData buffData, float time) : base(buffData, time)
+    public ATKBuff(float time) : base(time)
     {
         _endTime = Time.time + time;
     }

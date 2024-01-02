@@ -133,12 +133,7 @@ public abstract class Buff
     public virtual string Description => _buffData.BuffDescription;
     public virtual Sprite Sprite => _buffData.BuffImage;
 
-    protected BuffData _buffData;
-
-    public Buff(BuffData buffData)
-    {
-        _buffData = buffData;
-    }
+    protected abstract BuffData _buffData { get; }
 
     public abstract void OnAdded(BuffSystem manager);
     public abstract void OnUpdate(BuffSystem manager);
@@ -147,9 +142,5 @@ public abstract class Buff
 
 public abstract class Buff<T> : Buff where T : Buff<T>
 {
-    protected Buff(BuffData buffData) : base(buffData)
-    {
-    }
-
     public abstract void MergeBuff(T other);
 }

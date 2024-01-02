@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class MoveSpeedBuff : TimerBuff<MoveSpeedBuff>
 {
+    protected override BuffData _buffData => ResourceManager.ResourceBindingData.MoveSpeedBuffData;
+
     private float _endTime;
 
-    public MoveSpeedBuff(BuffData buffData, float time) : base(buffData, time)
+    public MoveSpeedBuff(float time) : base(time)
     {
     }
 

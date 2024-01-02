@@ -6,7 +6,18 @@ using UnityEngine;
 
 public class SkillSystem : MonoBehaviour
 {
-    public static SkillSystem Instance { get; private set; }
+    private static SkillSystem _instance;
+    public static SkillSystem Instance
+    {
+        get
+        {
+            if (_instance == null)
+            {
+                _instance = FindObjectOfType<SkillSystem>();
+            }
+            return _instance;
+        }
+    }
 
     public Action<Skill> OnRegistedSkill;
     public Action<Skill> OnChangeSkill;
@@ -25,26 +36,17 @@ public class SkillSystem : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-        else
-        {
-            Debug.LogError(typeof(SkillSystem).Name + "의 인스턴스가 2개 이상 존재합니다.\n" + gameObject.name + ", " + Instance.gameObject.name);
-            Destroy(this);
-        }
     }
 
     private void Start()
     {
-        SelectSkill(new Skill(_basicSkillData, () => { _playerController.PunchHandler.Invoke(); }));
+        SelectSkill(_basicSkillData.GetSkillInstance(() => { _playerController.PunchHandler.Invoke(); }));
 
-        RegistSkill(new Skill(_healSkillData, () => { _playerController.HearSkillHandler.Invoke(); }));
-        RegistSkill(new Skill(_moveSpeedBuffSkillData, () => { _playerController.MoveSpeedBuffSkillHandler.Invoke(); }));
-        RegistSkill(new Skill(_damageBuffSkillData, () => { _playerController.ATKBuffSkillHandler.Invoke(); }));
-        RegistSkill(new Skill(_fireBallSkillData, () => { _playerController.FireBallHandler.Invoke(); }));
-        RegistSkill(new Skill(_fearSkillData, () => { _playerController.FearSkillHandler.Invoke(); }));
+        RegistSkill(_healSkillData.GetSkillInstance(() => { _playerController.HearSkillHandler.Invoke(); }));
+        RegistSkill(_moveSpeedBuffSkillData.GetSkillInstance(() => { _playerController.MoveSpeedBuffSkillHandler.Invoke(); }));
+        RegistSkill(_damageBuffSkillData.GetSkillInstance(() => { _playerController.ATKBuffSkillHandler.Invoke(); }));
+        RegistSkill(_fireBallSkillData.GetSkillInstance(() => { _playerController.FireBallHandler.Invoke(); }));
+        RegistSkill(_fearSkillData.GetSkillInstance(() => { _playerController.FearSkillHandler.Invoke(); }));
     }
 
     private PlayerController _playerController => ActorManager.Instance.Player?.GetComponent<PlayerController>();

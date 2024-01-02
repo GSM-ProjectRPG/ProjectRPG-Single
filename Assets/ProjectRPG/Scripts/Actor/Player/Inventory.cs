@@ -108,4 +108,9 @@ public class Inventory : MonoBehaviour
             OnUseAction?.Invoke(index);
         }
     }
+
+    public Stat GetTotalStat()
+    {
+        return new();
+    }
 }

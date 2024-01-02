@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,6 +11,8 @@ public class StatSystem : MonoBehaviour
     public float MoveSpeed { get; set; }
 
     private BuffSystem _buffSystem;
+
+    public Action OnStatChanged;
 
     private void Awake()
     {

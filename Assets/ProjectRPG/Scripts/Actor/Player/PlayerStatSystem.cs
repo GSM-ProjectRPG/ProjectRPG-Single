@@ -19,6 +19,13 @@ public class PlayerStatSystem : StatSystem
 
     [SerializeField] protected PlayerLevelData levelData;
 
+    private void Awake()
+    {
+        Inventory inventory = GetComponent<Inventory>();
+        inventory.OnEquipItemAction += () => OnStatChanged?.Invoke();
+        inventory.UnEquipItemAction += () => OnStatChanged?.Invoke();
+    }
+
     public override Stat GetCurruntStat()
     {
         Stat stat = new Stat();

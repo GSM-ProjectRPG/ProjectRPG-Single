@@ -283,6 +283,9 @@ public class PlayerController : MonoBehaviour
         {
             cols[i].GetComponent<BuffSystem>().AddBuff(new Stun(3));
         }
+
+        _animator.SetTrigger("Fear");
+        StartCoroutine(SetMotionStun());
     }
 
     private void FireBallLogic()
@@ -305,6 +308,9 @@ public class PlayerController : MonoBehaviour
         }
 
         Instantiate(_fireBallPrefab, transform.position, Quaternion.identity).GetComponent<FireBall>().SetTarget(_statManager.GetCurruntStat().Attack * 500, gameObject, target);
+
+        _animator.SetTrigger("Attack");
+        StartCoroutine(SetMotionStun());
     }
     #endregion
 }

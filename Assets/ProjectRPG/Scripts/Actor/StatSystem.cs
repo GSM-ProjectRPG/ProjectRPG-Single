@@ -37,4 +37,9 @@ public struct Stat
     public float Health;
     public float Attack;
     public float MoveSpeed;
+
+    public static Stat operator +(Stat a, Stat b)
+    {
+        return new Stat { Health = a.Health + b.Health, Attack = a.Attack + b.Attack, MoveSpeed = a.MoveSpeed + b.MoveSpeed };
+    }
 }

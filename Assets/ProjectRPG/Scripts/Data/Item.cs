@@ -11,36 +11,53 @@ public enum ItemType
 
 public class Item
 {
-    public ItemType ItemType { get; set; }
-    public Sprite ItemImg { get; set; }
-    public string ItemName { get; set; }
-    public string ItemDescription { get; set; }
-    public int ItemID { get; set; }
-    public int Price { get; set; }
+    public ItemType ItemType => _itemData.itemType;
+    public Sprite ItemImg => _itemData.itemImg;
+    public string ItemName => _itemData.itemName;
+    public string ItemDescription => _itemData.itemDescription;
+    public int ItemID => _itemData.itemID;
+    public int Price => _itemData.price;
     public int count;
+
+    ItemData _itemData;
 
     public Item(ItemData itemData, int count)
     {
-        ItemType = itemData.itemType;
-        ItemImg = itemData.itemImg;
-        ItemName = itemData.itemName;
-        ItemDescription = itemData.itemDescription;
-        ItemID = itemData.itemID;
-        Price = itemData.price;
+        _itemData = itemData;
         this.count = count;
     }
 
     public ItemData GetItemData()
     {
-        return new ItemData()
+        return _itemData;
+    }
+
+    public Stat GetStat()
+    {
+        switch (ItemType)
         {
-            itemType = ItemType,
-            itemImg = ItemImg,
-            itemName = ItemName,
-            itemDescription = ItemDescription,
-            itemID = ItemID,
-            price = Price
-        };
+            case ItemType.Weapon:
+                Weapon weapon = _itemData as Weapon;
+                if (weapon != null)
+                {
+                    Stat stat = new Stat();
+                    stat.Attack = weapon.damage;
+                    return stat;
+                }
+                break;
+            case ItemType.Accessory:
+                Accessory accessory = _itemData as Accessory;
+                if (accessory != null)
+                {
+                    Stat stat = new Stat();
+                    stat.Attack = accessory.damage;
+                    stat.Health = accessory.health;
+                    stat.MoveSpeed = accessory.speed;
+                    return stat;
+                }
+                break;
+        }
+        return new Stat();
     }
 }
 

@@ -256,7 +256,7 @@ public class PlayerController : MonoBehaviour
         {
             if (cols[i].gameObject.layer != gameObject.layer)
             {
-                cols[i].GetComponent<DamageReciever>()?.TakeDamage(damage, gameObject);
+                _attackSystem.SendDamage(cols[i].GetComponent<DamageReciever>(), damage);
             }
         }
     }
@@ -307,7 +307,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        Instantiate(_fireBallPrefab, transform.position, Quaternion.identity).GetComponent<FireBall>().SetTarget(_statManager.GetCurruntStat().Attack * 500, gameObject, target);
+        Instantiate(_fireBallPrefab, transform.position, Quaternion.identity).GetComponent<FireBall>().SetTarget(_statManager.GetCurruntStat().Attack * 500, _attackSystem, target);
 
         _animator.SetTrigger("Attack");
         StartCoroutine(SetMotionStun());

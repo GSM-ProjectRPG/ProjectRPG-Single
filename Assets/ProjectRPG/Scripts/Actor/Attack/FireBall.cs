@@ -7,7 +7,7 @@ public class FireBall : MonoBehaviour
     [SerializeField] float _moveSpeed;
 
     private float _damage;
-    private GameObject _attacker;
+    private AttackSystem _attacker;
     private DamageReciever _target;
     private Rigidbody _rigid;
     private float _time;
@@ -21,7 +21,7 @@ public class FireBall : MonoBehaviour
     private void Update()
     {
         _time += Time.deltaTime;
-        if(_time > 10)
+        if (_time > 10)
         {
             HandleDestroy();
         }
@@ -40,7 +40,7 @@ public class FireBall : MonoBehaviour
         }
     }
 
-    public void SetTarget(float damage, GameObject attacker, DamageReciever target)
+    public void SetTarget(float damage, AttackSystem attacker, DamageReciever target)
     {
         _damage = damage;
         _attacker = attacker;
@@ -49,7 +49,7 @@ public class FireBall : MonoBehaviour
 
     private void HandleDestroy()
     {
-        if(_isDestroyed) return;
+        if (_isDestroyed) return;
         _isDestroyed = true;
         Destroy(gameObject);
     }
@@ -58,7 +58,7 @@ public class FireBall : MonoBehaviour
     {
         if (other.gameObject == _target.gameObject)
         {
-            _target.TakeDamage(_damage, _attacker);
+            _attacker.SendDamage(_target, _damage);
         }
         HandleDestroy();
     }

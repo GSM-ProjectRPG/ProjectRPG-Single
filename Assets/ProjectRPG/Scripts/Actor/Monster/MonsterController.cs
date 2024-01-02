@@ -52,6 +52,9 @@ public class MonsterController : MonoBehaviour
         {
             _animator.SetInteger("MoveMode", 0);
         }
+
+        Quaternion rot = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(_playerDetector.GetDetectedPlayerPosition() - transform.position), Time.deltaTime * 5);
+        transform.rotation = rot;
     }
 
     private void Attack()
@@ -78,9 +81,8 @@ public class MonsterController : MonoBehaviour
     private void Chase()
     {
         Vector3 moveVelocity = (_playerDetector.GetDetectedPlayerPosition() - transform.position).normalized;
-        _rigid.velocity = new Vector3(moveVelocity.x, _rigid.velocity.y, moveVelocity.z) * _statManager.MoveSpeed;
-        Quaternion rot = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(_playerDetector.GetDetectedPlayerPosition() - transform.position), Time.deltaTime);
-        transform.rotation = rot;
+        _rigid.velocity = new Vector3(moveVelocity.x * _statManager.MoveSpeed, _rigid.velocity.y, moveVelocity.z * _statManager.MoveSpeed);
+        
         _animator.SetInteger("MoveMode", 1);
     }
 

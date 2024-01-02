@@ -9,12 +9,25 @@ public class StatSystem : MonoBehaviour
     public float Health;
     public float MoveSpeed;
 
+    private BuffSystem _buffSystem;
+
+    private void Awake()
+    {
+        _buffSystem = GetComponent<BuffSystem>();
+    }
+
     public virtual Stat GetCurruntStat()
     {
         Stat stat = new Stat();
         stat.Health = Health;
         stat.Attack = Attack;
         stat.MoveSpeed = MoveSpeed;
+
+        if (_buffSystem != null && _buffSystem.ContainsBuff<ATKBuff>())
+        {
+            stat.Attack *= 1.2f;
+        }
+
         return stat;
     }
 }

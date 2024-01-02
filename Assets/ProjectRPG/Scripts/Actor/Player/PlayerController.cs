@@ -297,7 +297,7 @@ public class PlayerController : MonoBehaviour
         Collider[] cols = Physics.OverlapSphere(transform.position, _fearRange, LayerMask.NameToLayer("Monster"));
         for (int i = 0; i < cols.Length; i++)
         {
-            cols[i].GetComponent<BuffSystem>().AddBuff(new Stun(3));
+            cols[i].GetComponent<BuffSystem>()?.AddBuff(new Stun(3));
         }
 
         _animator.SetTrigger("Fear");

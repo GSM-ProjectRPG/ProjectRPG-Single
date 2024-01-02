@@ -62,7 +62,6 @@ public class PlayerController : MonoBehaviour
     private bool _isActing => _motionStopTime >= Time.time;
     private bool _canAct => !_isActing && !_isDead;
 
-    private Action _attackHandler;
     private Action _interactionHandler;
     private Action _jumpHandler;
     private Action _moveHandler;
@@ -95,7 +94,7 @@ public class PlayerController : MonoBehaviour
             _health.SetHealth(maxHealth, gameObject);
         };
 
-        _attackHandler = _attackSystem.Attack(Punch);
+        PunchHandler = _attackSystem.Attack(Punch);
         _interactionHandler = _actSystem.Act(() => _interactor.TryInteract());
         _jumpHandler = _actSystem.Act(Jump);
         _moveHandler = _actSystem.Act(() => Move(_input.GetMoveVector()));
@@ -117,7 +116,11 @@ public class PlayerController : MonoBehaviour
 
         if (_input.GetAttack() && _canAct)
         {
-            _attackHandler?.Invoke();
+            PunchHandler?.Invoke();
+        }
+        if(_input.GetSkill() && _canAct)
+        {
+            SkillSystem.Instance.UseSkill();
         }
         if (_input.GetJump() && _canAct)
         {
@@ -234,6 +237,7 @@ public class PlayerController : MonoBehaviour
     public Action MoveSpeedBuffSkillHandler => _actSystem.Act(MoveSpeedBuffSkillLogic);
     public Action FearSkillHandler => _attackSystem.Attack(FearSkillLogic);
     public Action FireBallHandler => _attackSystem.Attack(FireBallLogic);
+    public Action PunchHandler;
 
     private IEnumerator SetMotionStun()
     {
@@ -250,7 +254,10 @@ public class PlayerController : MonoBehaviour
         float damage = _statManager.GetCurruntStat().Attack;
         for (int i = 0; i < cols.Length; i++)
         {
-            cols[i].GetComponent<DamageReciever>().TakeDamage(damage, gameObject);
+            if (cols[i].gameObject.layer != gameObject.layer)
+            {
+                cols[i].GetComponent<DamageReciever>()?.TakeDamage(damage, gameObject);
+            }
         }
     }
 

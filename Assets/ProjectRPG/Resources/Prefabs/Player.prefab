@@ -19,7 +19,6 @@ GameObject:
   - component: {fileID: 6424370322115242300}
   - component: {fileID: 3288502224778911381}
   - component: {fileID: 1737948761529796464}
-  - component: {fileID: 2354460144339746182}
   - component: {fileID: 5499073839841361830}
   - component: {fileID: 1077869403365964432}
   m_Layer: 0
@@ -96,13 +95,10 @@ MonoBehaviour:
   _cameraHeight: 1
   _cameraInclination: 0.5
   _cameraLookHegit: 1
-  _healSkillData: {fileID: 11400000, guid: c15375dc2ce25064d813e1001e741369, type: 2}
-  _playerATKBuffSkillData: {fileID: 11400000, guid: bfe347cf2b235b447a6da7c9b3a10b38,
-    type: 2}
-  _moveSpeedBuffSkillData: {fileID: 11400000, guid: 1e6eadd405c5c8d40a14cae0934c0cea,
-    type: 2}
-  _fearSkillData: {fileID: 11400000, guid: 4b924ab85d1831c40bcf4f5a15a40a35, type: 2}
   _fearRange: 0
+  _slashPrefab: {fileID: 0}
+  _fireBallPrefab: {fileID: 0}
+  _fireBallRange: 0
 --- !u!114 &6799289787203058826
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -193,19 +189,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57ba3465e988e2d49880352f480fd91e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &2354460144339746182
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6799289787203058824}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7aa77741313c8394c82d4022f0c8384a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _basicSkillData: {fileID: 0}
 --- !u!114 &5499073839841361830
 MonoBehaviour:
   m_ObjectHideFlags: 0

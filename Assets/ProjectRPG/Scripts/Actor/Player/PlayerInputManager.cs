@@ -118,4 +118,10 @@ public class PlayerInputManager : MonoBehaviour
     {
         return Input.GetKey(KeyCode.LeftAlt);
     }
+
+    public bool GetSkill()
+    {
+        if (!MouseLock) return false;
+        return Input.GetKeyDown(KeyCode.E);
+    }
 }

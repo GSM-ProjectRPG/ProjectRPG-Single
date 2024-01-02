@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class MonsterController : MonoBehaviour
@@ -89,15 +88,28 @@ public class MonsterController : MonoBehaviour
     private void Die(GameObject killer)
     {
         _animator.SetTrigger("Die");
-        StartCoroutine(DieCoroutine());
+        StartCoroutine(DieCoroutine(killer));
     }
 
-    private IEnumerator DieCoroutine()
+    private IEnumerator DieCoroutine(GameObject killer)
     {
         _motionStopTime = Time.time + 1;
         yield return null;
         _motionStopTime = Time.time + _animator.GetNextAnimatorClipInfo(0).Length;
         yield return new WaitForSeconds(_animator.GetNextAnimatorClipInfo(0).Length);
+
+        killer.GetComponent<PlayerStatSystem>().AddExp(_statManager.DropExp);
+        killer.GetComponent<CoinSystem>().Coin += _statManager.DropCoin;
+
+        for (int i=0; i<_statManager.DropItems.Count; i++)
+        {
+            int rand = UnityEngine.Random.Range(1, 100);
+            if (rand <= _statManager.DropItems[i].Probability)
+            {
+                Item item = new Item(_statManager.DropItems[i].ItemData, _statManager.DropItems[i].Count);
+                killer.GetComponent<Inventory>().AddItem(item);
+            }
+        }
 
         Destroy(gameObject);
     }

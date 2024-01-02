@@ -20,3 +20,8 @@ MonoBehaviour:
   AttackRange: 2
   ChaseRange: 5
   DropExp: 20
+  DropCoin: 100
+  DropItems:
+  - ItemData: {fileID: 11400000, guid: 76ea5cf80b4f33b4f9db2f5d5cf5aefb, type: 2}
+    Count: 1
+    Probability: 100

@@ -31,15 +31,23 @@ public class SkillSystem : MonoBehaviour
         }
         else
         {
-            Debug.LogError(typeof(SkillSystem).Name + "의 인스턴스가 2개 이상 존재합니다.");
+            Debug.LogError(typeof(SkillSystem).Name + "의 인스턴스가 2개 이상 존재합니다.\n" + gameObject.name + ", " + Instance.gameObject.name);
             Destroy(this);
         }
     }
 
     private void Start()
     {
-        SelectSkill(new Skill(_basicSkillData, null));
+        SelectSkill(new Skill(_basicSkillData, () => { _playerController.PunchHandler.Invoke(); }));
+
+        RegistSkill(new Skill(_healSkillData, () => { _playerController.HearSkillHandler.Invoke(); }));
+        RegistSkill(new Skill(_moveSpeedBuffSkillData, () => { _playerController.MoveSpeedBuffSkillHandler.Invoke(); }));
+        RegistSkill(new Skill(_damageBuffSkillData, () => { _playerController.ATKBuffSkillHandler.Invoke(); }));
+        RegistSkill(new Skill(_fireBallSkillData, () => { _playerController.FireBallHandler.Invoke(); }));
+        RegistSkill(new Skill(_fearSkillData, () => { _playerController.FearSkillHandler.Invoke(); }));
     }
+
+    private PlayerController _playerController => ActorManager.Instance.Player?.GetComponent<PlayerController>();
 
     public void RegistSkill(Skill skill)
     {

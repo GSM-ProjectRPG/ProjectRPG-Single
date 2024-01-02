@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -50,6 +51,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float _cameraLookHegit = 1f;
     [Header("스킬 설정")]
     [SerializeField] private float _fearRange;
+    [SerializeField] private GameObject _slashPrefab;
+    [SerializeField] private GameObject _fireBallPrefab;
+    [SerializeField] private float _fireBallRange;
 
     private float _cameraDistance;
     private float _cameraRotation = 0;
@@ -79,7 +83,8 @@ public class PlayerController : MonoBehaviour
     }
 
     private void Start()
-    {InventoryUI=FindObjectOfType<InventoryUI>();
+    {
+        InventoryUI = FindObjectOfType<InventoryUI>();
         ActorManager.Instance.RegistPlayer(gameObject);
         _damageReciever.OnTakeDamage += (damage, attacker) => _health.TakeDamage(damage, attacker);
         _health.OnDead += (_) => { _animator.SetTrigger("Die"); _isDead = true; ActorManager.Instance.DeleteActor(gameObject); };
@@ -136,7 +141,7 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            if(_input.GetMouseMove() == _input.MouseLock)
+            if (_input.GetMouseMove() == _input.MouseLock)
             {
                 _input.MouseLock = !_input.GetMouseMove();
             }
@@ -228,6 +233,7 @@ public class PlayerController : MonoBehaviour
     public Action ATKBuffSkillHandler => _actSystem.Act(ATKBuffSkillLogic);
     public Action MoveSpeedBuffSkillHandler => _actSystem.Act(MoveSpeedBuffSkillLogic);
     public Action FearSkillHandler => _attackSystem.Attack(FearSkillLogic);
+    public Action FireBallHandler => _attackSystem.Attack(FireBallLogic);
 
     private IEnumerator SetMotionStun()
     {
@@ -260,10 +266,32 @@ public class PlayerController : MonoBehaviour
     private void FearSkillLogic()
     {
         Collider[] cols = Physics.OverlapSphere(transform.position, _fearRange, LayerMask.NameToLayer("Monster"));
-        for(int i=0;i<cols.Length; i++)
+        for (int i = 0; i < cols.Length; i++)
         {
             cols[i].GetComponent<BuffSystem>().AddBuff(new Stun(3));
         }
+    }
+
+    private void FireBallLogic()
+    {
+        List<Collider> cols = Physics.OverlapSphere(transform.position, _fireBallRange, LayerMask.NameToLayer("Monster")).ToList();
+        cols.Sort((a, b) => { return (int)Mathf.Sign(Vector3.Distance(transform.position, a.transform.position) - Vector3.Distance(transform.position, b.transform.position)); });
+
+        DamageReciever target = null;
+        foreach (Collider col in cols)
+        {
+            DamageReciever damageReciever = col.GetComponent<DamageReciever>();
+            if(damageReciever != null)
+            {
+                if (Vector3.Dot(transform.forward, Vector3.Normalize(col.transform.position - transform.position)) > 0.5f)
+                {
+                    target = damageReciever;
+                    break;
+                }
+            }
+        }
+
+        Instantiate(_fireBallPrefab, transform.position, Quaternion.identity).GetComponent<FireBall>().SetTarget(_statManager.GetCurruntStat().Attack * 500, gameObject, target);
     }
     #endregion
 }

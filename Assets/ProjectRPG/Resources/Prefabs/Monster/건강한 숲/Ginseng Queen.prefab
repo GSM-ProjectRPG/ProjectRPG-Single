@@ -685,7 +685,7 @@ GameObject:
   - component: {fileID: 7012213117130684070}
   - component: {fileID: 7012213117130684071}
   - component: {fileID: 7012213117130684072}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Ginseng Queen
   m_TagString: Untagged
   m_Icon: {fileID: 0}

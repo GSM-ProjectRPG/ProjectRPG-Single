@@ -6,10 +6,10 @@ using UnityEngine;
 
 public class BuffSystem : MonoBehaviour
 {
-    public event Action<Buff> OnAddedBuff;
-    public event Action<Buff> OnRemovedBuff;
+    public Dictionary<Type, Buff> _buffs { get; protected set; } = new();
 
-    private Dictionary<Type, Buff> _buffs = new();
+    public event Action<Buff> OnAddBuff;
+    public event Action<Buff> OnRemoveBuff;
 
     /// <summary>
     /// 특정 타입의 버프가 존재하는지 확인
@@ -32,6 +32,14 @@ public class BuffSystem : MonoBehaviour
     }
 
     /// <summary>
+    /// 현재 버프 개수 반환
+    /// </summary>
+    public int GetBuffCount()
+    {
+        return _buffs.Count;
+    }
+
+    /// <summary>
     /// 버프 추가
     /// </summary>
     public void AddBuff(Buff addedBuff)
@@ -46,8 +54,10 @@ public class BuffSystem : MonoBehaviour
         {
             _buffs.Add(addedBuff.GetType(), addedBuff);
             addedBuff.OnAdded(this);
-            OnAddedBuff?.Invoke(addedBuff);
+            OnAddBuff?.Invoke(addedBuff);
         }
+        addedBuff.OnAdded(this);
+        OnAddBuff?.Invoke(addedBuff);
     }
 
     /// <summary>
@@ -60,7 +70,33 @@ public class BuffSystem : MonoBehaviour
         {
             _buffs.Remove(type);
             buff.OnDeleted(this);
-            OnRemovedBuff?.Invoke(buff);
+            OnRemoveBuff?.Invoke(buff);
+        }
+    }
+
+    /// <summary>
+    /// 모든 버프 제거
+    /// </summary>
+    public void ClearBuff()
+    {
+        Action action = () => { };
+        foreach (var item in _buffs.Values)
+        {
+            action += () =>
+            {
+                item.OnDeleted(this);
+                OnRemoveBuff?.Invoke(item);
+            };
+        }
+        _buffs.Clear();
+        action?.Invoke();
+    }
+
+    public void BuffForeach(Action<Buff> action)
+    {
+        foreach(var item in _buffs.Values)
+        {
+            action?.Invoke(item);
         }
     }
 

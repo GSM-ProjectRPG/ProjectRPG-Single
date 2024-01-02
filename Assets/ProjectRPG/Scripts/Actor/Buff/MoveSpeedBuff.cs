@@ -24,7 +24,7 @@ public class MoveSpeedBuff : Buff
     {
         if (_endTime < Time.time)
         {
-            manager.RemoveBuff<ATKBuff>();
+            manager.RemoveBuff<MoveSpeedBuff>();
         }
     }
 

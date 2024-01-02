@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc9f6c52da990da418dc9e2d3902ae2a, type: 3}
   m_Name: Pink Slime
   m_EditorClassIdentifier: 
-  Name: Slime
+  Name: Pink Slime
   Attack: 20
   Health: 200
   MoveSpeed: 0.5

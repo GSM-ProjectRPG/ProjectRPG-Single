@@ -10,6 +10,7 @@ public class SkillData : ScriptableObject
     public string Description;
     public Sprite Sprite;
     public float CoolTime;
+    public SkillWeaponType SkillWeaponType;
 
     public Skill GetSkillInstance(Action useAction)
     {
@@ -22,4 +23,11 @@ public class SkillData : ScriptableObject
             return new Skill(this, useAction);
         }
     }
+}
+
+public enum SkillWeaponType
+{
+    Global = 0,
+    Melee = 1,
+    Range = 2
 }

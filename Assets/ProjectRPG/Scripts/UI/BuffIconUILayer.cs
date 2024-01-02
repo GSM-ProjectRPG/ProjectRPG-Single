@@ -15,13 +15,13 @@ public class BuffIconUILayer : MonoBehaviour
         {
             BuffSystem buffSystem = ActorManager.Instance.Player.GetComponent<BuffSystem>();
 
-            buffSystem.OnAddedBuff += (buff) =>
+            buffSystem.OnAddBuff += (buff) =>
             {
                 BuffIconUI icon = Instantiate(BasicBuffIconPrefab, transform).GetComponent<BuffIconUI>();
                 icon.BindBuff(buff);
                 _icons.Add(buff, icon);
             };
-            buffSystem.OnRemovedBuff += (buff) =>
+            buffSystem.OnRemoveBuff += (buff) =>
             {
                 GameObject g = _icons[buff].gameObject;
                 _icons.Remove(buff);

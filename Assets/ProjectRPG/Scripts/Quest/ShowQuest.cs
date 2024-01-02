@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ShowQuestProgress : MonoBehaviour
+public class ShowQuest : MonoBehaviour
 {
-    public static ShowQuestProgress Instance { get; private set; }
+    public static ShowQuest Instance { get; private set; }
 
     public Transform Parent;
     public GameObject QuestPrefeb;
@@ -32,6 +32,6 @@ public class ShowQuestProgress : MonoBehaviour
     public void RemoveQuest(int idx)
     {
         if (idx == -1) return;
-        Destroy(Parent.GetChild(idx).gameObject);
+        StartCoroutine(Parent.GetChild(idx).gameObject.GetComponentInChildren<QuestClearEffect>().OnClear());
     }
 }

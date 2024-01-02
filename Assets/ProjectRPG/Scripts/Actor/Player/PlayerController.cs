@@ -25,6 +25,7 @@ public class PlayerController : MonoBehaviour
     public float AttackStat => 0;
 
     public InventoryUI InventoryUI { private get; set; } = null;
+    public SkillSelectUI SkillSelectUI { private get; set; } = null;
 
     private Rigidbody _rigid;
     private PlayerInputManager _input;
@@ -140,10 +141,25 @@ public class PlayerController : MonoBehaviour
             }
             else
             {
+                SkillSelectUI.HideSkillMenu();
                 InventoryUI.OpenInventory();
             }
         }
-        else
+        if (_input.GetSkillSelectUI() && SkillSelectUI != null)
+        {
+            if (SkillSelectUI.IsOpeningUI)
+            {
+                SkillSelectUI.HideSkillMenu();
+                _input.MouseLock = true;
+            }
+            else
+            {
+                InventoryUI.CloseInventory();
+                SkillSelectUI.ShowSkillMenu();
+                _input.MouseLock = false;
+            }
+        }
+        if (!InventoryUI.isOpenInventory && !SkillSelectUI.IsOpeningUI)
         {
             if (_input.GetMouseMove() == _input.MouseLock)
             {
@@ -283,7 +299,7 @@ public class PlayerController : MonoBehaviour
         Collider[] cols = Physics.OverlapSphere(transform.position, _fearRange, 1 << LayerMask.NameToLayer("Monster"));
         for (int i = 0; i < cols.Length; i++)
         {
-            cols[i].GetComponent<BuffSystem>().AddBuff(new Stun(3));
+            cols[i].GetComponent<BuffSystem>()?.AddBuff(new Stun(3));
         }
 
         _animator.SetTrigger("Fear");

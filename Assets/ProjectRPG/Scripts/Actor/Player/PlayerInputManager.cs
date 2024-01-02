@@ -119,6 +119,11 @@ public class PlayerInputManager : MonoBehaviour
         return Input.GetKey(KeyCode.LeftAlt);
     }
 
+    public bool GetSkillSelectUI()
+    {
+        return Input.GetKeyDown(KeyCode.K);
+    }
+
     public bool GetSkill()
     {
         if (!MouseLock) return false;

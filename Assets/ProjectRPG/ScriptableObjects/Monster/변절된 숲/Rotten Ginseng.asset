@@ -15,7 +15,7 @@ MonoBehaviour:
   Name: Rotten Ginseng
   Attack: 300
   Health: 3500
-  MoveSpeed: 0.6
+  MoveSpeed: 1.8
   AttackSpeed: 1
   AttackRange: 2
   ChaseRange: 5

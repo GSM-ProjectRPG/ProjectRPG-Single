@@ -520,7 +520,7 @@ GameObject:
   - component: {fileID: 7515585048428922598}
   - component: {fileID: 7515585048428922599}
   - component: {fileID: 7515585048428922600}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Rotten Ginseng
   m_TagString: Untagged
   m_Icon: {fileID: 0}

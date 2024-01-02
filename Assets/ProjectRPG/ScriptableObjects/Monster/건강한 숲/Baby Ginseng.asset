@@ -15,7 +15,7 @@ MonoBehaviour:
   Name: Baby Ginseng
   Attack: 90
   Health: 600
-  MoveSpeed: 0.7
+  MoveSpeed: 2.1
   AttackSpeed: 0.5
   AttackRange: 2
   ChaseRange: 5

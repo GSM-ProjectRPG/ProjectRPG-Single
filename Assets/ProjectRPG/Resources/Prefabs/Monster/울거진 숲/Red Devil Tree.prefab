@@ -322,7 +322,7 @@ GameObject:
   - component: {fileID: 6559497344300583377}
   - component: {fileID: 6559497344300583376}
   - component: {fileID: 6559497344300583379}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Red Devil Tree
   m_TagString: Untagged
   m_Icon: {fileID: 0}

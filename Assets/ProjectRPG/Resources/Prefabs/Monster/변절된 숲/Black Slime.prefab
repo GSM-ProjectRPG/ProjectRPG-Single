@@ -19,7 +19,7 @@ GameObject:
   - component: {fileID: 852988721920347723}
   - component: {fileID: 852988721920347722}
   - component: {fileID: 852988721920347721}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Black Slime
   m_TagString: Untagged
   m_Icon: {fileID: 0}

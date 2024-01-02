@@ -15,7 +15,7 @@ MonoBehaviour:
   Name: Rainbow Devil Tree
   Attack: 70
   Health: 1000
-  MoveSpeed: 0.3
+  MoveSpeed: 0.9
   AttackSpeed: 2
   AttackRange: 2
   ChaseRange: 5

@@ -19,7 +19,7 @@ GameObject:
   - component: {fileID: 1077959776303732790}
   - component: {fileID: 1077959776303732791}
   - component: {fileID: 1077959776303732744}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Rainbow Devil Tree
   m_TagString: Untagged
   m_Icon: {fileID: 0}

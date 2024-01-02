@@ -26,6 +26,7 @@ public class MonsterPlayerDetector : MonoBehaviour
 
     public Vector3 GetDetectedPlayerPosition()
     {
+        if (ActorManager.Instance.Player == null) return new Vector3(0, 0, 0);
         Vector3 playerPosition = ActorManager.Instance.Player.transform.position;
         return new Vector3(playerPosition.x, transform.position.y, playerPosition.z);
     }

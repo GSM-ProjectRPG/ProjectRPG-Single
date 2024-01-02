@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: "\uC2A4\uD3F0 \uD480"
   m_EditorClassIdentifier: 
   SpawnRates:
-  - SpawnRate: 3
+  - SpawnRate: 5
     MonsterPrefab: {fileID: 5778945399967323621, guid: 0d9b071f493cd0f46994cd7fac8d31ef,
       type: 3}
-  - SpawnRate: 3
+  - SpawnRate: 2
     MonsterPrefab: {fileID: 7400792322845541657, guid: ad2c85d0fcf3651409a83e990539ca96,
       type: 3}

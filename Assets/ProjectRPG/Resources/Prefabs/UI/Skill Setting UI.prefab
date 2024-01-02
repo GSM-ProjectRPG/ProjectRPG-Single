@@ -623,7 +623,7 @@ MonoBehaviour:
   _meleeSkillTabButton: {fileID: 1249678579529751720}
   _rangeSkillTabButton: {fileID: 1249678580228001719}
   _UICloseButton: {fileID: 1249678580984298681}
-  _skillSelectUILayer: {fileID: 0}
+  _skillSelectUILayer: {fileID: 1249678580824968708}
   _content: {fileID: 1249678581523532599}
   _skillMenuBackGround: {fileID: 1249678580919149697}
   _skillInfoPrefab: {fileID: 8759960686518505718, guid: 70d3ec70fa17f6a4eb6172f9d1d0a398,
@@ -1346,7 +1346,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: -960, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1249678581523532596
 MonoBehaviour:

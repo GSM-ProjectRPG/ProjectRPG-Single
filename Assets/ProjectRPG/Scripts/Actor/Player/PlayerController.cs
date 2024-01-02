@@ -136,7 +136,6 @@ public class PlayerController : MonoBehaviour
         {
             if (InventoryUI.isOpenInventory)
             {
-                Debug.Log("sfdjklsdf");
                 InventoryUI.CloseInventory();
             }
             else

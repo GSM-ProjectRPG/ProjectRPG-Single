@@ -18,9 +18,9 @@ public class PlayerInfoUI : MonoBehaviour
             _targetHealth = ActorManager.Instance.Player.GetComponent<Health>();
             _targetHealth.OnHealthChanged += () =>
             {
-                RefreshUI();
+                StartCoroutine(RefreshUI());
             };
-            RefreshUI();
+            StartCoroutine(RefreshUI());
         };
     }
 
@@ -29,8 +29,9 @@ public class PlayerInfoUI : MonoBehaviour
         NameText.text = GameManager.Instance.NickName;
     }
 
-    private void RefreshUI()
+    private IEnumerator RefreshUI()
     {
+        yield return null;
         HpSlider.value = _targetHealth.CurruntHealth / _targetHealth.MaxHealth;
         HpText.text = (int)_targetHealth.CurruntHealth + "/" + (int)_targetHealth.MaxHealth;
     }

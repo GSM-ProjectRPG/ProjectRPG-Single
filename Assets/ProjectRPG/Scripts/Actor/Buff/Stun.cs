@@ -24,14 +24,6 @@ public class Stun : TimerBuff<Stun>
         animator?.SetInteger("MoveMode", -1);
     }
 
-    public override void OnUpdate(BuffSystem manager)
-    {
-        if (endTime < Time.time)
-        {
-            manager.RemoveBuff<Stun>();
-        }
-    }
-
     public override void OnDeleted(BuffSystem manager)
     {
     }

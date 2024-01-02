@@ -16,14 +16,6 @@ public class ATKBuff : TimerBuff<ATKBuff>
 
     }
 
-    public override void OnUpdate(BuffSystem manager)
-    {
-        if (_endTime < Time.time)
-        {
-            manager.RemoveBuff<ATKBuff>();
-        }
-    }
-
     public override void OnDeleted(BuffSystem manager)
     {
 

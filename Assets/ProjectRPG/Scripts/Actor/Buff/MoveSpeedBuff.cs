@@ -15,14 +15,6 @@ public class MoveSpeedBuff : TimerBuff<MoveSpeedBuff>
 
     }
 
-    public override void OnUpdate(BuffSystem manager)
-    {
-        if (_endTime < Time.time)
-        {
-            manager.RemoveBuff<MoveSpeedBuff>();
-        }
-    }
-
     public override void OnDeleted(BuffSystem manager)
     {
 

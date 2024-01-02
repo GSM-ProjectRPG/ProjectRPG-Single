@@ -246,6 +246,12 @@ public class PlayerController : MonoBehaviour
     {
         _animator.SetTrigger("Attack");
         StartCoroutine(SetMotionStun());
+        Collider[] cols = Physics.OverlapSphere(transform.position + transform.rotation * Vector3.forward, 1, LayerMask.NameToLayer("Monster"));
+        float damage = _statManager.GetCurruntStat().Attack;
+        for (int i = 0; i < cols.Length; i++)
+        {
+            cols[i].GetComponent<DamageReciever>().TakeDamage(damage, gameObject);
+        }
     }
 
     private void HealSkillLogic()
@@ -281,7 +287,7 @@ public class PlayerController : MonoBehaviour
         foreach (Collider col in cols)
         {
             DamageReciever damageReciever = col.GetComponent<DamageReciever>();
-            if(damageReciever != null)
+            if (damageReciever != null)
             {
                 if (Vector3.Dot(transform.forward, Vector3.Normalize(col.transform.position - transform.position)) > 0.5f)
                 {

@@ -9,7 +9,20 @@ public class SkillData : ScriptableObject
     public string Name;
     public string Description;
     public Sprite Sprite;
+    public float CoolTime;
     public SkillWeaponType SkillWeaponType;
+
+    public Skill GetSkillInstance(Action useAction)
+    {
+        if (CoolTime > 0)
+        {
+            return new CoolTimeSkill(this, useAction, CoolTime);
+        }
+        else
+        {
+            return new Skill(this, useAction);
+        }
+    }
 }
 
 public enum SkillWeaponType

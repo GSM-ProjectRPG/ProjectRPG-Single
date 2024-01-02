@@ -1,10 +1,24 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Reflection;
 using UnityEngine;
 
 public class SkillSystem : MonoBehaviour
 {
+    private static SkillSystem _instance;
+    public static SkillSystem Instance
+    {
+        get
+        {
+            if (_instance == null)
+            {
+                _instance = FindObjectOfType<SkillSystem>();
+            }
+            return _instance;
+        }
+    }
+
     public Action<Skill> OnRegistedSkill;
     public Action<Skill> OnChangeSkill;
     public Action<Skill> OnUseSkill;
@@ -13,11 +27,29 @@ public class SkillSystem : MonoBehaviour
     public Skill CurruntSkill { get; protected set; }
 
     [SerializeField] private SkillData _basicSkillData;
+    [SerializeField] private SkillData _healSkillData;
+    [SerializeField] private SkillData _moveSpeedBuffSkillData;
+    [SerializeField] private SkillData _damageBuffSkillData;
+    [SerializeField] private SkillData _slashSkillData;
+    [SerializeField] private SkillData _fireBallSkillData;
+    [SerializeField] private SkillData _fearSkillData;
 
     private void Awake()
     {
-        SelectSkill(new Skill(_basicSkillData, null));
     }
+
+    private void Start()
+    {
+        SelectSkill(_basicSkillData.GetSkillInstance(() => { _playerController.PunchHandler.Invoke(); }));
+
+        RegistSkill(_healSkillData.GetSkillInstance(() => { _playerController.HearSkillHandler.Invoke(); }));
+        RegistSkill(_moveSpeedBuffSkillData.GetSkillInstance(() => { _playerController.MoveSpeedBuffSkillHandler.Invoke(); }));
+        RegistSkill(_damageBuffSkillData.GetSkillInstance(() => { _playerController.ATKBuffSkillHandler.Invoke(); }));
+        RegistSkill(_fireBallSkillData.GetSkillInstance(() => { _playerController.FireBallHandler.Invoke(); }));
+        RegistSkill(_fearSkillData.GetSkillInstance(() => { _playerController.FearSkillHandler.Invoke(); }));
+    }
+
+    private PlayerController _playerController => ActorManager.Instance.Player?.GetComponent<PlayerController>();
 
     public void RegistSkill(Skill skill)
     {

@@ -123,4 +123,10 @@ public class PlayerInputManager : MonoBehaviour
     {
         return Input.GetKeyDown(KeyCode.K);
     }
+
+    public bool GetSkill()
+    {
+        if (!MouseLock) return false;
+        return Input.GetKeyDown(KeyCode.E);
+    }
 }

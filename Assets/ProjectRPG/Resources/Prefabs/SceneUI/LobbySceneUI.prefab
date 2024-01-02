@@ -186,8 +186,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: exit
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: a61d74203e981e9429bb819a0f4a4dd0, type: 2}
+  m_sharedMaterial: {fileID: 7484967563825822156, guid: a61d74203e981e9429bb819a0f4a4dd0,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -597,8 +598,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: Project RPG
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: cd6a961b418c2504b8ac8025d409eb6c, type: 2}
+  m_sharedMaterial: {fileID: -1181311166370086566, guid: cd6a961b418c2504b8ac8025d409eb6c,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -855,8 +857,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: Start
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: a61d74203e981e9429bb819a0f4a4dd0, type: 2}
+  m_sharedMaterial: {fileID: 7484967563825822156, guid: a61d74203e981e9429bb819a0f4a4dd0,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -933,6 +936,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: CreatePopup
+      objectReference: {fileID: 0}
+    - target: {fileID: 3956917706008570914, guid: 3bbd0c9e8fc0fbd489d8132ea7e2c0d3,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6476845301633830333, guid: 3bbd0c9e8fc0fbd489d8132ea7e2c0d3,
         type: 3}
@@ -1038,6 +1046,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7058534992907846818, guid: 3bbd0c9e8fc0fbd489d8132ea7e2c0d3,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3bbd0c9e8fc0fbd489d8132ea7e2c0d3, type: 3}

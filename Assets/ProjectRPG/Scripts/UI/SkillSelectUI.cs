@@ -19,12 +19,11 @@ public class SkillSelectUI : MonoBehaviour
     [SerializeField] private GameObject _skillInfoPrefab;
 
     private Image[] _skillTabImage;
-    private SkillSystem _skillSystem;
     private SkillWeaponType _curruntSkillTabType;
 
     private void Awake()
     {
-        ActorManager.Instance.OnRegistedPlayer += () =>
+        SkillSystem.Instance.OnRegistedSkill += (registedSkill) =>
         {
             _skillSystem = ActorManager.Instance.Player.GetComponent<SkillSystem>();
             _skillSystem.OnRegistedSkill += (registedSkill) => {
@@ -35,6 +34,11 @@ public class SkillSelectUI : MonoBehaviour
             };
 
             ActorManager.Instance.Player.GetComponent<PlayerController>().SkillSelectUI = this;
+            Debug.Log(registedSkill.SkillData);
+            if (registedSkill.SkillData.SkillWeaponType == _curruntSkillTabType)
+            {
+                InstantiateSkillInfo(registedSkill);
+            }
         };
     }
 
@@ -75,7 +79,7 @@ public class SkillSelectUI : MonoBehaviour
     private void RefreshSkillInfo()
     {
         ClearSkillInfo();
-        foreach (var skill in _skillSystem.HaveSkills)
+        foreach (var skill in SkillSystem.Instance.HaveSkills)
         {
             if (_curruntSkillTabType == skill.SkillData.SkillWeaponType)
             {
@@ -89,7 +93,7 @@ public class SkillSelectUI : MonoBehaviour
         GameObject g = Instantiate(_skillInfoPrefab, _content);
         g.GetComponent<SkillInfoUI>()?.SetSkillInfo(skill, () =>
         {
-            _skillSystem?.SelectSkill(skill);
+            SkillSystem.Instance?.SelectSkill(skill);
         });
     }
 

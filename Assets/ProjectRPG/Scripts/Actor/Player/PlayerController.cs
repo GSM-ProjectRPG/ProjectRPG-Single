@@ -1,12 +1,26 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public float MoveSpeed => 3;
+    public float MoveSpeed
+    {
+        get
+        {
+            if (_buffSystem.ContainsBuff<MoveSpeedBuff>())
+            {
+                return _moveSpeed * 1.3f;
+            }
+            else
+            {
+                return _moveSpeed;
+            }
+        }
+    }
     public float RunSpeed => MoveSpeed * 1.5f;
     public float AttackStat => 0;
 
@@ -22,19 +36,25 @@ public class PlayerController : MonoBehaviour
     private AttackSystem _attackSystem;
     private ActSystem _actSystem;
     private SkillSystem _skillSystem;
+    private BuffSystem _buffSystem;
+    private Camera _camera => Camera.main;
 
     [SerializeField] private Animator _animator;
 
     [Header("캐릭터 설정")]
+    [SerializeField] private float _moveSpeed = 3f;
     [SerializeField] private float _jumpPower = 3f;
-    [SerializeField] private SkillData _punchSkillData;
     [Header("카메라 설정")]
-    [SerializeField] private Camera _camera;
     [SerializeField] private float _cameraMaxDistance = 3f;
     [SerializeField] private float _cameraMinDistance = 2f;
     [SerializeField] private float _cameraHeight = 1f;
     [SerializeField] private float _cameraInclination = 0.5f;
     [SerializeField] private float _cameraLookHegit = 1f;
+    [Header("스킬 설정")]
+    [SerializeField] private float _fearRange;
+    [SerializeField] private GameObject _slashPrefab;
+    [SerializeField] private GameObject _fireBallPrefab;
+    [SerializeField] private float _fireBallRange;
 
     private float _cameraDistance;
     private float _cameraRotation = 0;
@@ -57,6 +77,7 @@ public class PlayerController : MonoBehaviour
         _attackSystem = GetComponent<AttackSystem>();
         _actSystem = GetComponent<ActSystem>();
         _skillSystem = GetComponent<SkillSystem>();
+        _buffSystem = GetComponent<BuffSystem>();
         _input = PlayerInputManager.Instance;
         //animator = GetComponent<Animator>();
     }
@@ -74,9 +95,7 @@ public class PlayerController : MonoBehaviour
             _health.SetHealth(maxHealth, gameObject);
         };
 
-        Skill punchSkill = new CoolTimeSkill(_punchSkillData, _attackSystem.Attack(Punch), 2);
-        _skillSystem.RegistSkill(punchSkill);
-        _skillSystem.SelectSkill(punchSkill);
+        PunchHandler = _attackSystem.Attack(Punch);
         _interactionHandler = _actSystem.Act(() => _interactor.TryInteract());
         _jumpHandler = _actSystem.Act(Jump);
         _moveHandler = _actSystem.Act(() => Move(_input.GetMoveVector()));
@@ -98,7 +117,11 @@ public class PlayerController : MonoBehaviour
 
         if (_input.GetAttack() && _canAct)
         {
-            _skillSystem.UseSkill();
+            PunchHandler?.Invoke();
+        }
+        if (_input.GetSkill() && _canAct)
+        {
+            SkillSystem.Instance.UseSkill();
         }
         if (_input.GetJump() && _canAct)
         {
@@ -144,12 +167,6 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void Punch()
-    {
-        _animator.SetTrigger("Attack");
-        StartCoroutine(SetMotionStun());
-    }
-
     private void SetCameraPos()
     {
         Vector3 rayDirection = Quaternion.Euler(0, _cameraRotation + 180, 0) * new Vector3(0, _cameraInclination, 1);
@@ -170,13 +187,6 @@ public class PlayerController : MonoBehaviour
     {
         _cameraDistance = _cameraMaxDistance;
         SetCameraPos();
-    }
-
-    private IEnumerator SetMotionStun()
-    {
-        _motionStopTime = Time.time + 1;
-        yield return null;
-        _motionStopTime = Time.time + _animator.GetNextAnimatorClipInfo(0).Length;
     }
 
     private void FixedUpdate()
@@ -236,4 +246,87 @@ public class PlayerController : MonoBehaviour
 
         _rigid.velocity = new Vector3(moveVelocity.x, _rigid.velocity.y, moveVelocity.z);
     }
+
+    #region 스킬 로직 구현
+    public Action HearSkillHandler => _actSystem.Act(HealSkillLogic);
+    public Action ATKBuffSkillHandler => _actSystem.Act(ATKBuffSkillLogic);
+    public Action MoveSpeedBuffSkillHandler => _actSystem.Act(MoveSpeedBuffSkillLogic);
+    public Action FearSkillHandler => _attackSystem.Attack(FearSkillLogic);
+    public Action FireBallHandler => _attackSystem.Attack(FireBallLogic);
+    public Action PunchHandler;
+
+    private IEnumerator SetMotionStun()
+    {
+        _motionStopTime = Time.time + 1;
+        yield return null;
+        _motionStopTime = Time.time + _animator.GetNextAnimatorClipInfo(0).Length;
+    }
+
+    private void Punch()
+    {
+        _animator.SetTrigger("Attack");
+        StartCoroutine(SetMotionStun());
+        Collider[] cols = Physics.OverlapSphere(transform.position + transform.rotation * Vector3.forward, 1, LayerMask.NameToLayer("Monster"));
+        float damage = _statManager.GetCurruntStat().Attack;
+        for (int i = 0; i < cols.Length; i++)
+        {
+            if (cols[i].gameObject.layer != gameObject.layer)
+            {
+                cols[i].GetComponent<DamageReciever>()?.TakeDamage(damage, gameObject);
+            }
+        }
+    }
+
+    private void HealSkillLogic()
+    {
+        _health.TakeHeal(_health.MaxHealth * 0.3f, gameObject);
+    }
+
+    private void ATKBuffSkillLogic()
+    {
+        _buffSystem.AddBuff(new ATKBuff(5));
+    }
+
+    private void MoveSpeedBuffSkillLogic()
+    {
+        _buffSystem.AddBuff(new MoveSpeedBuff(5));
+    }
+
+    private void FearSkillLogic()
+    {
+        Collider[] cols = Physics.OverlapSphere(transform.position, _fearRange, LayerMask.NameToLayer("Monster"));
+        for (int i = 0; i < cols.Length; i++)
+        {
+            cols[i].GetComponent<BuffSystem>().AddBuff(new Stun(3));
+        }
+
+        _animator.SetTrigger("Fear");
+        StartCoroutine(SetMotionStun());
+    }
+
+    private void FireBallLogic()
+    {
+        List<Collider> cols = Physics.OverlapSphere(transform.position, _fireBallRange, LayerMask.NameToLayer("Monster")).ToList();
+        cols.Sort((a, b) => { return (int)Mathf.Sign(Vector3.Distance(transform.position, a.transform.position) - Vector3.Distance(transform.position, b.transform.position)); });
+
+        DamageReciever target = null;
+        foreach (Collider col in cols)
+        {
+            DamageReciever damageReciever = col.GetComponent<DamageReciever>();
+            if (damageReciever != null)
+            {
+                if (Vector3.Dot(transform.forward, Vector3.Normalize(col.transform.position - transform.position)) > 0.5f)
+                {
+                    target = damageReciever;
+                    break;
+                }
+            }
+        }
+
+        Instantiate(_fireBallPrefab, transform.position, Quaternion.identity).GetComponent<FireBall>().SetTarget(_statManager.GetCurruntStat().Attack * 500, gameObject, target);
+
+        _animator.SetTrigger("Attack");
+        StartCoroutine(SetMotionStun());
+    }
+    #endregion
 }

@@ -13,6 +13,10 @@ MonoBehaviour:
   m_Name: BlackSlimeHunt
   m_EditorClassIdentifier: 
   QuestId: 8
+  Story:
+  - "\uC2AC\uB77C\uC784\uC774 \uC5B4\uB460\uC5D0 \uBB3C\uB4E4\uC5B4\uC11C"
+  - "\uC6B0\uB9AC\uC5D0\uAC8C \uD53C\uD574\uB97C \uC8FC\uAE30 \uC2DC\uC791\uD588\uC5B4"
+  - "\uBE14\uB799 \uC2AC\uB77C\uC784 18\uB9C8\uB9AC\uB97C \uCC98\uB9AC\uD574\uC918"
   QuestContents: "\uBE14\uB799 \uC2AC\uB77C\uC784 18\uB9C8\uB9AC\uB97C \uC0AC\uB0E5\uD558\uC790!"
   QuestType: 0
   TargetObject: {fileID: 852988721920347720, guid: 059de66113acbf0479bcd3b86baec0e9,
@@ -21,5 +25,5 @@ MonoBehaviour:
   TargetCount: 18
   RewardCoin: 150
   RewardExp: 75
-  RewardItem: {fileID: 0}
-  RewardItemCount: 0
+  RewardItem: {fileID: 11400000, guid: 93dcfa7435d246b44940cd6cd07e6f16, type: 2}
+  RewardItemCount: 6

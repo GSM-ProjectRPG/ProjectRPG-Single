@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class MonsterStatSystem : StatSystem
@@ -8,6 +9,8 @@ public class MonsterStatSystem : StatSystem
     public float AttackRange { get; private set; }
     public float ChaseRange { get; private set; }
     public float DropExp { get; private set; }
+    public int DropCoin { get; private set; }
+    public List<MonsterDropItemData> DropItems = new List<MonsterDropItemData>();
 
     public MonsterStatData _statData;
 
@@ -21,5 +24,7 @@ public class MonsterStatSystem : StatSystem
         AttackRange = _statData.AttackRange;
         ChaseRange = _statData.ChaseRange;
         DropExp = _statData.DropExp;
+        DropCoin = _statData.DropCoin;
+        DropItems = _statData.DropItems;
     }
 }

@@ -99,7 +99,8 @@ MonoBehaviour:
   _fearRange: 10
   _fearBuffData: {fileID: 11400000, guid: 4c4bf85fb7154b046b1acf446f1972e1, type: 2}
   _slashPrefab: {fileID: 0}
-  _fireBallPrefab: {fileID: 0}
+  _fireBallPrefab: {fileID: 3818239702576561793, guid: 476f247b1ff44284c936087079167e5c,
+    type: 3}
   _fireBallRange: 5
 --- !u!114 &6799289787203058826
 MonoBehaviour:

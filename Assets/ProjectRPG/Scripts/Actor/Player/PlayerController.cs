@@ -326,7 +326,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        Instantiate(_fireBallPrefab, transform.position, Quaternion.identity).GetComponent<FireBall>().SetTarget(_statManager.GetCurruntStat().Attack * 500, _attackSystem, target);
+        Instantiate(_fireBallPrefab, transform.position + Vector3.up * 0.5f, transform.rotation).GetComponent<FireBall>().SetTarget(_statManager.GetCurruntStat().Attack * 5, _attackSystem, target);
 
         _animator.SetTrigger("Attack");
         StartCoroutine(SetMotionStun());

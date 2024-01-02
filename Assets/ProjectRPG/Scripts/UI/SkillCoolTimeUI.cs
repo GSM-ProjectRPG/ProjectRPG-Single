@@ -19,8 +19,8 @@ public class SkillCoolTimeUI : MonoBehaviour
             {
                 _skill = skill as CoolTimeSkill;
 
-                Image.sprite = skill.Sprite;
-                Cover.sprite = skill.Sprite;
+                Image.sprite = skill.SkillData.Sprite;
+                Cover.sprite = skill.SkillData.Sprite;
                 if (_skill == null)
                 {
                     Cover.fillAmount = 0;

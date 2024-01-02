@@ -43,16 +43,12 @@ public class SkillSystem : MonoBehaviour
 
 public class Skill
 {
-    public virtual string Name => _skillData.Name;
-    public virtual string Description => _skillData.Description;
-    public virtual Sprite Sprite => _skillData.Sprite;
-
-    protected SkillData _skillData;
+    public SkillData SkillData { get; protected set; }
     protected Action _onUseSkill;
 
     public Skill(SkillData skillData, Action onUseSkill)
     {
-        _skillData = skillData;
+        SkillData = skillData;
         _onUseSkill = onUseSkill;
     }
 

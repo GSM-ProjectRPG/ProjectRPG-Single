@@ -12,20 +12,16 @@ public class SkillCoolTimeUI : MonoBehaviour
 
     private void Awake()
     {
-        ActorManager.Instance.OnRegistedPlayer += () =>
+        SkillSystem.Instance.OnChangeSkill += (skill) =>
         {
-            SkillSystem skillSystem = ActorManager.Instance.Player.GetComponent<SkillSystem>();
-            skillSystem.OnChangeSkill += (skill) =>
-            {
-                _skill = skill as CoolTimeSkill;
+            _skill = skill as CoolTimeSkill;
 
-                Image.sprite = skill.SkillData.Sprite;
-                Cover.sprite = skill.SkillData.Sprite;
-                if (_skill == null)
-                {
-                    Cover.fillAmount = 0;
-                }
-            };
+            Image.sprite = skill.SkillData.Sprite;
+            Cover.sprite = skill.SkillData.Sprite;
+            if (_skill == null)
+            {
+                Cover.fillAmount = 0;
+            }
         };
     }
 

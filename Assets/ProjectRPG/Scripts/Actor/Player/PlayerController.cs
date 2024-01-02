@@ -20,7 +20,6 @@ public class PlayerController : MonoBehaviour
     private PlayerInteractor _interactor;
     private AttackSystem _attackSystem;
     private ActSystem _actSystem;
-    private SkillSystem _skillSystem;
 
     [SerializeField] private Animator _animator;
 
@@ -55,7 +54,6 @@ public class PlayerController : MonoBehaviour
         _interactor = GetComponent<PlayerInteractor>();
         _attackSystem = GetComponent<AttackSystem>();
         _actSystem = GetComponent<ActSystem>();
-        _skillSystem = GetComponent<SkillSystem>();
         _input = PlayerInputManager.Instance;
         //animator = GetComponent<Animator>();
     }
@@ -73,8 +71,6 @@ public class PlayerController : MonoBehaviour
         };
 
         Skill punchSkill = new CoolTimeSkill(_punchSkillData, _attackSystem.Attack(Punch), 2);
-        _skillSystem.RegistSkill(punchSkill);
-        _skillSystem.SelectSkill(punchSkill);
         _interactionHandler = _actSystem.Act(() => _interactor.TryInteract());
         _jumpHandler = _actSystem.Act(Jump);
         _moveHandler = _actSystem.Act(() => Move(_input.GetMoveVector()));
@@ -96,7 +92,7 @@ public class PlayerController : MonoBehaviour
 
         if (_input.GetAttack() && _canAct)
         {
-            _skillSystem.UseSkill();
+            SkillSystem.Instance.UseSkill();
         }
         if (_input.GetJump() && _canAct)
         {

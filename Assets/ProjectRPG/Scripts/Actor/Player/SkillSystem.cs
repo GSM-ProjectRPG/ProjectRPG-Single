@@ -1,10 +1,13 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Reflection;
 using UnityEngine;
 
 public class SkillSystem : MonoBehaviour
 {
+    public static SkillSystem Instance { get; private set; }
+
     public Action<Skill> OnRegistedSkill;
     public Action<Skill> OnChangeSkill;
     public Action<Skill> OnUseSkill;
@@ -13,8 +16,27 @@ public class SkillSystem : MonoBehaviour
     public Skill CurruntSkill { get; protected set; }
 
     [SerializeField] private SkillData _basicSkillData;
+    [SerializeField] private SkillData _healSkillData;
+    [SerializeField] private SkillData _moveSpeedBuffSkillData;
+    [SerializeField] private SkillData _damageBuffSkillData;
+    [SerializeField] private SkillData _slashSkillData;
+    [SerializeField] private SkillData _fireBallSkillData;
+    [SerializeField] private SkillData _fearSkillData;
 
     private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Debug.LogError(typeof(SkillSystem).Name + "의 인스턴스가 2개 이상 존재합니다.");
+            Destroy(this);
+        }
+    }
+
+    private void Start()
     {
         SelectSkill(new Skill(_basicSkillData, null));
     }

@@ -28,7 +28,7 @@ public class Health : MonoBehaviour
         }
         set
         {
-            if(_isDead)
+            if (_isDead)
             {
                 value?.Invoke(_killer);
             }
@@ -49,17 +49,20 @@ public class Health : MonoBehaviour
 
     private void Awake()
     {
+        if (gameObject.layer == LayerMask.NameToLayer("Monster"))
+        {
+            //gameObject.AddComponent<ActorInfoSummoner>();
+        }
+    }
+
+    private void Start()
+    {
         _statManager = GetComponent<StatSystem>();
         if (_statManager != null)
         {
             MaxHealth = _statManager.GetCurruntStat().Health;
         }
         CurruntHealth = MaxHealth;
-
-        if(gameObject.layer == LayerMask.NameToLayer("Monster"))
-        {
-            gameObject.AddComponent<ActorInfoSummoner>();
-        }
     }
 
     public void TakeDamage(float damage, GameObject attacker)

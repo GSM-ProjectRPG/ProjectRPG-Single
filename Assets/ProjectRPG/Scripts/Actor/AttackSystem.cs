@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using Unity.VisualScripting;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using Debug = UnityEngine.Debug;
 
@@ -86,10 +87,26 @@ public class AttackSystem : MonoBehaviour
     /// </summary>
     public void SendDamage(DamageReciever damageReciever, float damage)
     {
-        Action<float, GameObject> action = (damageResult, _) => { OnAttackHitted?.Invoke(damageReciever.gameObject, damageResult); };
+        Health health = damageReciever.GetComponent<Health>();
 
-        damageReciever.OnTakeDamage += action;
+        Action<float, GameObject> onHitted = (damageResult, _) => { OnAttackHitted?.Invoke(damageReciever.gameObject, damageResult); };
+        Action<float, GameObject> onSendedDamage = (damageResult, _) => { OnSendedDamage?.Invoke(health.gameObject, damageResult); };
+        Action<GameObject> onKill = (_) => { OnKill?.Invoke(health.gameObject); };
+
+        damageReciever.OnTakeDamage += onHitted;
+        if (health != null)
+        {
+            health.OnDamaged += onSendedDamage;
+            health.OnDead += onKill;
+        }
+
         damageReciever.TakeDamage(damage, gameObject);
-        damageReciever.OnTakeDamage -= action;
+
+        if (health != null)
+        {
+            health.OnDead -= onKill;
+            health.OnDamaged -= onSendedDamage;
+        }
+        damageReciever.OnTakeDamage -= onHitted;
     }
 }

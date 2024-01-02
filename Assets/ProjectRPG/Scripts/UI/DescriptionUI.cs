@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class DescriptionUI : MonoBehaviour
 {
+    public InventoryUI InventoryView;
     public GameObject DescriptionView;
     public GameObject[] Descriptions;
     public Inventory Inventory;
@@ -24,7 +25,6 @@ public class DescriptionUI : MonoBehaviour
         point = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
         DescriptionView.transform.position = new Vector2(point.x, point.y + 100);
         CheckShowingView();
-        
     }
 
     private void GetInventory()
@@ -36,15 +36,17 @@ public class DescriptionUI : MonoBehaviour
     {
         bool isView = false;
         point = new Vector3(Input.mousePosition.x, Input.mousePosition.y, -Camera.main.transform.position.z);
-
-        for (int index = 0; index < Inventory.ItemList.Count; index++)
+        if (InventoryView.EquipmentView.activeSelf)
         {
-            if (Inventory is null) continue;
-            if (Descriptions[index].transform.position.x < point.x || Descriptions[index].transform.position.x - Descriptions[index].GetComponent<RectTransform>().rect.height > point.x) continue;
-            if (Descriptions[index].transform.position.y + Descriptions[index].GetComponent<RectTransform>().rect.width < point.y || Descriptions[index].transform.position.y > point.y) continue;
-            DescriptionView.SetActive(true);
-            SetDescription(index);
-            return;
+            for (int index = 0; index < Inventory.ItemList.Count; index++)
+            {
+                if (Inventory is null) continue;
+                if (Descriptions[index].transform.position.x < point.x || Descriptions[index].transform.position.x - Descriptions[index].GetComponent<RectTransform>().rect.height > point.x) continue;
+                if (Descriptions[index].transform.position.y + Descriptions[index].GetComponent<RectTransform>().rect.width < point.y || Descriptions[index].transform.position.y > point.y) continue;
+                DescriptionView.SetActive(true);
+                SetDescription(index);
+                return;
+            }
         }
         DescriptionView.SetActive(false);
     }

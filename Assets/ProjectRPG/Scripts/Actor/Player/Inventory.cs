@@ -111,6 +111,14 @@ public class Inventory : MonoBehaviour
 
     public Stat GetTotalStat()
     {
-        return new();
+        Stat stat = new Stat();
+        for(int i=0;i<EquipmentList.Count;i++)
+        {
+            if (EquipmentList[i] != null)
+            {
+                stat += EquipmentList[i].GetStat();
+            }
+        }
+        return stat;
     }
 }

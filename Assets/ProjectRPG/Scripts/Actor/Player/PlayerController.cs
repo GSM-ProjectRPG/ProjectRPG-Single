@@ -321,7 +321,7 @@ public class PlayerController : MonoBehaviour
             DamageReciever damageReciever = col.GetComponent<DamageReciever>();
             if (damageReciever != null)
             {
-                if (Vector3.Dot(transform.forward, Vector3.Normalize(col.transform.position - transform.position)) > 0f)
+                if (Vector3.Dot(transform.forward, Vector3.Normalize(col.transform.position - transform.position)) > 0.5f)
                 {
                     target = damageReciever;
                     break;

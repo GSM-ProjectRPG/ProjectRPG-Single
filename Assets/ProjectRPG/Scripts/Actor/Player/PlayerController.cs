@@ -51,7 +51,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float _cameraInclination = 0.5f;
     [SerializeField] private float _cameraLookHegit = 1f;
     [Header("스킬 설정")]
+    [SerializeField] private BuffData _moveSpeedBuffData;
+    [SerializeField] private BuffData _damageBuffData;
     [SerializeField] private float _fearRange;
+    [SerializeField] private BuffData _fearBuffData;
     [SerializeField] private GameObject _slashPrefab;
     [SerializeField] private GameObject _fireBallPrefab;
     [SerializeField] private float _fireBallRange;
@@ -270,7 +273,6 @@ public class PlayerController : MonoBehaviour
         float damage = _statManager.GetCurruntStat().Attack;
         for (int i = 0; i < cols.Length; i++)
         {
-            Debug.Log(cols[i].gameObject.name);
             if (cols[i].gameObject.layer != gameObject.layer)
             {
                 _attackSystem.SendDamage(cols[i].GetComponent<DamageReciever>(), damage);
@@ -324,7 +326,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        Instantiate(_fireBallPrefab, transform.position, Quaternion.identity).GetComponent<FireBall>().SetTarget(_statManager.GetCurruntStat().Attack * 500, _attackSystem, target);
+        Instantiate(_fireBallPrefab, transform.position + Vector3.up * 0.5f, transform.rotation).GetComponent<FireBall>().SetTarget(_statManager.GetCurruntStat().Attack * 5, _attackSystem, target);
 
         _animator.SetTrigger("Attack");
         StartCoroutine(SetMotionStun());

@@ -65,7 +65,6 @@ public class SkillSelectUI : MonoBehaviour
 
     public void ChangeTab(SkillWeaponType tabType)
     {
-        Debug.Log(tabType);
         _curruntSkillTabType = tabType;
         _skillMenuBackGround.color = _skillTabImage[(int)tabType].color;
         RefreshSkillInfo();

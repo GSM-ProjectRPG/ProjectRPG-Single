@@ -53,11 +53,26 @@ public class Health : MonoBehaviour
         {
             //gameObject.AddComponent<ActorInfoSummoner>();
         }
+
+        _statManager = GetComponent<StatSystem>();
+        if(_statManager != null)
+        {
+            _statManager.OnStatChanged += () =>
+            {
+                float originMaxHealth = MaxHealth;
+                float originCurruntHealth = CurruntHealth;
+                MaxHealth = _statManager.GetCurruntStat().Health;
+                CurruntHealth = Mathf.Clamp(CurruntHealth, 0, MaxHealth);
+                if(originCurruntHealth != CurruntHealth || originMaxHealth != MaxHealth)
+                {
+                    OnHealthChanged?.Invoke();
+                }
+            };
+        }
     }
 
     private void Start()
     {
-        _statManager = GetComponent<StatSystem>();
         if (_statManager != null)
         {
             MaxHealth = _statManager.GetCurruntStat().Health;

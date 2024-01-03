@@ -9,6 +9,7 @@ public class FireBall : MonoBehaviour
     private float _damage;
     private AttackSystem _attacker;
     private DamageReciever _target;
+    private Collider _targetCollider;
     private Rigidbody _rigid;
     private float _time;
     private bool _isDestroyed = false;
@@ -31,8 +32,10 @@ public class FireBall : MonoBehaviour
     {
         if (_target != null)
         {
-            transform.LookAt(_target.transform.position);
-            _rigid.MovePosition(Vector3.MoveTowards(_rigid.position, _target.transform.position, _moveSpeed * Time.fixedDeltaTime));
+            Vector3 targetPos = _targetCollider.bounds.center;
+
+            transform.LookAt(targetPos);
+            _rigid.MovePosition(Vector3.MoveTowards(_rigid.position, targetPos, _moveSpeed * Time.fixedDeltaTime));
         }
         else
         {
@@ -45,6 +48,10 @@ public class FireBall : MonoBehaviour
         _damage = damage;
         _attacker = attacker;
         _target = target;
+        if (_target != null)
+        {
+            _targetCollider = _target.GetComponentInChildren<Collider>();
+        }
     }
 
     private void HandleDestroy()
@@ -56,9 +63,15 @@ public class FireBall : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject == _target.gameObject)
+        if (other.gameObject == _attacker.gameObject) return;
+
+        if (_target != null && other.gameObject == _target.gameObject)
         {
             _attacker.SendDamage(_target, _damage);
+        }
+        else if (other.GetComponent<DamageReciever>() != null)
+        {
+            _attacker.SendDamage(other.GetComponent<DamageReciever>(), _damage);
         }
         HandleDestroy();
     }

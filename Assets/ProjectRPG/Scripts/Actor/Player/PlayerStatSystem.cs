@@ -19,12 +19,21 @@ public class PlayerStatSystem : StatSystem
 
     [SerializeField] protected PlayerLevelData levelData;
 
+    private Inventory _inventory;
+
+    private void Awake()
+    {
+        _inventory = GetComponent<Inventory>();
+        _inventory.OnEquipItemAction += () => OnStatChanged?.Invoke();
+        _inventory.UnEquipItemAction += () => OnStatChanged?.Invoke();
+    }
+
     public override Stat GetCurruntStat()
     {
-        Stat stat = new Stat();
-        stat.Health = levelData.GetLevelData(Level).maxHp;
-        stat.Attack = levelData.GetLevelData(Level).attack;
-        stat.MoveSpeed = MoveSpeed;
+        Stat stat = _inventory.GetTotalStat();
+        stat.Health += levelData.GetLevelData(Level).maxHp;
+        stat.Attack += levelData.GetLevelData(Level).attack;
+        stat.MoveSpeed += MoveSpeed;
         return stat;
     }
 

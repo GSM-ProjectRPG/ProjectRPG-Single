@@ -26,5 +26,5 @@ public class GameManager : MonoBehaviour
 
     public string NickName { get; set; }
 
-    
+    public int Coin { get; set; }
 }

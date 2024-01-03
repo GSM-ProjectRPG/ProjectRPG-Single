@@ -94,9 +94,13 @@ MonoBehaviour:
   _cameraHeight: 1
   _cameraInclination: 0.5
   _cameraLookHegit: 1
+  _moveSpeedBuffData: {fileID: 11400000, guid: 298221b395ae1fc4e80419839dbb5fd0, type: 2}
+  _damageBuffData: {fileID: 11400000, guid: 363d437589cbf25409f6e21ce113e047, type: 2}
   _fearRange: 10
+  _fearBuffData: {fileID: 11400000, guid: 4c4bf85fb7154b046b1acf446f1972e1, type: 2}
   _slashPrefab: {fileID: 0}
-  _fireBallPrefab: {fileID: 0}
+  _fireBallPrefab: {fileID: 3818239702576561793, guid: 476f247b1ff44284c936087079167e5c,
+    type: 3}
   _fireBallRange: 5
 --- !u!114 &6799289787203058826
 MonoBehaviour:
@@ -146,10 +150,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48aacad8bc9531542ab53e6ffac7b1d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: 
-  Attack: 0
-  Health: 0
-  MoveSpeed: 0
   levelData: {fileID: 11400000, guid: 623ea17b6f898b64c9a2bf394036b688, type: 2}
 --- !u!114 &6424370322115242300
 MonoBehaviour:

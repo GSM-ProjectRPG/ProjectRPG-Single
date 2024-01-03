@@ -92,8 +92,9 @@ MonoBehaviour:
   _cameraMaxDistance: 3
   _cameraMinDistance: 2
   _cameraHeight: 1
-  _cameraInclination: 0.5
   _cameraLookHegit: 1
+  _cameraMinVerticalDegree: 5
+  _cameraMaxVerticalDegree: 70
   _moveSpeedBuffData: {fileID: 11400000, guid: 298221b395ae1fc4e80419839dbb5fd0, type: 2}
   _damageBuffData: {fileID: 11400000, guid: 363d437589cbf25409f6e21ce113e047, type: 2}
   _fearRange: 10

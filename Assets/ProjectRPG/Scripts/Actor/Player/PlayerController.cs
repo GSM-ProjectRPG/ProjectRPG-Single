@@ -48,8 +48,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float _cameraMaxDistance = 3f;
     [SerializeField] private float _cameraMinDistance = 2f;
     [SerializeField] private float _cameraHeight = 1f;
-    [SerializeField] private float _cameraInclination = 0.5f;
     [SerializeField] private float _cameraLookHegit = 1f;
+    [SerializeField] private float _cameraMinVerticalDegree = 20f;
+    [SerializeField] private float _cameraMaxVerticalDegree = 70f;
     [Header("스킬 설정")]
     [SerializeField] private BuffData _moveSpeedBuffData;
     [SerializeField] private BuffData _damageBuffData;
@@ -61,6 +62,7 @@ public class PlayerController : MonoBehaviour
 
     private float _cameraDistance;
     private float _cameraRotation = 0;
+    private float _cameraVerticalDegree;
     private float _motionStopTime;
     private bool _isDead = false;
     private bool _isActing => _motionStopTime >= Time.time;
@@ -113,6 +115,7 @@ public class PlayerController : MonoBehaviour
         if (_input.GetLookScrolling())
         {
             _cameraRotation += _input.GetLookDelta().x;
+            _cameraVerticalDegree = Mathf.Clamp(_cameraVerticalDegree + _input.GetLookDelta().y, _cameraMinVerticalDegree, _cameraMaxVerticalDegree);
         }
         _cameraDistance = Mathf.Clamp(_cameraDistance + _input.GetCameraDistanceDelta(), _cameraMinDistance, _cameraMaxDistance);
 
@@ -172,7 +175,7 @@ public class PlayerController : MonoBehaviour
 
     private void SetCameraPos()
     {
-        Vector3 rayDirection = Quaternion.Euler(0, _cameraRotation + 180, 0) * new Vector3(0, _cameraInclination, 1);
+        Vector3 rayDirection = Quaternion.Euler(-_cameraVerticalDegree, _cameraRotation + 180, 0) * new Vector3(0, 0, 1);
         if (Physics.Raycast(transform.position + Vector3.up * _cameraHeight, rayDirection, out RaycastHit hit, _cameraDistance))
         {
             _camera.transform.position = hit.point;

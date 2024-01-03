@@ -55,7 +55,8 @@ public class MuscleCatController : MonoBehaviour
     {
         Vector3 moveVelocity = (_playerDetector.GetDetectedPlayerPosition() - transform.position).normalized;
         _rigid.velocity = new Vector3(moveVelocity.x, _rigid.velocity.y, moveVelocity.z) * _statManager.MoveSpeed;
-        transform.rotation = Quaternion.LookRotation(_playerDetector.GetDetectedPlayerPosition() - transform.position);
+        Quaternion rot = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(_playerDetector.GetDetectedPlayerPosition() - transform.position), Time.deltaTime * 5);
+        transform.rotation = rot;
     }
 
     private void Die(GameObject killer)

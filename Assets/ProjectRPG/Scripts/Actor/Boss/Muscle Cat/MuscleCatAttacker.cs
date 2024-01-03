@@ -16,20 +16,20 @@ public class MuscleCatAttacker : MonoBehaviour
     [SerializeField] private Vector3 _punchAttackArea;
 
     [Space()]
-    [Header("Jump Attack")]
-    [SerializeField] private float _jumpAttackCool;
-
-    [Space()]
     [Header("Dash Attack")]
     [SerializeField] private float _dashAttackCool;
+    [SerializeField] private float _dashAttackDamage;
     [SerializeField] private float _dashForce;
     [SerializeField] private float _dashDurationTime;
-    [SerializeField] private bool _isDashing;
+    [SerializeField] private bool _canAttackWithDash;
 
     [Space()]
     [Header("Range Attack")]
     [SerializeField] private float _rangeAttackCool;
+    [SerializeField] private float _rangeAttackDamage;
+    [SerializeField] private float _rangeAttackSpeed;
     [SerializeField] private GameObject _rangeAttackObject;
+    [SerializeField] private Transform _rangeAttackSpawnPos;
 
     private Rigidbody _rigid;
     private AttackSystem _attackSystem;
@@ -46,7 +46,8 @@ public class MuscleCatAttacker : MonoBehaviour
 
     public void Attack()
     {
-        int rand = Random.Range(0, 4);
+        IsAttacking = true;
+        int rand = Random.Range(0, 3);
 
         switch (rand)
         {
@@ -55,14 +56,10 @@ public class MuscleCatAttacker : MonoBehaviour
                 StartCoroutine(PunchAttackCoroutine());
                 break;
             case 1:
-                SetAttackCoolTime(_jumpAttackCool);
-                StartCoroutine(JumpAttackCoroutine());
-                break;
-            case 2:
                 SetAttackCoolTime(_dashAttackCool);
                 StartCoroutine(DashAttackCoroutine());
                 break;
-            case 3:
+            case 2:
                 SetAttackCoolTime(_rangeAttackCool);
                 StartCoroutine(RangeAttackCoroutine());
                 break;
@@ -85,18 +82,14 @@ public class MuscleCatAttacker : MonoBehaviour
             yield return new WaitForSeconds(_animator.GetNextAnimatorClipInfo(0).Length);
         }
 
-        yield break;
-    }
-
-    private IEnumerator JumpAttackCoroutine()
-    {
-
-
+        IsAttacking = false;
         yield break;
     }
 
     private IEnumerator DashAttackCoroutine()
     {
+        _canAttackWithDash = true;
+
         _animator.SetTrigger("DashAttack");
         yield return null;
         yield return new WaitForSeconds(_animator.GetNextAnimatorClipInfo(0).Length);
@@ -106,19 +99,35 @@ public class MuscleCatAttacker : MonoBehaviour
         yield return new WaitForSeconds(_dashDurationTime);
 
         _rigid.velocity = Vector3.zero;
+        _canAttackWithDash = false;
 
+        IsAttacking = false;
         yield break;
     }
 
     private IEnumerator RangeAttackCoroutine()
     {
+        _animator.SetTrigger("RangeAttack");
 
-
+        GameObject rangeAttackObject = Instantiate(_rangeAttackObject, _rangeAttackSpawnPos.position, Quaternion.identity);
+        rangeAttackObject.GetComponent<MuscleCatRangeAttack>().SetAttackData(_rangeAttackDamage, _rangeAttackSpeed, _attackSystem, _playerDetector.GetDetectedPlayerPosition());
+        
+        IsAttacking = false;
         yield break;
     }
 
     private void SetAttackCoolTime(float cool)
     {
         _attackCool = Time.time + cool;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject == ActorManager.Instance.Player && _canAttackWithDash)
+        {
+            _attackSystem.SendDamage(collision.gameObject.GetComponent<DamageReciever>(), _dashAttackDamage);
+
+            _canAttackWithDash = false;
+        }
     }
 }

@@ -850,6 +850,7 @@ GameObject:
   - component: {fileID: 7846145718084144192}
   - component: {fileID: 7846145718084144195}
   - component: {fileID: 7846145718084144194}
+  - component: {fileID: 5075442178958153182}
   m_Layer: 6
   m_Name: Spider
   m_TagString: Untagged
@@ -927,10 +928,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad3d40954a0680944ae5da2de37d3258, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: 
-  Attack: 0
-  Health: 0
-  MoveSpeed: 0
+  DropItems: []
   _statData: {fileID: 11400000, guid: 0e2b74430d2fd83419bdf8218c316b3c, type: 2}
 --- !u!114 &7846145718084144207
 MonoBehaviour:
@@ -1006,3 +1004,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39e4abb645430794db26fa7d5314bf67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &5075442178958153182
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7846145718084144197}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 259e12a527755af49a463818c17b4828, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  InfoUIPrefab: {fileID: 5872024888160963694, guid: fc960eb52bb6e3d4e9f4d634c56694bc,
+    type: 3}
+  UiShowTime: 5
+  UiHeight: 1

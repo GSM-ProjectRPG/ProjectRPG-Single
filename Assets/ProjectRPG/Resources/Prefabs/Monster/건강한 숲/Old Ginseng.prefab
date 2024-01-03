@@ -487,6 +487,7 @@ GameObject:
   - component: {fileID: 7509034288452827859}
   - component: {fileID: 7509034288452827856}
   - component: {fileID: 7509034288452827857}
+  - component: {fileID: 8677405284657967257}
   m_Layer: 6
   m_Name: Old Ginseng
   m_TagString: Untagged
@@ -564,10 +565,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad3d40954a0680944ae5da2de37d3258, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: 
-  Attack: 0
-  Health: 0
-  MoveSpeed: 0
+  DropItems: []
   _statData: {fileID: 11400000, guid: 3bc28b2ead075b047a0851eb0e12549e, type: 2}
 --- !u!114 &7509034288452827860
 MonoBehaviour:
@@ -643,3 +641,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39e4abb645430794db26fa7d5314bf67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &8677405284657967257
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7509034288452827870}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 259e12a527755af49a463818c17b4828, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  InfoUIPrefab: {fileID: 5872024888160963694, guid: fc960eb52bb6e3d4e9f4d634c56694bc,
+    type: 3}
+  UiShowTime: 5
+  UiHeight: 1.6

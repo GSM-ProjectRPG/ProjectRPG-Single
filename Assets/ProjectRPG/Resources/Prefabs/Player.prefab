@@ -101,7 +101,7 @@ MonoBehaviour:
   _slashPrefab: {fileID: 0}
   _fireBallPrefab: {fileID: 3818239702576561793, guid: 476f247b1ff44284c936087079167e5c,
     type: 3}
-  _fireBallRange: 5
+  _fireBallRange: 20
 --- !u!114 &6799289787203058826
 MonoBehaviour:
   m_ObjectHideFlags: 0

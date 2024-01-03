@@ -115,7 +115,7 @@ public class PlayerController : MonoBehaviour
         if (_input.GetLookScrolling())
         {
             _cameraRotation += _input.GetLookDelta().x;
-            _cameraVerticalDegree = Mathf.Clamp(_cameraVerticalDegree + _input.GetLookDelta().y, _cameraMinVerticalDegree, _cameraMaxVerticalDegree);
+            _cameraVerticalDegree = Mathf.Clamp(_cameraVerticalDegree - _input.GetLookDelta().y, _cameraMinVerticalDegree, _cameraMaxVerticalDegree);
         }
         _cameraDistance = Mathf.Clamp(_cameraDistance + _input.GetCameraDistanceDelta(), _cameraMinDistance, _cameraMaxDistance);
 

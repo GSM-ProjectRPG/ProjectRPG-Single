@@ -89,7 +89,7 @@ MonoBehaviour:
   _animator: {fileID: 8527198450792483269}
   _moveSpeed: 3
   _jumpPower: 3
-  _cameraMaxDistance: 3
+  _cameraMaxDistance: 5
   _cameraMinDistance: 2
   _cameraHeight: 1
   _cameraLookHegit: 1

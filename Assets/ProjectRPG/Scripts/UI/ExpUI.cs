@@ -27,8 +27,8 @@ public class ExpUI : MonoBehaviour
     {
         if (_playerStatSystem == null) return;
         Slider.value = _playerStatSystem.Exp / _playerStatSystem.NeededExp;
-        int  percentText = (int)(_playerStatSystem.Exp / _playerStatSystem.NeededExp * 100f);
-        string text = percentText + "% (" + _playerStatSystem.Exp + "/" + _playerStatSystem.NeededExp + ")";
+        int percentText = (int)(_playerStatSystem.Exp / _playerStatSystem.NeededExp * 100f);
+        string text = _playerStatSystem.Level + "Lv " + percentText + "% (" + _playerStatSystem.Exp + "/" + _playerStatSystem.NeededExp + ")";
         Text.text = text;
     }
 }

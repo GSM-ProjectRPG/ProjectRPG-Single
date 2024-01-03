@@ -13,8 +13,8 @@ public class PlayerStatSystem : StatSystem
     public Action<float> OnAddedExp;
 
     //플레이어 데이터 저장 기능 만들면 수정필요
-    public int Level { get; protected set; } = 1;
-    public float Exp { get; protected set; } = 0;
+    public int Level { get => GameManager.Instance.Level; protected set => GameManager.Instance.Level = value; }
+    public float Exp { get => GameManager.Instance.Exp; protected set => GameManager.Instance.Exp = value; }
     public float NeededExp => levelData.GetLevelData(Level).totalExp;
 
     [SerializeField] protected PlayerLevelData levelData;
@@ -26,6 +26,11 @@ public class PlayerStatSystem : StatSystem
         _inventory = GetComponent<Inventory>();
         _inventory.OnEquipItemAction += () => OnStatChanged?.Invoke();
         _inventory.UnEquipItemAction += () => OnStatChanged?.Invoke();
+    }
+
+    private void Start()
+    {
+        OnAddedExp?.Invoke(0);
     }
 
     public override Stat GetCurruntStat()

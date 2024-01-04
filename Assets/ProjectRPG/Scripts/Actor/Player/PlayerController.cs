@@ -67,6 +67,7 @@ public class PlayerController : MonoBehaviour
     private bool _isDead = false;
     private bool _isActing => _motionStopTime >= Time.time;
     private bool _canAct => !_isActing && !_isDead;
+    private bool _isGround;
 
     private Action _interactionHandler;
     private Action _jumpHandler;
@@ -197,7 +198,9 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (_canAct)
+        _isGround = Physics.Raycast(transform.position + Vector3.up * 0.1f, Vector3.down, 0.2f, ~(1 << LayerMask.NameToLayer("Player")));
+        Debug.DrawRay(transform.position + Vector3.up * 0.1f, Vector3.down * 0.2f);
+        if (_canAct && _isGround)
         {
             _moveHandler?.Invoke();
 
@@ -205,8 +208,8 @@ public class PlayerController : MonoBehaviour
             {
                 _jumpHandler?.Invoke();
             }
-            _jumpInputBuffer = false;
         }
+        _jumpInputBuffer = false;
     }
 
     private bool _jumpInputBuffer;

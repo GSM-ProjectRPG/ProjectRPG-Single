@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc9f6c52da990da418dc9e2d3902ae2a, type: 3}
+  m_Name: Rainbow Devil Tree
+  m_EditorClassIdentifier: 
+  Name: Rainbow Devil Tree
+  Attack: 70
+  Health: 1000
+  MoveSpeed: 0.9
+  AttackSpeed: 2
+  AttackRange: 2
+  ChaseRange: 5
+  DropExp: 7
+  DropCoin: 20
+  DropItems:
+  - ItemData: {fileID: 11400000, guid: 87d85d0cf8d744b4c890af11139ab192, type: 2}
+    Count: 3
+    Probability: 100
